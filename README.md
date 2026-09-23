@@ -16,9 +16,8 @@ booking, historical and new.
 
 | Screen | Purpose |
 |---|---|
-| **Schedule** | The familiar berth × day grid, but every bar is coloured by what the system found. Overlapping bookings are stacked in separate lanes so a collision is impossible to miss. |
+| **Schedule** | The berth by day grid, and the only place bookings are made. Drag along a row to select days; the drag clamps where the berth is taken. Overlapping bookings stack in separate lanes, so a double booking makes the row visibly taller before any colour is read. |
 | **Findings** | Every double-booking and every oversized vessel across all 23 years, ranked. This replaces reading the grid. |
-| **New booking** | Validates live as you type — conflicts and berth fit — before anything is saved. |
 | **Data quality** | What the source data cannot tell us, and what it would take to fix. |
 
 ---
@@ -87,8 +86,8 @@ is a day-grid in which a filled cell means "occupied that day" — a run ending 
 means the vessel was physically there on the 17th.
 
 This is not cosmetic. Under half-open semantics every same-day handover silently becomes
-legal. Inclusive semantics are kept, and a one-day overlap is graded a *warning* (plausible
-turnaround) rather than a *violation*.
+legal, which would erase most of what the archive reports. Inclusive semantics are kept, and
+a new booking sharing even one day is refused.
 
 ### Fit has four states, not two
 
@@ -139,18 +138,26 @@ would hide the very problem the brief describes. They become a reviewable backlo
 
 Validation blocks on *create*, not on *ingest*.
 
-### A violation can be overridden, with a reason
+### Overlap and oversize refuse. There is no override
 
-Real waterfronts raft vessels and make judgment calls. A system that makes the correct action
-impossible just gets worked around. A blocked booking can proceed if the user records a
-reason, which is stored on the row. The override log is itself a feature.
+A new booking that overlaps another, or puts a vessel in a berth shorter than it, is refused
+outright.
+
+Overlap is refused *during the drag* rather than after it: the bar stops growing at the last
+free day, so the wrong thing is never expressible and no error message is needed. Oversize
+cannot work that way, because the vessel is not known until it is named, so that one refuses
+in the panel with the numbers spelled out, alongside a list of berths that would fit.
+
+The same-day turnaround that earlier versions allowed is gone. Before removing it I checked
+the archive: in 23 years **no two different vessels share exactly one day**, so the allowance
+was protecting a case the data never contains.
 
 ### One validation engine, not two
 
 `lib/validation/engine.ts` is pure — no database, no `fetch`, no `Date.now()`. It is imported
-by both the import path and the booking form, so the rules applied to the historical archive
-and to a new reservation provably cannot drift apart. It has 31 unit tests covering the
-inclusive-boundary cases, containment, unknown lengths, and events.
+by both the import path and the grid, so the rules applied to the historical archive
+and to a new reservation provably cannot drift apart. It has 32 unit tests covering the
+inclusive-boundary cases, containment, unknown lengths, events, and refusal.
 
 ---
 
