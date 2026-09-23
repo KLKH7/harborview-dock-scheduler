@@ -106,12 +106,19 @@ export function ScheduleGrid({
   const [year, setYear] = useState(initialYear)
   const [month, setMonth] = useState(initialMonth)
   const [view, setView] = useState<ScheduleView>('month')
-  const [weekStart, setWeekStart] = useState(1)
+  // Null means "follow the first occupied day of the visible month". A user
+  // paging weeks sets an explicit value; changing month clears it. Derived
+  // rather than synced in an effect, which read a value declared below it and
+  // could leave the week view on a stale start.
+  const [weekOverride, setWeekOverride] = useState<{ key: string; day: number } | null>(null)
   const [drag, dispatch] = useReducer(dragReducer, { kind: 'idle' })
   const [placedId, setPlacedId] = useState<string | null>(null)
   const [announcement, setAnnounce] = useState('')
   const [formOpen, setFormOpen] = useState(false)
   const [hover, setHover] = useState<{ r: GridReservation; rect: DOMRect } | null>(null)
+  // Clicking a bar pins its hull so the trace survives the pointer leaving, and
+  // so keyboard and touch can reach it at all. Hover alone would be mouse-only.
+  const [pinnedHull, setPinnedHull] = useState<string | null>(null)
   const hideHover = useRef<ReturnType<typeof setTimeout> | null>(null)
   const router = useRouter()
 
@@ -124,17 +131,61 @@ export function ScheduleGrid({
     hideHover.current = setTimeout(() => setHover(null), 200)
   }
 
+  /**
+   * Identity of a stay for the purpose of tracing one hull across the grid.
+   * Mirrors how the validation engine decides two rows are the same occupant:
+   * vessel id when known, case-folded label when not.
+   */
+  const hullOf = useCallback(
+    (r: GridReservation) => r.vesselId ?? r.label.trim().toUpperCase(),
+    [],
+  )
+
+  // Pin wins over hover, so a pinned trace does not flicker as the pointer
+  // crosses other bars on the way to reading it.
+  const tracedHull = pinnedHull ?? (hover ? hullOf(hover.r) : null)
+
   const vesselById = useMemo(() => new Map(vessels.map((v) => [v.id, v])), [vessels])
   const berthById = useMemo(() => new Map(berths.map((b) => [b.id, b])), [berths])
 
   const scrollerRef = useRef<HTMLDivElement>(null)
   const nDays = daysInMonth(year, month)
+  const monthKey = `${year}-${month}`
+  const monthStart = Date.UTC(year, month - 1, 1)
+  const monthEnd = Date.UTC(year, month - 1, nDays)
+
+  const occupiedThisMonth = useMemo(
+    () =>
+      reservations.filter(
+        (r) => parseDay(r.end) >= monthStart && parseDay(r.start) <= monthEnd,
+      ),
+    [reservations, monthStart, monthEnd],
+  )
+
+  /** First day of the month that has anything on it, so week view opens on work. */
+  const firstOccupied = useMemo(() => {
+    let min = Infinity
+    for (const r of occupiedThisMonth) {
+      const day =
+        Math.floor((Math.max(parseDay(r.start), monthStart) - monthStart) / DAY_MS) + 1
+      if (day < min) min = day
+    }
+    return Number.isFinite(min) ? min : 1
+  }, [occupiedThisMonth, monthStart])
+
+  // An explicit page through weeks wins, but only within the month it was made.
+  // Changing month drops back to the first occupied day with no effect needed.
+  const weekStart =
+    weekOverride && weekOverride.key === monthKey ? weekOverride.day : firstOccupied
+  const setWeekStart = useCallback(
+    (day: number) => setWeekOverride({ key: monthKey, day }),
+    [monthKey],
+  )
+
   const firstDay = view === 'week' ? Math.min(weekStart, Math.max(1, nDays - 6)) : 1
   const visCount = view === 'week' ? Math.min(7, nDays - firstDay + 1) : nDays
   const lastDay = firstDay + visCount - 1
   const dayPx = view === 'week' ? WEEK_DAY_PX : MONTH_DAY_PX
-  const monthStart = Date.UTC(year, month - 1, 1)
-  const monthEnd = Date.UTC(year, month - 1, nDays)
   const visStart = Date.UTC(year, month - 1, firstDay)
   const visEnd = Date.UTC(year, month - 1, lastDay)
 
@@ -142,10 +193,6 @@ export function ScheduleGrid({
   // offset carries into February and the view opens mid-month.
   useEffect(() => {
     scrollerRef.current?.scrollTo({ left: 0 })
-  }, [year, month])
-
-  useEffect(() => {
-    if (view === 'week') setWeekStart(firstOccupied)
   }, [year, month])
 
   // Keep the URL in step without a server round-trip. A navigation here would
@@ -156,24 +203,6 @@ export function ScheduleGrid({
     u.searchParams.set('month', String(month))
     window.history.replaceState(null, '', u)
   }, [year, month])
-
-  const occupiedThisMonth = useMemo(
-    () =>
-      reservations.filter(
-        (r) => parseDay(r.end) >= monthStart && parseDay(r.start) <= monthEnd,
-      ),
-    [reservations, monthStart, monthEnd],
-  )
-
-  const firstOccupied = useMemo(() => {
-    let min = Infinity
-    for (const r of occupiedThisMonth) {
-      const day =
-        Math.floor((Math.max(parseDay(r.start), monthStart) - monthStart) / DAY_MS) + 1
-      if (day < min) min = day
-    }
-    return Number.isFinite(min) ? min : 1
-  }, [occupiedThisMonth, monthStart])
 
   const visible = useMemo(
     () =>
@@ -247,7 +276,7 @@ export function ScheduleGrid({
       setWeekStart(1)
       dispatch({ type: 'cancel' })
     },
-    [month, year],
+    [month, year, setWeekStart],
   )
 
   const shiftRange = useCallback(
@@ -280,8 +309,19 @@ export function ScheduleGrid({
       setWeekStart(d)
       dispatch({ type: 'cancel' })
     },
-    [view, firstDay, month, year, shiftMonth],
+    [view, firstDay, month, year, shiftMonth, setWeekStart],
   )
+
+  // Escape clears a pinned trace. Separate from the drag handler below, which
+  // only binds while a drag is live, so the two never contend for the key.
+  useEffect(() => {
+    if (pinnedHull === null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setPinnedHull(null)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [pinnedHull])
 
   // Escape cancels a drag or a pending selection. Bound only while one is live.
   useEffect(() => {
@@ -495,8 +535,13 @@ export function ScheduleGrid({
                             visStart={visStart}
                             visEnd={visEnd}
                             placed={placedId === r.id}
+                            traced={tracedHull === null ? null : hullOf(r) === tracedHull}
+                            pinned={pinnedHull !== null && hullOf(r) === pinnedHull}
                             onHover={openHover}
                             onHoverEnd={closeHoverSoon}
+                            onToggleTrace={() =>
+                              setPinnedHull((cur) => (cur === hullOf(r) ? null : hullOf(r)))
+                            }
                           />
                         ))}
                       </div>
@@ -582,15 +627,22 @@ function Bar({
   visStart,
   visEnd,
   placed,
+  traced,
+  pinned,
   onHover,
   onHoverEnd,
+  onToggleTrace,
 }: {
   r: GridReservation
   visStart: number
   visEnd: number
   placed: boolean
+  /** null when nothing is traced, true when this bar is the traced hull. */
+  traced: boolean | null
+  pinned: boolean
   onHover: (h: { r: GridReservation; rect: DOMRect }) => void
   onHoverEnd: () => void
+  onToggleTrace: () => void
 }) {
   const s = Math.max(parseDay(r.start), visStart)
   const e = Math.min(parseDay(r.end), visEnd)
@@ -606,11 +658,21 @@ function Bar({
       ? 'border-l-[3px] border-event bg-event-fill text-event'
       : 'border-l-[3px] border-sea bg-sea-fill text-sea'
 
+  // The old spreadsheet gave each regular vessel its own fill colour, which
+  // answered "where else is this hull this month" at a glance. That does not
+  // survive 462 vessels and one accent, so the same question is answered on
+  // demand instead: the other stays recede rather than this one shouting.
+  const dimmed = traced === false
+
   return (
-    <div
-      className={`relative z-[1] mx-px my-1 flex items-center overflow-hidden px-2.5 ${fill} ${
+    <button
+      type="button"
+      aria-pressed={pinned}
+      className={`bar-trace relative z-[1] mx-px my-1 flex items-center overflow-hidden px-2.5 text-left ${fill} ${
         placed ? 'bar-placed' : ''
       }`}
+      data-dimmed={dimmed ? '' : undefined}
+      data-traced={traced === true ? '' : undefined}
       style={{
         gridColumn: `${col} / span ${span}`,
         borderTopLeftRadius: clippedStart ? 0 : 4,
@@ -620,13 +682,16 @@ function Bar({
       }}
       onMouseEnter={(e) => onHover({ r, rect: e.currentTarget.getBoundingClientRect() })}
       onMouseLeave={onHoverEnd}
+      onFocus={(e) => onHover({ r, rect: e.currentTarget.getBoundingClientRect() })}
+      onBlur={onHoverEnd}
+      onClick={onToggleTrace}
     >
       <span className="line-clamp-2 text-[12px] font-medium leading-snug tracking-[-0.02em]">
         {clippedStart && <span className="opacity-50">‹ </span>}
         {r.label}
         {clippedEnd && <span className="opacity-50"> ›</span>}
       </span>
-    </div>
+    </button>
   )
 }
 

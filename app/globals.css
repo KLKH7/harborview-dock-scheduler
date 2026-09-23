@@ -122,3 +122,37 @@ body {
   user-select: none;
   cursor: col-resize;
 }
+
+/*
+  Tracing one hull across the schedule.
+
+  The source spreadsheet gave each regular vessel a fixed fill colour, which
+  answered "where else is this hull this month" without reading a single label.
+  That worked for about ten vessels and collapsed for the other four hundred, so
+  the same question is answered on demand here.
+
+  The matched bar is not brightened; the others recede. Emphasis by removal
+  keeps the palette intact and keeps red meaning one thing.
+
+  No entrance animation: this fires whenever the pointer crosses a bar, dozens
+  of times a minute, and a transition on something that frequent reads as lag.
+  The dim itself is a colour change, so `ease` rather than `ease-out`.
+*/
+.bar-trace {
+  transition: opacity 120ms ease;
+}
+
+.bar-trace[data-dimmed] {
+  opacity: 0.32;
+}
+
+/* Pinned or hovered match: a hairline, not a glow. */
+.bar-trace[data-traced] {
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-trace {
+    transition: none;
+  }
+}

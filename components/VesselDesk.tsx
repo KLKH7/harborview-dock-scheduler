@@ -155,7 +155,7 @@ function LengthRow({
             onBlur={() => {
               if (dirty) onSave(vessel.id, draft)
             }}
-            placeholder="—"
+            placeholder="--"
             className="tnum w-20 rounded border border-line bg-panel px-2 py-1 text-[13px] outline-none focus:border-sea"
           />
           {dirty && (
