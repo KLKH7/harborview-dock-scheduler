@@ -110,7 +110,11 @@ export function ScheduleGrid({
   const [placedId, setPlacedId] = useState<string | null>(null)
   const [announcement, setAnnounce] = useState('')
   const [formOpen, setFormOpen] = useState(false)
+  const [hover, setHover] = useState<{ r: GridReservation; rect: DOMRect } | null>(null)
   const router = useRouter()
+
+  const vesselById = useMemo(() => new Map(vessels.map((v) => [v.id, v])), [vessels])
+  const berthById = useMemo(() => new Map(berths.map((b) => [b.id, b])), [berths])
 
   const scrollerRef = useRef<HTMLDivElement>(null)
   const nDays = daysInMonth(year, month)
@@ -480,6 +484,7 @@ export function ScheduleGrid({
                             visStart={visStart}
                             visEnd={visEnd}
                             placed={placedId === r.id}
+                            onHover={setHover}
                           />
                         ))}
                       </div>
@@ -506,6 +511,15 @@ export function ScheduleGrid({
         <p className="px-5 py-3 text-[13px] text-mute sm:px-8">
           Nothing booked this month. Reserve, or drag across empty days on a berth.
         </p>
+      )}
+
+      {hover && (
+        <StayTip
+          r={hover.r}
+          anchor={hover.rect}
+          berth={berthById.get(hover.r.berthId) ?? null}
+          vessel={hover.r.vesselId ? (vesselById.get(hover.r.vesselId) ?? null) : null}
+        />
       )}
 
       {pending && (
@@ -548,21 +562,21 @@ function Bar({
   visStart,
   visEnd,
   placed,
+  onHover,
 }: {
   r: GridReservation
   visStart: number
   visEnd: number
   placed: boolean
+  onHover: (h: { r: GridReservation; rect: DOMRect } | null) => void
 }) {
   const s = Math.max(parseDay(r.start), visStart)
   const e = Math.min(parseDay(r.end), visEnd)
   const col = (s - visStart) / DAY_MS + 1
   const span = (e - s) / DAY_MS + 1
-  const total = dayCount(r.start, r.end)
 
   const clippedStart = parseDay(r.start) < visStart
   const clippedEnd = parseDay(r.end) > visEnd
-  const flag = r.conflicted ? 'conflict' : r.oversize ? 'too long for berth' : ''
   const alarm = r.conflicted || r.oversize
   const fill = alarm
     ? 'border-l-[3px] border-conflict bg-conflict/10 text-conflict'
@@ -582,15 +596,75 @@ function Bar({
         borderTopRightRadius: clippedEnd ? 0 : 4,
         borderBottomRightRadius: clippedEnd ? 0 : 4,
       }}
-      title={`${r.label}. ${r.start} to ${r.end}, ${total} day${total === 1 ? '' : 's'}.${
-        flag ? ` ${flag}.` : ''
-      }`}
+      onMouseEnter={(e) => onHover({ r, rect: e.currentTarget.getBoundingClientRect() })}
+      onMouseMove={(e) => onHover({ r, rect: e.currentTarget.getBoundingClientRect() })}
+      onMouseLeave={() => onHover(null)}
     >
       <span className="truncate whitespace-nowrap text-[12px] font-medium leading-none tracking-[-0.02em]">
         {clippedStart && <span className="opacity-50">‹ </span>}
         {r.label}
         {clippedEnd && <span className="opacity-50"> ›</span>}
       </span>
+    </div>
+  )
+}
+
+function fmtDay(iso: string) {
+  return new Date(`${iso}T00:00:00Z`).toLocaleString('en', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  })
+}
+
+function StayTip({
+  r,
+  anchor,
+  berth,
+  vessel,
+}: {
+  r: GridReservation
+  anchor: DOMRect
+  berth: BerthRow | null
+  vessel: Vessel | null
+}) {
+  const n = dayCount(r.start, r.end)
+  const range =
+    r.start === r.end ? fmtDay(r.start) : `${fmtDay(r.start)} to ${fmtDay(r.end)}`
+  const lengthFt = vessel?.lengthFt ?? null
+  const berthFt = berth?.lengthFt ?? null
+
+  let fit: string | null = null
+  if (r.kind === 'event') fit = 'Event. No length check.'
+  else if (lengthFt == null) fit = 'No length on this vessel.'
+  else if (berthFt == null) fit = `${lengthFt} ft. Berth length not set.`
+  else if (r.oversize) fit = `Does not fit. ${lengthFt} ft on a ${berthFt} ft berth.`
+  else fit = `${lengthFt} ft. Fits ${berth?.name ?? 'this berth'} (${berthFt} ft).`
+
+  const left = Math.min(Math.max(8, anchor.left), (typeof window === 'undefined' ? 400 : window.innerWidth) - 280)
+  const below = anchor.bottom + 8
+  const top =
+    typeof window !== 'undefined' && below + 160 > window.innerHeight
+      ? Math.max(8, anchor.top - 160)
+      : below
+
+  return (
+    <div
+      role="tooltip"
+      className="pointer-events-none fixed z-[80] w-[260px] rounded-lg border border-line bg-panel px-3 py-2.5 text-ink shadow-[0_8px_24px_rgba(35,31,32,0.14)]"
+      style={{ left, top }}
+    >
+      <div className="text-[13px] font-medium tracking-[-0.03em]">{r.label}</div>
+      <div className="tnum mt-1 text-[12px] text-mute">
+        {range}
+        <span className="text-mute"> · {n} day{n === 1 ? '' : 's'}</span>
+      </div>
+      {berth && <div className="mt-0.5 text-[12px] text-mute">{berth.name}</div>}
+      {fit && <div className="mt-2 text-[12px] text-ink">{fit}</div>}
+      {r.conflicted && (
+        <div className="mt-1 text-[12px] text-conflict">Shares this berth with another stay.</div>
+      )}
     </div>
   )
 }
