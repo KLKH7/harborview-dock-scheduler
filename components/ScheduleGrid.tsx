@@ -4,11 +4,14 @@ import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'r
 import type { BerthRow } from '@/lib/data'
 import { parseDay, dayCount, type Reservation, type Vessel } from '@/lib/validation/engine'
 import { ReservePopover, type PendingSelection } from './ReservePopover'
-import { MonthHeader } from './MonthHeader'
+import { ReserveDialog } from './ReserveDialog'
+import { MonthHeader, type ScheduleView } from './MonthHeader'
 
 const DAY_MS = 86_400_000
 const WEEKDAY = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
-const MIN_DAY_PX = 30
+const BERTH_COL_PX = 220
+const MONTH_DAY_PX = 64
+const WEEK_DAY_PX = 128
 
 export type GridReservation = Reservation & {
   conflicted: boolean
@@ -100,14 +103,23 @@ export function ScheduleGrid({
 }: Props) {
   const [year, setYear] = useState(initialYear)
   const [month, setMonth] = useState(initialMonth)
+  const [view, setView] = useState<ScheduleView>('month')
+  const [weekStart, setWeekStart] = useState(1)
   const [drag, dispatch] = useReducer(dragReducer, { kind: 'idle' })
   const [placedId, setPlacedId] = useState<string | null>(null)
   const [announcement, setAnnounce] = useState('')
+  const [formOpen, setFormOpen] = useState(false)
 
   const scrollerRef = useRef<HTMLDivElement>(null)
   const nDays = daysInMonth(year, month)
+  const firstDay = view === 'week' ? Math.min(weekStart, Math.max(1, nDays - 6)) : 1
+  const visCount = view === 'week' ? Math.min(7, nDays - firstDay + 1) : nDays
+  const lastDay = firstDay + visCount - 1
+  const dayPx = view === 'week' ? WEEK_DAY_PX : MONTH_DAY_PX
   const monthStart = Date.UTC(year, month - 1, 1)
   const monthEnd = Date.UTC(year, month - 1, nDays)
+  const visStart = Date.UTC(year, month - 1, firstDay)
+  const visEnd = Date.UTC(year, month - 1, lastDay)
 
   // Reset horizontal scroll when the month changes, otherwise a 31-day scroll
   // offset carries into February and the view opens mid-month.
@@ -127,9 +139,9 @@ export function ScheduleGrid({
   const visible = useMemo(
     () =>
       reservations.filter(
-        (r) => parseDay(r.end) >= monthStart && parseDay(r.start) <= monthEnd,
+        (r) => parseDay(r.end) >= visStart && parseDay(r.start) <= visEnd,
       ),
-    [reservations, monthStart, monthEnd],
+    [reservations, visStart, visEnd],
   )
 
   const byBerth = useMemo(() => {
@@ -193,9 +205,43 @@ export function ScheduleGrid({
       }
       setYear(y)
       setMonth(m)
+      setWeekStart(1)
       dispatch({ type: 'cancel' })
     },
     [month, year],
+  )
+
+  const shiftRange = useCallback(
+    (delta: number) => {
+      if (view === 'month') {
+        shiftMonth(delta)
+        return
+      }
+      let d = firstDay + delta * 7
+      let m = month
+      let y = year
+      while (d > daysInMonth(y, m)) {
+        d -= daysInMonth(y, m)
+        m += 1
+        if (m > 12) {
+          m = 1
+          y += 1
+        }
+      }
+      while (d < 1) {
+        m -= 1
+        if (m < 1) {
+          m = 12
+          y -= 1
+        }
+        d += daysInMonth(y, m)
+      }
+      setYear(y)
+      setMonth(m)
+      setWeekStart(d)
+      dispatch({ type: 'cancel' })
+    },
+    [view, firstDay, month, year, shiftMonth],
   )
 
   // Escape cancels a drag or a pending selection. Bound only while one is live.
@@ -210,9 +256,9 @@ export function ScheduleGrid({
 
   const dayFromEvent = (e: React.PointerEvent<HTMLDivElement>, el: HTMLElement) => {
     const rect = el.getBoundingClientRect()
-    const w = rect.width / nDays
-    const d = Math.floor((e.clientX - rect.left) / w) + 1
-    return Math.min(nDays, Math.max(1, d))
+    const w = rect.width / visCount
+    const d = Math.floor((e.clientX - rect.left) / w) + firstDay
+    return Math.min(lastDay, Math.max(firstDay, d))
   }
 
   function onRowPointerDown(e: React.PointerEvent<HTMLDivElement>, berthId: string) {
@@ -250,9 +296,9 @@ export function ScheduleGrid({
       // capture may already be gone; nothing to do
     }
     const lane = e.currentTarget.getBoundingClientRect()
-    const w = lane.width / nDays
+    const w = lane.width / visCount
     const endDay = Math.max(drag.anchor, drag.cursor)
-    const rect = new DOMRect(lane.left + (endDay - 1) * w, lane.top, w, lane.height)
+    const rect = new DOMRect(lane.left + (endDay - firstDay) * w, lane.top, w, lane.height)
     dispatch({ type: 'commit', rect })
   }
 
@@ -266,50 +312,65 @@ export function ScheduleGrid({
         }
       : null
 
-  const gridCols = `repeat(${nDays}, minmax(${MIN_DAY_PX}px, 1fr))`
+  const gridCols = `repeat(${visCount}, minmax(${dayPx}px, 1fr))`
+  const minWidth = BERTH_COL_PX + visCount * dayPx
 
   return (
-    <div className={drag.kind === 'anchored' ? 'dragging' : undefined}>
+    <div
+      className={`flex min-h-0 flex-1 flex-col ${drag.kind === 'anchored' ? 'dragging' : ''}`}
+    >
       <MonthHeader
         year={year}
         month={month}
         years={years}
-        onShift={shiftMonth}
+        view={view}
+        onView={(v) => {
+          setView(v)
+          if (v === 'week') setWeekStart(1)
+        }}
+        onShift={shiftRange}
         onJump={(y, m) => {
           setYear(y)
           setMonth(m)
+          setWeekStart(1)
         }}
+        onToday={() => {
+          const [y, m] = today.split('-').map(Number)
+          setYear(y)
+          setMonth(m)
+          setWeekStart(1)
+        }}
+        onReserve={() => setFormOpen(true)}
       />
 
       <div
         ref={scrollerRef}
-        className="overflow-auto border-y border-line bg-panel"
+        className="min-h-0 flex-1 overflow-auto bg-panel"
         role="grid"
         aria-label={`Berth occupancy, ${monthLabel(year, month)}`}
       >
-        <div style={{ minWidth: 120 + nDays * MIN_DAY_PX }}>
-          {/* Day header */}
+        <div className="flex min-h-full flex-col" style={{ minWidth }}>
           <div
-            className="sticky top-0 z-30 flex border-b border-line bg-panel"
+            className="sticky top-0 z-30 flex h-12 shrink-0 border-b border-line bg-panel"
             role="row"
           >
-            <div className="sticky left-0 z-40 w-[120px] shrink-0 border-r border-line bg-panel px-3 py-1.5 sm:w-[200px] text-[11px] uppercase tracking-wide text-mute">
+            <div className="sticky left-0 z-40 shrink-0 border-r border-line bg-panel px-4 py-2 text-[11px] font-medium uppercase tracking-[0.06em] text-mute" style={{ width: BERTH_COL_PX }}>
               Berth
             </div>
             <div className="grid flex-1" style={{ gridTemplateColumns: gridCols }}>
-              {Array.from({ length: nDays }, (_, i) => i + 1).map((d) => {
+              {Array.from({ length: visCount }, (_, i) => firstDay + i).map((d) => {
                 const wd = (new Date(Date.UTC(year, month - 1, d)).getUTCDay() + 6) % 7
                 const isToday = iso(year, month, d) === today
                 return (
                   <div
                     key={d}
                     role="columnheader"
-                    className={`tnum py-1 text-center text-[11px] ${
-                      isToday ? 'bg-wash text-ink' : wd >= 5 ? 'text-mute/60' : 'text-mute'
+                    className={`tnum flex flex-col items-center justify-center text-[12px] ${
+                      isToday ? 'bg-today text-sea' : wd >= 5 ? 'text-mute/70' : 'text-mute'
                     }`}
                   >
-                    <div>{d}</div>
-                    <div className="text-[9px] text-mute/60">{WEEKDAY[wd]}</div>
+                    <div className="text-[10px] uppercase tracking-[0.04em]">{WEEKDAY[wd]}</div>
+                    <div className={`text-[13px] font-medium ${isToday ? 'text-sea' : 'text-ink'}`}>{d}</div>
                   </div>
                 )
               })}
@@ -317,17 +378,28 @@ export function ScheduleGrid({
           </div>
 
           {berths.map((berth) => {
-            const rows = layoutLanes(byBerth.get(berth.id) ?? [], monthStart, monthEnd)
+            const rows = layoutLanes(byBerth.get(berth.id) ?? [], visStart, visEnd)
             const isDragRow = drag.kind === 'anchored' && drag.berthId === berth.id
             const selLo = isDragRow ? Math.min(drag.anchor, drag.cursor) : 0
             const selHi = isDragRow ? Math.max(drag.anchor, drag.cursor) : 0
+            const selCol = selLo - firstDay + 1
+            const selSpan = selHi - selLo + 1
 
             return (
-              <div key={berth.id} className="flex border-b border-line" role="row">
-                <div className="sticky left-0 z-20 w-[120px] shrink-0 border-r border-line bg-panel px-3 py-2 sm:w-[200px]">
-                  <div className="truncate text-[13px] text-ink">{berth.name}</div>
-                  <div className="tnum text-[11px] text-mute">
-                    {berth.lengthFt === null ? 'length not recorded' : `${berth.lengthFt} ft`}
+              <div
+                key={berth.id}
+                className="flex min-h-[76px] flex-1 border-b border-line"
+                role="row"
+              >
+                <div
+                  className="sticky left-0 z-20 flex shrink-0 flex-col justify-center border-r border-line bg-panel px-4 py-3"
+                  style={{ width: BERTH_COL_PX }}
+                >
+                  <div className="truncate text-[14px] font-medium tracking-[-0.03em] text-ink">
+                    {berth.name}
+                  </div>
+                  <div className="tnum mt-0.5 text-[12px] text-mute">
+                    {berth.lengthFt != null ? `${berth.lengthFt} ft` : ''}
                   </div>
                 </div>
 
@@ -338,24 +410,25 @@ export function ScheduleGrid({
                   onPointerUp={onRowPointerUp}
                   onPointerCancel={() => dispatch({ type: 'cancel' })}
                 >
-                  {/* day columns */}
                   <div
                     className="absolute inset-0 grid"
                     style={{ gridTemplateColumns: gridCols }}
                     aria-hidden
                   >
-                    {Array.from({ length: nDays }, (_, i) => i + 1).map((d) => {
+                    {Array.from({ length: visCount }, (_, i) => firstDay + i).map((d) => {
+                      const wd = (new Date(Date.UTC(year, month - 1, d)).getUTCDay() + 6) % 7
                       const isToday = iso(year, month, d) === today
                       return (
                         <div
                           key={d}
-                          className={`border-r border-line/60 ${isToday ? 'bg-wash' : ''}`}
+                          className={`border-r border-line/70 ${
+                            isToday ? 'bg-today' : wd >= 5 ? 'bg-wash/40' : ''
+                          }`}
                         />
                       )
                     })}
                   </div>
 
-                  {/* live selection */}
                   {isDragRow && (
                     <div
                       className="pointer-events-none absolute inset-y-0 z-10 grid"
@@ -363,25 +436,25 @@ export function ScheduleGrid({
                       aria-hidden
                     >
                       <div
-                        className="my-[3px] rounded-[3px] bg-occupied-strong"
-                        style={{ gridColumn: `${selLo} / span ${selHi - selLo + 1}` }}
+                        className="my-2 rounded bg-occupied-strong"
+                        style={{ gridColumn: `${selCol} / span ${selSpan}` }}
                       />
                     </div>
                   )}
 
-                  <div className="relative" style={{ minHeight: 30 }}>
+                  <div className="relative flex h-full min-h-[60px] flex-col justify-center py-1.5">
                     {rows.map((lane, li) => (
                       <div
                         key={li}
                         className="relative grid"
-                        style={{ gridTemplateColumns: gridCols, height: 28 }}
+                        style={{ gridTemplateColumns: gridCols, minHeight: 48 }}
                       >
                         {lane.map((r) => (
                           <Bar
                             key={r.id}
                             r={r}
-                            monthStart={monthStart}
-                            monthEnd={monthEnd}
+                            visStart={visStart}
+                            visEnd={visEnd}
                             placed={placedId === r.id}
                           />
                         ))}
@@ -399,6 +472,12 @@ export function ScheduleGrid({
         {announcement}
       </p>
 
+      {visible.length === 0 && (
+        <p className="px-5 py-3 text-[13px] text-mute sm:px-8">
+          Nothing booked this {view}. Reserve, or drag across empty days on a berth.
+        </p>
+      )}
+
       {pending && (
         <ReservePopover
           selection={pending}
@@ -411,56 +490,74 @@ export function ScheduleGrid({
           }}
         />
       )}
+
+      {formOpen && (
+        <ReserveDialog
+          berths={berths}
+          vessels={vessels}
+          defaultStart={today}
+          onClose={() => setFormOpen(false)}
+          onReserved={(id, start) => {
+            const [y, m] = start.split('-').map(Number)
+            setYear(y)
+            setMonth(m)
+            setWeekStart(1)
+            setPlacedId(id)
+            setFormOpen(false)
+          }}
+        />
+      )}
     </div>
   )
 }
 
 function Bar({
   r,
-  monthStart,
-  monthEnd,
+  visStart,
+  visEnd,
   placed,
 }: {
   r: GridReservation
-  monthStart: number
-  monthEnd: number
+  visStart: number
+  visEnd: number
   placed: boolean
 }) {
-  const s = Math.max(parseDay(r.start), monthStart)
-  const e = Math.min(parseDay(r.end), monthEnd)
-  const col = (s - monthStart) / DAY_MS + 1
+  const s = Math.max(parseDay(r.start), visStart)
+  const e = Math.min(parseDay(r.end), visEnd)
+  const col = (s - visStart) / DAY_MS + 1
   const span = (e - s) / DAY_MS + 1
   const total = dayCount(r.start, r.end)
 
-  // A stay that runs off either edge of the month gets a square edge there, so
-  // "continues" is legible from the shape without an extra element.
-  const clippedStart = parseDay(r.start) < monthStart
-  const clippedEnd = parseDay(r.end) > monthEnd
+  const clippedStart = parseDay(r.start) < visStart
+  const clippedEnd = parseDay(r.end) > visEnd
   const flag = r.conflicted ? 'conflict' : r.oversize ? 'too long for berth' : ''
+  const alarm = r.conflicted || r.oversize
+  const fill = alarm
+    ? 'border-l-[3px] border-conflict bg-conflict/10 text-conflict'
+    : r.kind === 'event'
+      ? 'border-l-[3px] border-event bg-event-fill text-event'
+      : 'border-l-[3px] border-sea bg-sea-fill text-sea'
 
   return (
     <div
-      className={`relative z-[1] my-[3px] flex items-center overflow-hidden px-1.5 ${
-        r.conflicted || r.oversize
-          ? 'border-l-2 border-conflict bg-occupied'
-          : 'bg-occupied'
-      } ${placed ? 'bar-placed' : ''}`}
+      className={`relative z-[1] mx-px my-1 flex items-center overflow-hidden px-2.5 ${fill} ${
+        placed ? 'bar-placed' : ''
+      }`}
       style={{
         gridColumn: `${col} / span ${span}`,
-        borderTopLeftRadius: clippedStart ? 0 : 3,
-        borderBottomLeftRadius: clippedStart ? 0 : 3,
-        borderTopRightRadius: clippedEnd ? 0 : 3,
-        borderBottomRightRadius: clippedEnd ? 0 : 3,
+        borderTopLeftRadius: clippedStart ? 0 : 4,
+        borderBottomLeftRadius: clippedStart ? 0 : 4,
+        borderTopRightRadius: clippedEnd ? 0 : 4,
+        borderBottomRightRadius: clippedEnd ? 0 : 4,
       }}
       title={`${r.label}. ${r.start} to ${r.end}, ${total} day${total === 1 ? '' : 's'}.${
         flag ? ` ${flag}.` : ''
       }`}
     >
-      <span className="truncate whitespace-nowrap text-[11px] leading-none text-ink">
-        {clippedStart && <span className="text-mute">‹ </span>}
-        {r.kind === 'event' && <span className="text-mute">event </span>}
+      <span className="truncate whitespace-nowrap text-[12px] font-medium leading-none tracking-[-0.02em]">
+        {clippedStart && <span className="opacity-50">‹ </span>}
         {r.label}
-        {clippedEnd && <span className="text-mute"> ›</span>}
+        {clippedEnd && <span className="opacity-50"> ›</span>}
       </span>
     </div>
   )
@@ -468,10 +565,8 @@ function Bar({
 
 /**
  * Pack bars into lanes so two overlapping bookings are never drawn on top of
- * each other. A double-booked berth therefore becomes visibly taller, which
- * makes the conflict legible from the shape of the row before any colour is
- * read. That matters here because the palette has one accent, so colour cannot
- * carry the state on its own.
+ * each other. A double-booked berth therefore becomes visibly taller. Colour
+ * marks kind (vessel vs event) and alarm. Shape still carries overlap.
  */
 function layoutLanes(
   bars: GridReservation[],

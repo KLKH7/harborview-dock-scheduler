@@ -19,12 +19,13 @@ export default async function FindingsPage() {
   const sortedConflicts = [...conflicts].sort((a, b) => b.sharedDays - a.sharedDays)
 
   return (
+    <div className="min-h-0 flex-1 overflow-y-auto">
     <div className="mx-auto max-w-[1100px] space-y-8 px-5 py-6">
       <div>
         <h1 className="text-[17px] font-medium tracking-tight">Findings</h1>
         <p className="mt-1 text-sm text-mute">
-          Every booking in {stats.yearsCovered} years of history, checked against both rules. This
-          replaces reading the grid by eye.
+          Double-bookings and vessels that do not fit their berth. Checked by the same rules that
+          refuse a new reservation.
         </p>
       </div>
 
@@ -32,14 +33,14 @@ export default async function FindingsPage() {
         <Stat label="Reservations" value={stats.reservations} />
         <Stat label="Double-booked" value={stats.conflicts} alarm />
         <Stat label="Exceeds berth" value={stats.oversizedCount} alarm />
-        <Stat label="Unverifiable" value={stats.unverifiableCount} />
+        <Stat label="No length" value={stats.unverifiableCount} />
       </div>
 
       <section className="space-y-3">
         <div className="flex items-baseline gap-3">
           <h2 className="text-[15px] font-medium">Double-bookings</h2>
           <span className="tnum text-sm text-mute">
-            {stats.conflicts} in {stats.yearsCovered} years
+            {stats.conflicts}
           </span>
         </div>
 
@@ -157,20 +158,21 @@ export default async function FindingsPage() {
         )}
       </section>
 
-      <section className="rounded-[8px] border border-line bg-wash p-4">
-        <h2 className="font-medium text-ink">
-          {stats.unverifiableCount.toLocaleString()} bookings could not be checked
-        </h2>
-        <p className="mt-1 text-sm text-mute">
-          That is {stats.unverifiableBookedDays.toLocaleString()} booked days whose vessel has no
-          length on record anywhere in the source workbook. They are reported as{' '}
-          <strong>unverifiable</strong> rather than approved. the system will not tell you a vessel
-          fits when it cannot know.{' '}
-          <Link href="/data-quality" className="underline">
-            See what data is missing to
-          </Link>
-        </p>
-      </section>
+      {stats.unverifiableCount > 0 && (
+        <section className="rounded-[8px] border border-line bg-wash p-4">
+          <h2 className="font-medium text-ink">
+            {stats.unverifiableCount.toLocaleString()} bookings have no vessel length
+          </h2>
+          <p className="mt-1 text-sm text-mute">
+            Fit is not claimed when length is missing. Add feet on the{' '}
+            <Link href="/vessels" className="text-ink underline">
+              vessels
+            </Link>{' '}
+            list and these bookings will check like any other.
+          </p>
+        </section>
+      )}
+    </div>
     </div>
   )
 }

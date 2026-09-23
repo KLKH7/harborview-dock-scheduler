@@ -3,32 +3,33 @@
 /*
   Harborview dock schedule.
 
-  One canvas, no dark mode. This is a single-coordinator operational tool that
-  replaces a paper-and-Excel wall schedule, so it keeps a paper ground in every
-  environment rather than inverting to a dark theme it would never be used in.
-
-  Seven tokens, and only seven. Occupancy is drawn in one ink tint, never a
-  second hue: a schedule that colour-codes every vessel becomes a rainbow you
-  have to decode. Red is reserved so that when it appears, it means exactly one
-  thing.
+  Paper-calm, not beige-dead, not consumer-rainbow. Charcoal ink from a
+  product nav that already works (Quad). Sea and moss only on occupancy
+  bars, so a booked berth reads as occupied from across the room. Conflict
+  red is still the only alarm.
 */
 @theme {
-  --color-paper: #f8f7f3;
-  --color-ink: #4b453b;
-  --color-mute: #6b6453;
-  --color-line: #eae6db;
-  --color-wash: #f1eee7;
+  --color-paper: #fafaf8;
+  --color-ink: #231f20;
+  --color-mute: #6b645c;
+  --color-line: #e6e2d8;
+  --color-wash: #f3f0ea;
   --color-panel: #ffffff;
-  --color-conflict: #b42318;
 
-  /* Occupancy fill: ink at 12%. The name on top stays ink at full strength. */
-  --color-occupied: rgba(75, 69, 59, 0.12);
-  --color-occupied-strong: rgba(75, 69, 59, 0.2);
+  --color-sea: #1a4a5c;
+  --color-sea-fill: #d7e6ec;
+  --color-event: #3d4a3a;
+  --color-event-fill: #e2ead8;
+  --color-today: #e8f1f4;
+  --color-conflict: #c72215;
 
-  --radius-cell: 3px;
+  --color-occupied: var(--color-sea-fill);
+  --color-occupied-strong: #c5d8e0;
+
+  --radius-cell: 4px;
   --radius-panel: 8px;
 
-  --shadow-panel: 0 1px 2px rgba(75, 69, 59, 0.06);
+  --shadow-panel: 0 1px 2px rgba(35, 31, 32, 0.06);
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
@@ -37,26 +38,22 @@
 
 html {
   background: var(--color-paper);
+  height: 100%;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  /* Fixed 14px. Type does not scale with viewport: a schedule read at arm's
-     length on a desk monitor should not reflow because the window narrowed. */
   font-size: 14px;
   line-height: 1.45;
+  letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
+  height: 100%;
 }
 
-/*
-  Browser surfaces. These ship with defaults that belong to no design system,
-  and leaving them is the cheapest tell that a page was assembled rather than
-  built. Theme them from the same seven tokens.
-*/
 ::selection {
-  background: var(--color-occupied-strong);
+  background: var(--color-sea-fill);
   color: var(--color-ink);
 }
 
@@ -65,12 +62,11 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-sea);
   outline-offset: 1px;
   border-radius: 2px;
 }
 
-/* Remove the focus ring only where a component paints its own. */
 [data-focus-painted]:focus-visible {
   outline: none;
 }
@@ -96,23 +92,14 @@ body {
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #ddd8cb;
+  background: #d4cfc4;
 }
 
-/* Dates, lengths and day numbers are compared column to column. Proportional
-   digits make that comparison wobble. */
 .tnum {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
 }
 
-/*
-  The only animation in the product: the bar you just placed.
-
-  Everything else in the grid is deliberately transition-free, which is what
-  guarantees the schedule never animates into view. A coordinator scanning
-  months does that motion tens of times an hour.
-*/
 @media (prefers-reduced-motion: no-preference) {
   .bar-placed {
     animation: bar-place 200ms var(--ease-out) both;
@@ -130,7 +117,6 @@ body {
   }
 }
 
-/* While a drag is in progress, stop the browser selecting row labels. */
 .dragging,
 .dragging * {
   user-select: none;

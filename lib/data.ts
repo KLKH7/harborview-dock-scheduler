@@ -10,6 +10,7 @@ import {
   type Conflict,
   type FitFinding,
 } from './validation/engine'
+import { hullKey } from './vessel-name'
 
 export type BerthRow = Berth & { displayOrder: number }
 
@@ -175,9 +176,37 @@ export async function getFuzzyMatches() {
   }))
 }
 
+/**
+ * Years the coordinator can open. Archive years plus the current year and
+ * two ahead, so 2026 is a real month you can book into, not a wall after 2019.
+ */
 export async function getYears(): Promise<number[]> {
   const rows = (await sql`
-    SELECT DISTINCT extract(year FROM start_date)::int AS y FROM reservation ORDER BY y
+    SELECT
+      min(extract(year FROM start_date))::int AS lo,
+      max(extract(year FROM start_date))::int AS hi
+    FROM reservation
   `) as Record<string, unknown>[]
-  return rows.map((r) => Number(r.y))
+  const now = new Date().getUTCFullYear()
+  const lo = Number(rows[0]?.lo) || now
+  const hi = Math.max(Number(rows[0]?.hi) || now, now + 2)
+  const years: number[] = []
+  for (let y = lo; y <= hi; y++) years.push(y)
+  return years
+}
+
+export async function findVesselByHull(name: string): Promise<Vessel | null> {
+  const key = hullKey(name)
+  const vessels = await getVessels()
+  return vessels.find((v) => hullKey(v.displayName) === key) ?? null
+}
+
+export async function insertVessel(displayName: string, lengthFt: number | null): Promise<Vessel> {
+  const id = `app_${crypto.randomUUID()}`
+  const lengthSource = lengthFt != null ? 'manual_override' : 'unknown'
+  await sql`
+    INSERT INTO vessel (id, display_name, length_ft, length_source)
+    VALUES (${id}, ${displayName}, ${lengthFt}, ${lengthSource})
+  `
+  return { id, displayName, lengthFt, lengthSource }
 }

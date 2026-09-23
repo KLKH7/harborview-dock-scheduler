@@ -8,9 +8,14 @@ export default async function SchedulePage(props: PageProps<'/'>) {
   const params = await props.searchParams
   const years = await getYears()
 
-  const latest = years[years.length - 1] ?? new Date().getUTCFullYear()
-  const year = clamp(Number(params.year) || latest, years[0] ?? latest, latest)
-  const month = clamp(Number(params.month) || 7, 1, 12)
+  const now = new Date()
+  const latest = years[years.length - 1] ?? now.getUTCFullYear()
+  const year = clamp(
+    Number(params.year) || now.getUTCFullYear(),
+    years[0] ?? latest,
+    latest,
+  )
+  const month = clamp(Number(params.month) || now.getUTCMonth() + 1, 1, 12)
 
   // Serve a window wider than the month so a stay starting in the previous
   // month still draws, and still takes part in conflict detection.
@@ -40,15 +45,17 @@ export default async function SchedulePage(props: PageProps<'/'>) {
   const today = new Date().toISOString().slice(0, 10)
 
   return (
-    <ScheduleGrid
-      berths={berths}
-      vessels={vessels}
-      reservations={rows}
-      initialYear={year}
-      initialMonth={month}
-      years={years}
-      today={today}
-    />
+    <div className="flex min-h-0 flex-1 flex-col">
+      <ScheduleGrid
+        berths={berths}
+        vessels={vessels}
+        reservations={rows}
+        initialYear={year}
+        initialMonth={month}
+        years={years}
+        today={today}
+      />
+    </div>
   )
 }
 

@@ -7,23 +7,31 @@ const MONTHS = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
 
+export type ScheduleView = 'week' | 'month'
+
 type Props = {
   year: number
   month: number
   years: number[]
+  view: ScheduleView
+  onView: (view: ScheduleView) => void
   onShift: (delta: number) => void
   onJump: (year: number, month: number) => void
+  onToday: () => void
+  onReserve: () => void
 }
 
-/**
- * Month navigation.
- *
- * The title is the control: clicking it opens month and year pickers in place,
- * the way Circle's calendar does, rather than sitting two dropdowns and a Go
- * button above the schedule. Changing the month applies immediately; there is
- * nothing to submit.
- */
-export function MonthHeader({ year, month, years, onShift, onJump }: Props) {
+export function MonthHeader({
+  year,
+  month,
+  years,
+  view,
+  onView,
+  onShift,
+  onJump,
+  onToday,
+  onReserve,
+}: Props) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -44,13 +52,11 @@ export function MonthHeader({ year, month, years, onShift, onJump }: Props) {
   }, [open])
 
   return (
-    <div className="relative flex items-center gap-1 px-5 py-3" ref={ref}>
+    <div className="relative flex h-14 shrink-0 items-center gap-1 px-5 sm:px-8" ref={ref}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         onKeyDown={(e) => {
-          // Arrows move the month while the toolbar has focus. Inside the grid
-          // they move the day cursor instead, so the two never collide.
           if (e.key === 'ArrowLeft') {
             e.preventDefault()
             onShift(-1)
@@ -61,7 +67,7 @@ export function MonthHeader({ year, month, years, onShift, onJump }: Props) {
           }
         }}
         aria-expanded={open}
-        className="tnum -mx-1 rounded-[4px] px-1 text-[15px] font-medium text-ink hover:bg-wash"
+        className="tnum -mx-1 rounded px-1 text-[18px] font-medium tracking-[-0.04em] text-ink hover:bg-wash"
       >
         {MONTHS[month - 1]} {year}
       </button>
@@ -69,22 +75,69 @@ export function MonthHeader({ year, month, years, onShift, onJump }: Props) {
       <button
         type="button"
         onClick={() => onShift(-1)}
-        aria-label="Previous month"
-        className="ml-1 flex h-6 w-6 items-center justify-center rounded-[4px] text-mute hover:bg-wash hover:text-ink"
+        aria-label={view === 'week' ? 'Previous week' : 'Previous month'}
+        className="ml-1 flex h-8 w-8 items-center justify-center rounded text-mute hover:bg-wash hover:text-ink"
       >
         <Chevron dir="left" />
       </button>
       <button
         type="button"
         onClick={() => onShift(1)}
-        aria-label="Next month"
-        className="flex h-6 w-6 items-center justify-center rounded-[4px] text-mute hover:bg-wash hover:text-ink"
+        aria-label={view === 'week' ? 'Next week' : 'Next month'}
+        className="flex h-8 w-8 items-center justify-center rounded text-mute hover:bg-wash hover:text-ink"
       >
         <Chevron dir="right" />
       </button>
 
+      <div className="ml-3 flex rounded bg-wash p-0.5 text-[12px] font-medium tracking-[-0.02em]">
+        {(['week', 'month'] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            onClick={() => onView(v)}
+            aria-pressed={view === v}
+            className={`rounded px-2.5 py-1 ${
+              view === v ? 'bg-panel text-ink shadow-[0_1px_1px_rgba(35,31,32,0.06)]' : 'text-mute hover:text-ink'
+            }`}
+          >
+            {v}
+          </button>
+        ))}
+      </div>
+
+      <div className="ml-auto flex items-center gap-3">
+      <button
+        type="button"
+        onClick={onToday}
+        className="hidden rounded px-2 py-1 text-[12px] text-mute hover:bg-wash hover:text-ink sm:inline"
+      >
+        Today
+      </button>
+      <button
+        type="button"
+        onClick={onReserve}
+        className="rounded bg-sea px-3 py-1.5 text-[13px] font-medium text-white"
+      >
+        Reserve
+      </button>
+      <div className="hidden items-center gap-4 text-[11px] tracking-[-0.02em] text-mute lg:flex">
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block h-2.5 w-2.5 rounded-sm bg-sea-fill ring-1 ring-sea/30" />
+          vessel
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block h-2.5 w-2.5 rounded-sm bg-event-fill ring-1 ring-event/30" />
+          event
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <i className="inline-block h-2.5 w-2.5 rounded-sm bg-conflict/20 ring-1 ring-conflict/50" />
+          conflict
+        </span>
+      </div>
+      </div>
+
       {open && (
-        <div className="absolute left-4 top-11 z-50 w-[286px] rounded-[8px] border border-line bg-panel p-2 shadow-[0_1px_2px_rgba(75,69,59,0.06)]">
+        <div className="absolute left-5 top-12 z-50 w-[286px] rounded-[8px] border border-line bg-panel p-2 shadow-[var(--shadow-panel)] sm:left-8">
           <div className="grid grid-cols-3 gap-1">
             {MONTHS.map((m, i) => (
               <button
@@ -94,8 +147,8 @@ export function MonthHeader({ year, month, years, onShift, onJump }: Props) {
                   onJump(year, i + 1)
                   setOpen(false)
                 }}
-                className={`rounded-[4px] px-2 py-1.5 text-[12px] ${
-                  i + 1 === month ? 'bg-occupied text-ink' : 'text-mute hover:bg-wash hover:text-ink'
+                className={`rounded px-2 py-1.5 text-[12px] ${
+                  i + 1 === month ? 'bg-sea-fill text-sea' : 'text-mute hover:bg-wash hover:text-ink'
                 }`}
               >
                 {m.slice(0, 3)}
@@ -112,8 +165,8 @@ export function MonthHeader({ year, month, years, onShift, onJump }: Props) {
                     onJump(y, month)
                     setOpen(false)
                   }}
-                  className={`tnum rounded-[4px] px-2 py-1 text-[12px] ${
-                    y === year ? 'bg-occupied text-ink' : 'text-mute hover:bg-wash hover:text-ink'
+                  className={`tnum rounded px-2 py-1 text-[12px] ${
+                    y === year ? 'bg-sea-fill text-sea' : 'text-mute hover:bg-wash hover:text-ink'
                   }`}
                 >
                   {y}
@@ -129,7 +182,7 @@ export function MonthHeader({ year, month, years, onShift, onJump }: Props) {
 
 function Chevron({ dir }: { dir: 'left' | 'right' }) {
   return (
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
       <path
         d={dir === 'left' ? 'M10 3.5 5.5 8l4.5 4.5' : 'M6 3.5 10.5 8 6 12.5'}
         stroke="currentColor"

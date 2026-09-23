@@ -53,6 +53,7 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
   const nameRef = useRef<HTMLInputElement>(null)
   const [kind, setKind] = useState<'vessel' | 'event'>('vessel')
   const [name, setName] = useState('')
+  const [length, setLength] = useState('')
   const [pending, startTransition] = useTransition()
   const [serverError, setServerError] = useState<string | null>(null)
 
@@ -65,18 +66,22 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
   // Fit is known only once a vessel resolves, so it cannot be prevented during
   // the drag the way an overlap can. It refuses here instead, the moment the
   // name matches, rather than after the reserve button is pressed.
+  const isNewHull = kind === 'vessel' && name.trim() !== '' && vessel == null
+  const parsedLength = length.trim() === '' ? null : Number(length)
+  const lengthFt = vessel?.lengthFt ?? (Number.isFinite(parsedLength) ? parsedLength : null)
+
   const oversize =
     kind === 'vessel' &&
-    vessel?.lengthFt != null &&
+    lengthFt != null &&
     berth.lengthFt != null &&
-    vessel.lengthFt > berth.lengthFt
+    lengthFt > berth.lengthFt
 
-  const unverifiable = kind === 'vessel' && vessel != null && vessel.lengthFt == null
+  const unverifiable = kind === 'vessel' && !isNewHull && vessel != null && vessel.lengthFt == null
 
   const fits = useMemo(() => {
-    if (!oversize || vessel?.lengthFt == null) return []
-    return berths.filter((b) => b.lengthFt != null && b.lengthFt >= vessel.lengthFt!)
-  }, [oversize, vessel, berths])
+    if (!oversize || lengthFt == null) return []
+    return berths.filter((b) => b.lengthFt != null && b.lengthFt >= lengthFt)
+  }, [oversize, lengthFt, berths])
 
   useEffect(() => {
     const el = ref.current
@@ -121,7 +126,7 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
     return { left, top }
   }, [selection.anchorRect])
 
-  const canReserve = !pending && !oversize && (kind === 'event' ? name.trim() !== '' : vessel != null)
+  const canReserve = !pending && !oversize && name.trim() !== ''
 
   function reserve() {
     if (!canReserve) return
@@ -133,7 +138,8 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
         end: selection.end,
         kind,
         vesselId: kind === 'vessel' ? (vessel?.id ?? null) : null,
-        label: kind === 'vessel' ? (vessel?.displayName ?? name.trim()) : name.trim(),
+        label: name.trim(),
+        newVesselLengthFt: isNewHull ? parsedLength : null,
       })
       if (res.status === 'created') onReserved(res.id)
       else setServerError(res.message)
@@ -167,7 +173,7 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
             aria-checked={kind === k}
             onClick={() => setKind(k)}
             className={`rounded-[3px] px-2.5 py-1 text-[12px] ${
-              kind === k ? 'bg-occupied text-ink' : 'text-mute hover:text-ink'
+              kind === k ? 'bg-sea-fill text-sea' : 'text-mute hover:text-ink'
             }`}
           >
             {k === 'vessel' ? 'Vessel' : 'Event'}
@@ -198,18 +204,34 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
       </label>
 
       {kind === 'vessel' && vessel?.lengthFt != null && !oversize && (
-        <p className="tnum mt-1 text-[11px] text-mute">{vessel.lengthFt} ft, from roster</p>
+        <p className="tnum mt-1 text-[11px] text-mute">{vessel.lengthFt} ft</p>
+      )}
+
+      {isNewHull && (
+        <label className="mt-2 block">
+          <span className="mb-1 block text-[11px] uppercase tracking-wide text-mute">
+            Length, feet
+          </span>
+          <input
+            type="number"
+            min={1}
+            value={length}
+            onChange={(e) => setLength(e.target.value)}
+            placeholder="optional"
+            className="w-full rounded-[4px] border border-line bg-panel px-2 py-1.5 text-[13px] outline-none focus:border-ink"
+          />
+        </label>
       )}
 
       {unverifiable && (
         <p className="mt-1 text-[11px] text-mute">
-          No length on record for this vessel. Fit not checked.
+          No length yet. Fit will not be checked. Add feet on the vessel, or here when booking a new hull.
         </p>
       )}
 
-      {oversize && vessel && (
+      {oversize && lengthFt != null && (
         <div id="fit-refusal" className="tnum mt-1.5 text-[12px] text-conflict">
-          {vessel.displayName} is {vessel.lengthFt} ft. {berth.name} is {berth.lengthFt} ft.
+          {name.trim() || 'This vessel'} is {lengthFt} ft. {berth.name} is {berth.lengthFt} ft.
           {fits.length > 0 && (
             <span className="mt-0.5 block text-mute">
               Fits at {fits.map((b) => b.name).join(', ')}.
@@ -225,7 +247,7 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
           type="button"
           onClick={reserve}
           disabled={!canReserve}
-          className="rounded-[4px] bg-ink px-3 py-1.5 text-[12px] text-paper disabled:bg-line disabled:text-mute"
+          className="rounded-[4px] bg-sea px-3 py-1.5 text-[12px] text-white disabled:bg-line disabled:text-mute"
         >
           {pending ? 'Saving' : 'Reserve'}
         </button>
