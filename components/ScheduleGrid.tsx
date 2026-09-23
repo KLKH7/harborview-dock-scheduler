@@ -4,13 +4,14 @@ import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'r
 import { useRouter } from 'next/navigation'
 import type { BerthRow } from '@/lib/data'
 import { parseDay, dayCount, type Reservation, type Vessel } from '@/lib/validation/engine'
+import { deleteReservation } from '@/app/actions'
 import { ReservePopover, type PendingSelection } from './ReservePopover'
 import { ReserveDialog } from './ReserveDialog'
 import { MonthHeader, type ScheduleView } from './MonthHeader'
 
 const DAY_MS = 86_400_000
 const WEEKDAY = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
-const BERTH_COL_PX = 220
+const BERTH_COL_PX = 268
 const MONTH_DAY_PX = 64
 const WEEK_DAY_PX = 128
 
@@ -111,7 +112,17 @@ export function ScheduleGrid({
   const [announcement, setAnnounce] = useState('')
   const [formOpen, setFormOpen] = useState(false)
   const [hover, setHover] = useState<{ r: GridReservation; rect: DOMRect } | null>(null)
+  const hideHover = useRef<ReturnType<typeof setTimeout> | null>(null)
   const router = useRouter()
+
+  function openHover(next: { r: GridReservation; rect: DOMRect }) {
+    if (hideHover.current) clearTimeout(hideHover.current)
+    setHover(next)
+  }
+  function closeHoverSoon() {
+    if (hideHover.current) clearTimeout(hideHover.current)
+    hideHover.current = setTimeout(() => setHover(null), 200)
+  }
 
   const vesselById = useMemo(() => new Map(vessels.map((v) => [v.id, v])), [vessels])
   const berthById = useMemo(() => new Map(berths.map((b) => [b.id, b])), [berths])
@@ -423,7 +434,7 @@ export function ScheduleGrid({
                   className="sticky left-0 z-20 flex shrink-0 flex-col justify-center border-r border-line bg-panel px-4 py-3"
                   style={{ width: BERTH_COL_PX }}
                 >
-                  <div className="truncate text-[14px] font-medium tracking-[-0.03em] text-ink">
+                  <div className="text-[13px] font-medium leading-snug tracking-[-0.03em] text-ink">
                     {berth.name}
                   </div>
                   <div className="tnum mt-0.5 text-[12px] text-mute">
@@ -484,7 +495,8 @@ export function ScheduleGrid({
                             visStart={visStart}
                             visEnd={visEnd}
                             placed={placedId === r.id}
-                            onHover={setHover}
+                            onHover={openHover}
+                            onHoverEnd={closeHoverSoon}
                           />
                         ))}
                       </div>
@@ -519,6 +531,14 @@ export function ScheduleGrid({
           anchor={hover.rect}
           berth={berthById.get(hover.r.berthId) ?? null}
           vessel={hover.r.vesselId ? (vesselById.get(hover.r.vesselId) ?? null) : null}
+          onEnter={() => {
+            if (hideHover.current) clearTimeout(hideHover.current)
+          }}
+          onLeave={closeHoverSoon}
+          onDeleted={() => {
+            setHover(null)
+            router.refresh()
+          }}
         />
       )}
 
@@ -563,12 +583,14 @@ function Bar({
   visEnd,
   placed,
   onHover,
+  onHoverEnd,
 }: {
   r: GridReservation
   visStart: number
   visEnd: number
   placed: boolean
-  onHover: (h: { r: GridReservation; rect: DOMRect } | null) => void
+  onHover: (h: { r: GridReservation; rect: DOMRect }) => void
+  onHoverEnd: () => void
 }) {
   const s = Math.max(parseDay(r.start), visStart)
   const e = Math.min(parseDay(r.end), visEnd)
@@ -597,10 +619,9 @@ function Bar({
         borderBottomRightRadius: clippedEnd ? 0 : 4,
       }}
       onMouseEnter={(e) => onHover({ r, rect: e.currentTarget.getBoundingClientRect() })}
-      onMouseMove={(e) => onHover({ r, rect: e.currentTarget.getBoundingClientRect() })}
-      onMouseLeave={() => onHover(null)}
+      onMouseLeave={onHoverEnd}
     >
-      <span className="truncate whitespace-nowrap text-[12px] font-medium leading-none tracking-[-0.02em]">
+      <span className="line-clamp-2 text-[12px] font-medium leading-snug tracking-[-0.02em]">
         {clippedStart && <span className="opacity-50">‹ </span>}
         {r.label}
         {clippedEnd && <span className="opacity-50"> ›</span>}
@@ -623,11 +644,17 @@ function StayTip({
   anchor,
   berth,
   vessel,
+  onEnter,
+  onLeave,
+  onDeleted,
 }: {
   r: GridReservation
   anchor: DOMRect
   berth: BerthRow | null
   vessel: Vessel | null
+  onEnter: () => void
+  onLeave: () => void
+  onDeleted: () => void
 }) {
   const n = dayCount(r.start, r.end)
   const range =
@@ -645,26 +672,50 @@ function StayTip({
   const left = Math.min(Math.max(8, anchor.left), (typeof window === 'undefined' ? 400 : window.innerWidth) - 280)
   const below = anchor.bottom + 8
   const top =
-    typeof window !== 'undefined' && below + 160 > window.innerHeight
-      ? Math.max(8, anchor.top - 160)
+    typeof window !== 'undefined' && below + 200 > window.innerHeight
+      ? Math.max(8, anchor.top - 200)
       : below
+
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   return (
     <div
-      role="tooltip"
-      className="pointer-events-none fixed z-[80] w-[260px] rounded-lg border border-line bg-panel px-3 py-2.5 text-ink shadow-[0_8px_24px_rgba(35,31,32,0.14)]"
+      role="dialog"
+      aria-label={r.label}
+      className="fixed z-[80] w-[260px] rounded-lg border border-line bg-panel px-3 py-2.5 text-ink shadow-[0_8px_24px_rgba(35,31,32,0.14)]"
       style={{ left, top }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
     >
-      <div className="text-[13px] font-medium tracking-[-0.03em]">{r.label}</div>
+      <div className="text-[13px] font-medium leading-snug tracking-[-0.03em]">{r.label}</div>
       <div className="tnum mt-1 text-[12px] text-mute">
         {range}
         <span className="text-mute"> · {n} day{n === 1 ? '' : 's'}</span>
       </div>
-      {berth && <div className="mt-0.5 text-[12px] text-mute">{berth.name}</div>}
+      {berth && <div className="mt-0.5 text-[12px] leading-snug text-mute">{berth.name}</div>}
       {fit && <div className="mt-2 text-[12px] text-ink">{fit}</div>}
       {r.conflicted && (
         <div className="mt-1 text-[12px] text-conflict">Shares this berth with another stay.</div>
       )}
+      {error && <p className="mt-2 text-[12px] text-conflict">{error}</p>}
+      <button
+        type="button"
+        disabled={busy}
+        className="mt-3 text-[12px] text-mute hover:text-conflict disabled:opacity-50"
+        onClick={async () => {
+          setBusy(true)
+          setError(null)
+          const res = await deleteReservation(r.id)
+          if (res.status === 'ok') onDeleted()
+          else {
+            setError(res.message)
+            setBusy(false)
+          }
+        }}
+      >
+        {busy ? 'Removing' : 'Remove stay'}
+      </button>
     </div>
   )
 }

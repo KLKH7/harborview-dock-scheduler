@@ -93,6 +93,16 @@ export async function createReservation(draft: CreateInput): Promise<CreateResul
   return { status: 'created', id: String(rows[0].id) }
 }
 
+export async function deleteReservation(id: string): Promise<{ status: 'ok' } | { status: 'refused'; message: string }> {
+  const rows = (await sql`
+    DELETE FROM reservation WHERE id = ${id} RETURNING id
+  `) as Record<string, unknown>[]
+  if (rows.length === 0) return { status: 'refused', message: 'That stay is already gone.' }
+  revalidatePath('/')
+  revalidatePath('/conflicts')
+  return { status: 'ok' }
+}
+
 export async function updateVesselLength(
   id: string,
   lengthFt: number | null,
