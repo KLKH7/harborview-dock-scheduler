@@ -27,7 +27,15 @@ export type BookingKind = 'vessel' | 'event'
 export type Berth = {
   id: string
   name: string
-  lengthFt: number
+  /**
+   * null when the berth's capacity is not recorded in the source. Two grouped
+   * areas ("North Finger Piers", "Small craft slips") carry no length in the
+   * spreadsheet. This must stay null rather than becoming 0 or Infinity: 0
+   * would flag every vessel as too long, and Infinity would silently report
+   * every vessel as fitting, which is the false assurance this system exists
+   * to prevent.
+   */
+  lengthFt: number | null
 }
 
 export type Vessel = {
@@ -68,7 +76,7 @@ export type FitStatus = 'fits' | 'violation' | 'unverifiable' | 'not_applicable'
 export type FitFinding = {
   status: FitStatus
   vesselLengthFt: number | null
-  berthLengthFt: number
+  berthLengthFt: number | null
   /** Feet by which the vessel exceeds the berth. Positive only when violation. */
   overhangFt: number | null
   reason: string
@@ -209,6 +217,18 @@ export function checkFit(vessel: Vessel | null, berth: Berth): FitFinding {
     }
   }
 
+  // The berth's own capacity may be unrecorded (grouped areas). Knowing the
+  // vessel's length does not help if there is nothing to compare it against.
+  if (berth.lengthFt === null) {
+    return {
+      status: 'unverifiable',
+      vesselLengthFt: vessel.lengthFt,
+      berthLengthFt: null,
+      overhangFt: null,
+      reason: `${berth.name} has no recorded length — cannot verify ${vessel.displayName} (${vessel.lengthFt}') fits`,
+    }
+  }
+
   const overhang = vessel.lengthFt - berth.lengthFt
   if (overhang > 0) {
     return {
@@ -345,7 +365,7 @@ export function findAvailableBerths(
       occupied.push({ berth, by: clashes })
       continue
     }
-    if (requiredLengthFt !== null && requiredLengthFt > berth.lengthFt) {
+    if (requiredLengthFt !== null && berth.lengthFt !== null && requiredLengthFt > berth.lengthFt) {
       tooShort.push(berth)
       continue
     }

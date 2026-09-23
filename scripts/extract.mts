@@ -72,7 +72,7 @@ function cellText(cell: ExcelJS.Cell): string {
   if (v === null || v === undefined) return ''
   if (typeof v === 'object') {
     // Formula cells: prefer the cached result, fall back to rich text.
-    const o = v as Record<string, unknown>
+    const o = v as unknown as Record<string, unknown>
     if ('result' in o && o.result != null) return String(o.result).trim()
     if ('richText' in o && Array.isArray(o.richText)) {
       return (o.richText as { text: string }[]).map((t) => t.text).join('').trim()

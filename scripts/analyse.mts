@@ -11,7 +11,7 @@ import {
   type Berth,
   type Reservation,
   type Vessel,
-} from '../lib/validation/engine.ts'
+} from '../lib/validation/engine'
 
 const snapshot = JSON.parse(readFileSync('data/snapshot.json', 'utf8'))
 const vesselData = JSON.parse(readFileSync('data/vessels.json', 'utf8'))

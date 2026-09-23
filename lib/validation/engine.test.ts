@@ -170,6 +170,19 @@ describe('checkFit', () => {
   it('returns not_applicable for a non-vessel event', () => {
     expect(checkFit(null, INNER_CHANNEL).status).toBe('not_applicable')
   })
+
+  // Two grouped areas in the source carry no length. A known-length vessel in
+  // an unmeasured berth is still unverifiable -- there is nothing to compare
+  // against. Representing that berth as 0 or Infinity would make this "violation"
+  // or "fits" respectively, and both would be a lie.
+  it('returns unverifiable when the BERTH has no recorded length', () => {
+    const unmeasured: Berth = { id: 'nfp', name: 'North Finger Piers', lengthFt: null }
+    const f = checkFit(HUGE, unmeasured)
+    expect(f.status).toBe('unverifiable')
+    expect(f.status).not.toBe('fits')
+    expect(f.berthLengthFt).toBeNull()
+    expect(f.vesselLengthFt).toBe(120)
+  })
 })
 
 describe('validateProposed', () => {
