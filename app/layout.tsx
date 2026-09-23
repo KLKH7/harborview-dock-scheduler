@@ -3,45 +3,35 @@ import Link from 'next/link'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Harborview Dock Scheduling',
-  description: 'Berth reservations, conflict detection and vessel fit checking',
+  title: 'Harborview dock schedule',
+  description: 'Berth occupancy, 1997 to 2019',
 }
 
 const NAV = [
   { href: '/', label: 'Schedule' },
   { href: '/conflicts', label: 'Findings' },
-  { href: '/new', label: 'New booking' },
   { href: '/data-quality', label: 'Data quality' },
 ] as const
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900">
-        <header className="border-b border-slate-200 bg-white">
-          <div className="mx-auto max-w-[1400px] px-6 py-3 flex items-baseline gap-6 flex-wrap">
-            <Link href="/" className="font-semibold tracking-tight">
-              Harborview Marine Research Center
+    <html lang="en" className="h-full">
+      <body className="flex min-h-full flex-col">
+        <header className="border-b border-line">
+          <div className="flex items-baseline gap-6 px-5 py-2.5">
+            <Link href="/" className="font-medium tracking-tight text-ink">
+              Harborview dock schedule
             </Link>
-            <nav className="flex gap-4 text-sm">
+            <nav className="flex gap-4 text-[13px] text-mute">
               {NAV.map((n) => (
-                <Link
-                  key={n.href}
-                  href={n.href}
-                  className="text-slate-600 hover:text-slate-900 hover:underline underline-offset-4"
-                >
+                <Link key={n.href} href={n.href} className="hover:text-ink">
                   {n.label}
                 </Link>
               ))}
             </nav>
           </div>
         </header>
-        <main className="mx-auto w-full max-w-[1400px] flex-1 px-6 py-6">{children}</main>
-        <footer className="border-t border-slate-200 bg-white">
-          <div className="mx-auto max-w-[1400px] px-6 py-3 text-xs text-slate-500">
-            Dock scheduling system · imported from 23 years of spreadsheet history
-          </div>
-        </footer>
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   )

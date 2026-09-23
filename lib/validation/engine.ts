@@ -260,8 +260,6 @@ export type DraftReservation = {
 
 export type ValidationReport = {
   ok: boolean
-  /** True when the only thing standing in the way is a violation the user may override. */
-  overridable: boolean
   conflicts: Conflict[]
   fit: FitFinding
   errors: string[]
@@ -270,11 +268,18 @@ export type ValidationReport = {
 /**
  * Validate a proposed reservation against existing ones.
  *
- * Blocking rules:
+ * NEW bookings are refused outright. There is no override:
  *   - malformed input (end before start, unknown berth) is a hard error
- *   - a fit violation or a multi-day overlap blocks, but MAY be overridden with
- *     a reason, because real waterfronts raft vessels and make judgment calls
- *   - a one-day turnaround and an unverifiable length are surfaced, not blocked
+ *   - ANY overlap refuses, including a single shared day. The one-day
+ *     "turnaround" allowance was removed after checking the real archive: in 23
+ *     years there is not a single pair of different vessels sharing exactly one
+ *     day, so the allowance was protecting a case that never occurs.
+ *   - a vessel longer than its berth refuses
+ *   - an unverifiable length does NOT refuse. It cannot be checked, so it is
+ *     reported and allowed; pretending it fits would be the worse failure.
+ *
+ * Historical rows imported from the spreadsheet keep their conflicts. This
+ * function governs what the app creates, not what the archive contains.
  */
 export function validateProposed(
   draft: DraftReservation,
@@ -288,7 +293,6 @@ export function validateProposed(
   if (!berth) {
     return {
       ok: false,
-      overridable: false,
       conflicts: [],
       fit: {
         status: 'not_applicable',
@@ -327,13 +331,11 @@ export function validateProposed(
           (c) => c.a.id === '__draft__' || c.b.id === '__draft__',
         )
 
-  const blockingConflicts = conflicts.filter((c) => c.severity === 'violation')
-  const blockedByFit = fit.status === 'violation'
-  const blocked = blockingConflicts.length > 0 || blockedByFit
+  // Any overlap at all, not just a multi-day one.
+  const blocked = conflicts.length > 0 || fit.status === 'violation'
 
   return {
     ok: errors.length === 0 && !blocked,
-    overridable: errors.length === 0 && blocked,
     conflicts,
     fit,
     errors,

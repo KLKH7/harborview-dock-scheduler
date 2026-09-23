@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Harborview dock schedule.
+
+  One canvas, no dark mode. This is a single-coordinator operational tool that
+  replaces a paper-and-Excel wall schedule, so it keeps a paper ground in every
+  environment rather than inverting to a dark theme it would never be used in.
+
+  Seven tokens, and only seven. Occupancy is drawn in one ink tint, never a
+  second hue: a schedule that colour-codes every vessel becomes a rainbow you
+  have to decode. Red is reserved so that when it appears, it means exactly one
+  thing.
+*/
+@theme {
+  --color-paper: #f8f7f3;
+  --color-ink: #4b453b;
+  --color-mute: #6b6453;
+  --color-line: #eae6db;
+  --color-wash: #f1eee7;
+  --color-panel: #ffffff;
+  --color-conflict: #b42318;
+
+  /* Occupancy fill: ink at 12%. The name on top stays ink at full strength. */
+  --color-occupied: rgba(75, 69, 59, 0.12);
+  --color-occupied-strong: rgba(75, 69, 59, 0.2);
+
+  --radius-cell: 3px;
+  --radius-panel: 8px;
+
+  --shadow-panel: 0 1px 2px rgba(75, 69, 59, 0.06);
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-paper);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /* Fixed 14px. Type does not scale with viewport: a schedule read at arm's
+     length on a desk monitor should not reflow because the window narrowed. */
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+  Browser surfaces. These ship with defaults that belong to no design system,
+  and leaving them is the cheapest tell that a page was assembled rather than
+  built. Theme them from the same seven tokens.
+*/
+::selection {
+  background: var(--color-occupied-strong);
+  color: var(--color-ink);
+}
+
+* {
+  caret-color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 1px;
+  border-radius: 2px;
+}
+
+/* Remove the focus ring only where a component paints its own. */
+[data-focus-painted]:focus-visible {
+  outline: none;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 6px;
+  border: 2px solid var(--color-paper);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #ddd8cb;
+}
+
+/* Dates, lengths and day numbers are compared column to column. Proportional
+   digits make that comparison wobble. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/*
+  The only animation in the product: the bar you just placed.
+
+  Everything else in the grid is deliberately transition-free, which is what
+  guarantees the schedule never animates into view. A coordinator scanning
+  months does that motion tens of times an hour.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .bar-placed {
+    animation: bar-place 200ms var(--ease-out) both;
+  }
+}
+
+@keyframes bar-place {
+  from {
+    opacity: 0.55;
+    transform: scaleX(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* While a drag is in progress, stop the browser selecting row labels. */
+.dragging,
+.dragging * {
+  user-select: none;
+  cursor: col-resize;
 }

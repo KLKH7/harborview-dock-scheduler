@@ -78,7 +78,10 @@ describe('inclusive interval semantics', () => {
 })
 
 describe('overlap severity', () => {
-  it('grades one shared day as a warning (same-day turnaround)', () => {
+  // Severity still grades HISTORY (the findings page ranks by it). It no longer
+  // decides whether a new booking is allowed: see validateProposed, which
+  // refuses any overlap.
+  it('grades one shared day as a warning when reporting history', () => {
     expect(gradeOverlap(1)).toBe('warning')
   })
 
@@ -200,33 +203,42 @@ describe('validateProposed', () => {
     expect(r.fit.status).toBe('fits')
   })
 
-  it('blocks a multi-day overlap but marks it overridable', () => {
+  it('refuses a multi-day overlap', () => {
     const r = validateProposed(
       { berthId: 'npw', start: '2019-06-15', end: '2019-06-25', kind: 'vessel', vesselId: 'v1', label: 'S/V Wild Drift' },
       existing, BERTHS, VESSELS,
     )
     expect(r.ok).toBe(false)
-    expect(r.overridable).toBe(true)
     expect(r.conflicts[0].severity).toBe('violation')
   })
 
-  it('allows a same-day turnaround with a warning', () => {
+  // The rule the brief tightened. A vessel arriving the day another leaves used
+  // to be allowed; it now refuses like any other overlap.
+  it('refuses a single shared day, not just a multi-day overlap', () => {
     const r = validateProposed(
       { berthId: 'npw', start: '2019-06-20', end: '2019-06-28', kind: 'vessel', vesselId: 'v1', label: 'S/V Wild Drift' },
       existing, BERTHS, VESSELS,
     )
-    expect(r.ok).toBe(true)
+    expect(r.ok).toBe(false)
     expect(r.conflicts).toHaveLength(1)
-    expect(r.conflicts[0].severity).toBe('warning')
+    expect(r.conflicts[0].sharedDays).toBe(1)
   })
 
-  it('blocks an oversized vessel but marks it overridable', () => {
+  it('allows a booking that ends the day before another starts', () => {
+    const r = validateProposed(
+      { berthId: 'npw', start: '2019-06-01', end: '2019-06-09', kind: 'vessel', vesselId: 'v1', label: 'S/V Wild Drift' },
+      existing, BERTHS, VESSELS,
+    )
+    expect(r.ok).toBe(true)
+    expect(r.conflicts).toHaveLength(0)
+  })
+
+  it('refuses an oversized vessel', () => {
     const r = validateProposed(
       { berthId: 'ic', start: '2019-07-01', end: '2019-07-02', kind: 'vessel', vesselId: 'v2', label: 'R/V High Drift' },
       [], BERTHS, VESSELS,
     )
     expect(r.ok).toBe(false)
-    expect(r.overridable).toBe(true)
     expect(r.fit.status).toBe('violation')
   })
 
@@ -245,7 +257,6 @@ describe('validateProposed', () => {
       [], BERTHS, VESSELS,
     )
     expect(r.ok).toBe(false)
-    expect(r.overridable).toBe(false)
     expect(r.errors.join(' ')).toContain('before')
   })
 
@@ -255,7 +266,6 @@ describe('validateProposed', () => {
       [], BERTHS, VESSELS,
     )
     expect(r.ok).toBe(false)
-    expect(r.overridable).toBe(false)
   })
 
   it('only reports conflicts involving the draft, not pre-existing ones', () => {

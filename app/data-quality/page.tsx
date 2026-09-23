@@ -31,21 +31,21 @@ export default async function DataQualityPage() {
   const unmeasuredBerths = berths.filter((b) => b.lengthFt === null)
 
   return (
-    <div className="space-y-8">
+    <div className="mx-auto max-w-[1100px] space-y-8 px-5 py-6">
       <div>
-        <h1 className="text-xl font-semibold tracking-tight">Data quality</h1>
-        <p className="mt-1 text-sm text-slate-600">
+        <h1 className="text-[17px] font-medium tracking-tight">Data quality</h1>
+        <p className="mt-1 text-sm text-mute">
           What the source workbook does not tell us, and what it would take to close each gap. These
-          are the limits on what the system can verify — stated rather than hidden.
+          are the limits on what the system can verify, stated rather than hidden.
         </p>
       </div>
 
-      <section className="rounded-lg border border-sky-200 bg-sky-50 p-5">
-        <h2 className="font-semibold text-sky-900">
-          Missing vessel lengths — {findings.stats.unverifiableCount.toLocaleString()} bookings
+      <section className="rounded-[8px] border border-line bg-wash p-5">
+        <h2 className="font-medium text-ink">
+          Missing vessel lengths: {findings.stats.unverifiableCount.toLocaleString()} bookings
           cannot be fit-checked
         </h2>
-        <p className="mt-1 text-sm text-sky-900/80">
+        <p className="mt-1 text-sm text-mute">
           Vessel lengths live only in the <code>Science</code> and <code>Yachts</code> roster tabs,
           embedded in the name (e.g. <code>R/V High Drift 120&prime;</code>). The busiest vessels in
           the schedule appear in neither tab, so their length is unknowable from this workbook.
@@ -53,9 +53,9 @@ export default async function DataQualityPage() {
           <strong>{top10.toLocaleString()} booked days</strong> verifiable.
         </p>
 
-        <div className="mt-4 overflow-hidden rounded-lg border border-sky-200 bg-white">
+        <div className="mt-4 overflow-hidden rounded-[8px] border border-line bg-panel">
           <table className="w-full text-sm">
-            <thead className="bg-sky-100/60 text-left text-xs uppercase tracking-wide text-sky-900">
+            <thead className="bg-wash text-left text-xs uppercase tracking-wide text-ink">
               <tr>
                 <th className="px-4 py-2 font-medium">#</th>
                 <th className="px-4 py-2 font-medium">Vessel</th>
@@ -63,13 +63,13 @@ export default async function DataQualityPage() {
                 <th className="px-4 py-2 text-right font-medium">Bookings</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line">
               {unknown.map((v, i) => (
-                <tr key={v.id} className={i < 10 ? 'bg-sky-50/40' : ''}>
-                  <td className="px-4 py-1.5 tabular-nums text-slate-400">{i + 1}</td>
+                <tr key={v.id} className={i < 10 ? 'bg-wash/40' : ''}>
+                  <td className="px-4 py-1.5 tnum tabular-nums text-mute">{i + 1}</td>
                   <td className="px-4 py-1.5 font-medium">{v.displayName}</td>
-                  <td className="px-4 py-1.5 text-right tabular-nums">{v.bookedDays}</td>
-                  <td className="px-4 py-1.5 text-right tabular-nums text-slate-500">
+                  <td className="px-4 py-1.5 text-right tnum tabular-nums">{v.bookedDays}</td>
+                  <td className="px-4 py-1.5 text-right tnum tabular-nums text-mute">
                     {v.bookings}
                   </td>
                 </tr>
@@ -80,29 +80,29 @@ export default async function DataQualityPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-[15px] font-medium">
           Inferred lengths needing confirmation{' '}
-          <span className="text-sm font-normal text-slate-500">({fuzzy.length} vessels)</span>
+          <span className="text-sm font-normal text-mute">({fuzzy.length} vessels)</span>
         </h2>
-        <p className="text-sm text-slate-600">
-          The schedule and the roster disagree about vessel prefixes — the schedule says{' '}
+        <p className="text-sm text-mute">
+          The schedule and the roster disagree about vessel prefixes: the schedule says{' '}
           <code>R/V Clear Sextant</code>, the roster says <code>S/Y Clear Sextant 145&prime;</code>.
           These lengths were matched on the hull name with the prefix ignored. That is an inference,
           so each one is listed for a human to confirm or reject.
         </p>
-        <div className="overflow-hidden rounded-lg border border-slate-200 bg-white">
+        <div className="overflow-hidden rounded-[8px] border border-line bg-panel">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
+            <thead className="bg-paper text-left text-xs uppercase tracking-wide text-mute">
               <tr>
                 <th className="px-4 py-2 font-medium">Vessel (as scheduled)</th>
                 <th className="px-4 py-2 text-right font-medium">Length taken from roster</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line">
               {fuzzy.map((v) => (
                 <tr key={v.id}>
                   <td className="px-4 py-1.5">{v.displayName}</td>
-                  <td className="px-4 py-1.5 text-right tabular-nums">{v.lengthFt}′</td>
+                  <td className="px-4 py-1.5 text-right tnum tabular-nums">{v.lengthFt}′</td>
                 </tr>
               ))}
             </tbody>
@@ -111,10 +111,10 @@ export default async function DataQualityPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold">Structural notes on the source workbook</h2>
+        <h2 className="text-[15px] font-medium">Structural notes on the source workbook</h2>
         <div className="space-y-2">
           <Note title={`${meta.verified} of ${meta.monthBlocks} month grids independently verified`}>
-            Bookings are reconstructed from cell fill colours, and in the 1997–2001 sheets the day
+            Bookings are reconstructed from cell fill colours, and in the 1997 to 2001 sheets the day
             numbers are uncached formulas that must be rebuilt arithmetically. Each rebuilt grid is
             checked against that grid&apos;s own weekday-letter row, so the dates are proven rather
             than assumed.
@@ -137,7 +137,7 @@ export default async function DataQualityPage() {
             <Note title={`${unmeasuredBerths.length} berthing areas have no recorded length`} tone="warn">
               {unmeasuredBerths.map((b) => b.name).join(' and ')} appear partway through the archive
               and carry no length in their row label. They are grouped areas rather than single
-              measured berths, so any vessel placed there is reported as unverifiable — never as
+              measured berths, so any vessel placed there is reported as unverifiable, never as
               fitting.
             </Note>
           )}
@@ -171,10 +171,10 @@ function Note({
 }) {
   const cls =
     tone === 'warn'
-      ? 'bg-amber-50 ring-amber-200 text-amber-900'
-      : 'bg-white ring-slate-200 text-slate-700'
+      ? 'bg-wash ring-line text-ink'
+      : 'bg-panel ring-line text-ink'
   return (
-    <div className={`rounded-lg px-4 py-3 text-sm ring-1 ${cls}`}>
+    <div className={`rounded-[8px] px-4 py-3 text-sm ring-1 ${cls}`}>
       <div className="font-semibold">{title}</div>
       <div className="mt-0.5">{children}</div>
     </div>
