@@ -49,11 +49,11 @@ export function PairLengthFix({
         disabled={pending}
         onChange={(e) => setDraft(e.target.value)}
         aria-label="Vessel length in feet"
-        className="tnum w-16 rounded border border-line bg-panel px-1.5 py-1 text-[12px] outline-none focus:border-sea"
+        className="tnum w-16 rounded border border-line bg-panel px-1.5 py-1 text-[12px] outline-none focus:border-ink"
       />
       <span className="text-[11px] text-mute">ft</span>
       {dirty && (
-        <button type="submit" disabled={pending} className="text-[12px] text-sea">
+        <button type="submit" disabled={pending} className="text-[12px] font-medium text-ink underline underline-offset-2">
           {pending ? 'Saving' : wouldFit ? 'Save, clears group' : 'Save'}
         </button>
       )}

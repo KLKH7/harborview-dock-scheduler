@@ -15,7 +15,7 @@ export function DayBoard({ board }: { board: Board }) {
 
   if (empty) {
     return (
-      <p className="tnum px-5 py-2 text-[13px] text-mute sm:px-8">
+      <p className="tnum px-5 pt-5 pb-1 text-[14px] text-mute sm:px-8">
         Nothing alongside today. All {board.berthCount} berths free.
         {board.next7.length > 0 && <> {board.next7.length} due in the next 7 days.</>}
         {board.archive && (
@@ -41,7 +41,7 @@ export function DayBoard({ board }: { board: Board }) {
     `${board.freeTonight.length} of ${board.berthCount} berths free tonight`,
   ]
   return (
-    <p className="tnum px-5 py-2 text-[13px] text-mute sm:px-8">
+    <p className="tnum px-5 pt-5 pb-1 text-[14px] text-mute sm:px-8">
       {parts.join(' · ')}
       {board.next7.length > 0 && <> · {board.next7.length} due this week</>}
     </p>

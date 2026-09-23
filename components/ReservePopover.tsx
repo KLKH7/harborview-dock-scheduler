@@ -173,7 +173,7 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
             aria-checked={kind === k}
             onClick={() => setKind(k)}
             className={`rounded-[3px] px-2.5 py-1 text-[12px] ${
-              kind === k ? 'bg-sea-fill text-sea' : 'text-mute hover:text-ink'
+              kind === k ? 'bg-ink text-paper' : 'text-mute hover:text-ink'
             }`}
           >
             {k === 'vessel' ? 'Vessel' : 'Event'}
@@ -247,7 +247,7 @@ export function ReservePopover({ selection, berths, vessels, onCancel, onReserve
           type="button"
           onClick={reserve}
           disabled={!canReserve}
-          className="rounded-[4px] bg-sea px-3 py-1.5 text-[12px] text-white disabled:bg-line disabled:text-mute"
+          className="rounded-[4px] bg-ink px-3 py-1.5 text-[12px] font-medium text-paper hover:bg-ink/90 disabled:bg-line disabled:text-mute"
         >
           {pending ? 'Saving' : 'Reserve'}
         </button>

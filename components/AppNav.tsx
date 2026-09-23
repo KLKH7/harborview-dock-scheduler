@@ -19,19 +19,16 @@ export function AppNav() {
 
   return (
     <header className="relative z-40 h-16 shrink-0 bg-panel">
-      <div className="flex h-full items-center px-5 sm:px-8">
+      <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8">
         <Link
           href="/"
-          className="relative z-10 shrink-0 text-[15px] font-medium tracking-[-0.04em] text-ink"
+          className="justify-self-start text-[16px] font-medium tracking-tight text-ink"
         >
           harborview
         </Link>
 
-        <nav
-          className="pointer-events-none absolute inset-0 flex items-center justify-center"
-          aria-label="Main"
-        >
-          <ul className="pointer-events-auto flex items-center gap-8 sm:gap-12">
+        <nav aria-label="Main">
+          <ul className="flex items-center gap-8 sm:gap-12">
             {NAV.map((n) => {
               const on = isActive(pathname, n.href)
               return (
@@ -39,7 +36,7 @@ export function AppNav() {
                   <Link
                     href={n.href}
                     aria-current={on ? 'page' : undefined}
-                    className={`text-[13px] font-medium tracking-[-0.03em] sm:text-[14px] ${
+                    className={`text-[14px] font-medium sm:text-[15px] ${
                       on ? 'text-ink' : 'text-mute hover:text-ink'
                     }`}
                   >

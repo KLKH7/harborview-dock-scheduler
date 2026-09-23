@@ -26,8 +26,8 @@ export default async function ImportPage() {
 
   return (
     <div className="min-h-0 flex-1 overflow-y-auto">
-      <div className="mx-auto max-w-[720px] px-5 py-6 sm:px-8">
-        <h1 className="text-[17px] font-medium tracking-[-0.02em] text-ink">Import notes</h1>
+      <div className="mx-auto max-w-[800px] px-5 py-10 sm:px-8">
+        <h1 className="text-[20px] font-medium tracking-tight text-ink">Import notes</h1>
         <p className="tnum mt-1 text-[13px] text-mute">
           {run ? `Imported ${run.importedAt.slice(0, 10)}. ` : ''}
           Archive covers {stats.firstDate} to {stats.lastDate}, {stats.reservations.toLocaleString()} stays.

@@ -93,7 +93,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
         aria-labelledby="reserve-title"
         className="w-full max-w-[420px] rounded-lg border border-line bg-panel p-5 text-ink shadow-[0_8px_24px_rgba(35,31,32,0.12)]"
       >
-        <h2 id="reserve-title" className="text-[16px] font-medium tracking-[-0.03em]">
+        <h2 id="reserve-title" className="text-[16px] font-medium">
           Reserve a berth
         </h2>
         <p className="mt-1 text-[13px] text-mute">
@@ -109,7 +109,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
               aria-checked={kind === k}
               onClick={() => setKind(k)}
               className={`rounded px-2.5 py-1 text-[12px] ${
-                kind === k ? 'bg-sea-fill text-sea' : 'text-mute hover:text-ink'
+                kind === k ? 'bg-ink text-paper' : 'text-mute hover:text-ink'
               }`}
             >
               {k === 'vessel' ? 'Vessel' : 'Event'}
@@ -122,7 +122,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
           <select
             value={berthId}
             onChange={(e) => setBerthId(e.target.value)}
-            className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+            className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-ink"
           >
             {berths.map((b) => (
               <option key={b.id} value={b.id}>
@@ -144,7 +144,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
                     <button
                       type="button"
                       onClick={() => setBerthId(b.id)}
-                      className={`underline-offset-2 hover:underline ${b.id === berthId ? 'text-ink' : 'text-sea'}`}
+                      className={`underline-offset-2 hover:underline ${b.id === berthId ? 'font-medium text-ink' : 'text-mute'}`}
                     >
                       {b.name}
                     </button>
@@ -175,7 +175,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
                 setStart(e.target.value)
                 if (e.target.value > end) setEnd(e.target.value)
               }}
-              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-ink"
             />
           </label>
           <label className="block text-[11px] uppercase tracking-[0.06em] text-mute">
@@ -185,7 +185,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
               value={end}
               min={start}
               onChange={(e) => setEnd(e.target.value)}
-              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-ink"
             />
           </label>
         </div>
@@ -202,7 +202,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
             onChange={(e) => setName(e.target.value)}
             list={kind === 'vessel' ? 'reserve-vessel-names' : undefined}
             placeholder={kind === 'vessel' ? 'R/V Atlantis' : 'Community sail day'}
-            className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+            className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-ink"
           />
         </label>
         {kind === 'vessel' && (
@@ -226,7 +226,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
               value={length}
               onChange={(e) => setLength(e.target.value)}
               placeholder="needed to check fit"
-              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-ink"
             />
           </label>
         )}
@@ -249,7 +249,7 @@ export function ReserveDialog({ berths, vessels, reservations, defaultStart, onC
             type="button"
             onClick={reserve}
             disabled={!canReserve}
-            className="rounded bg-sea px-3.5 py-2 text-[13px] text-white disabled:bg-line disabled:text-mute"
+            className="rounded bg-ink px-3.5 py-2 text-[13px] font-medium text-paper hover:bg-ink/90 disabled:bg-line disabled:text-mute"
           >
             {pending ? 'Saving' : 'Reserve'}
           </button>

@@ -57,7 +57,7 @@ export function VesselDesk({ vessels }: Props) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Name"
-            className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+            className="mt-1.5 w-full rounded border border-line bg-panel px-3 py-2.5 text-[14px] text-ink outline-none focus:border-ink"
           />
         </label>
       </div>
@@ -66,8 +66,8 @@ export function VesselDesk({ vessels }: Props) {
         <table className="w-full text-sm">
           <thead className="bg-wash text-left text-[11px] uppercase tracking-[0.06em] text-mute">
             <tr>
-              <th className="px-4 py-2 font-medium">Vessel</th>
-              <th className="w-36 px-4 py-2 font-medium">Length, ft</th>
+              <th className="px-5 py-2.5 font-medium">Vessel</th>
+              <th className="w-40 px-5 py-2.5 font-medium">Length, ft</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
@@ -83,8 +83,8 @@ export function VesselDesk({ vessels }: Props) {
         </table>
       </div>
 
-      <div className="rounded-lg border border-line bg-panel p-4">
-        <h2 className="text-[14px] font-medium">Add a vessel</h2>
+      <div className="rounded-lg border border-line bg-panel p-5">
+        <h2 className="text-[15px] font-medium">Add a vessel</h2>
         <div className="mt-3 flex flex-wrap items-end gap-3">
           <label className="min-w-[200px] flex-1 text-[11px] uppercase tracking-[0.06em] text-mute">
             Name
@@ -92,7 +92,7 @@ export function VesselDesk({ vessels }: Props) {
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               placeholder="R/V Atlantis"
-              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+              className="mt-1.5 w-full rounded border border-line bg-panel px-3 py-2.5 text-[14px] text-ink outline-none focus:border-ink"
             />
           </label>
           <label className="w-28 text-[11px] uppercase tracking-[0.06em] text-mute">
@@ -103,14 +103,14 @@ export function VesselDesk({ vessels }: Props) {
               value={newLen}
               onChange={(e) => setNewLen(e.target.value)}
               placeholder="ft"
-              className="mt-1 w-full rounded border border-line bg-panel px-2 py-2 text-[13px] text-ink outline-none focus:border-sea"
+              className="mt-1.5 w-full rounded border border-line bg-panel px-3 py-2.5 text-[14px] text-ink outline-none focus:border-ink"
             />
           </label>
           <button
             type="button"
             onClick={create}
             disabled={pending || !newName.trim()}
-            className="rounded bg-sea px-3.5 py-2 text-[13px] text-white disabled:bg-line disabled:text-mute"
+            className="rounded bg-ink px-4 py-2.5 text-[14px] font-medium text-paper hover:bg-ink/90 disabled:bg-line disabled:text-mute"
           >
             Add
           </button>
@@ -137,8 +137,8 @@ function LengthRow({
 
   return (
     <tr className={vessel.lengthFt == null ? 'bg-wash/50' : undefined}>
-      <td className="px-4 py-2 font-medium">{vessel.displayName}</td>
-      <td className="px-4 py-1.5">
+      <td className="px-5 py-2.5 text-[14px] font-medium">{vessel.displayName}</td>
+      <td className="px-5 py-2">
         <form
           className="flex items-center gap-2"
           onSubmit={(e) => {
@@ -156,10 +156,10 @@ function LengthRow({
               if (dirty) onSave(vessel.id, draft)
             }}
             placeholder="--"
-            className="tnum w-20 rounded border border-line bg-panel px-2 py-1 text-[13px] outline-none focus:border-sea"
+            className="tnum w-24 rounded border border-line bg-panel px-2.5 py-1.5 text-[14px] outline-none focus:border-ink"
           />
           {dirty && (
-            <button type="submit" className="text-[12px] text-sea">
+            <button type="submit" className="text-[13px] font-medium text-ink underline underline-offset-2">
               Save
             </button>
           )}

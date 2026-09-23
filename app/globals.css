@@ -3,10 +3,9 @@
 /*
   Harborview dock schedule.
 
-  Paper-calm, not beige-dead, not consumer-rainbow. Charcoal ink from a
-  product nav that already works (Quad). Sea and moss only on occupancy
-  bars, so a booked berth reads as occupied from across the room. Conflict
-  red is still the only alarm.
+  Paper and one ink. Occupancy is a tint of the ink rather than a second
+  hue, so a vessel and an event are told apart by their label, every
+  control is ink, and the only colour on the page is conflict red.
 */
 @theme {
   --color-paper: #fafaf8;
@@ -16,15 +15,11 @@
   --color-wash: #f3f0ea;
   --color-panel: #ffffff;
 
-  --color-sea: #1a4a5c;
-  --color-sea-fill: #d7e6ec;
-  --color-event: #3d4a3a;
-  --color-event-fill: #e2ead8;
-  --color-today: #e8f1f4;
   --color-conflict: #c72215;
 
-  --color-occupied: var(--color-sea-fill);
-  --color-occupied-strong: #c5d8e0;
+  /* Ink over paper at roughly 8% and 14%. */
+  --color-occupied: #ebe8e3;
+  --color-occupied-strong: #ddd8d0;
 
   --radius-cell: 4px;
   --radius-panel: 8px;
@@ -46,14 +41,13 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 14px;
-  line-height: 1.45;
-  letter-spacing: -0.02em;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   height: 100%;
 }
 
 ::selection {
-  background: var(--color-sea-fill);
+  background: var(--color-occupied-strong);
   color: var(--color-ink);
 }
 
@@ -62,7 +56,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-sea);
+  outline: 2px solid var(--color-ink);
   outline-offset: 1px;
   border-radius: 2px;
 }

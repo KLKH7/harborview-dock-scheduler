@@ -450,10 +450,10 @@ export function ScheduleGrid({
       >
         <div className="flex min-h-full flex-col" style={{ minWidth }}>
           <div
-            className="sticky top-0 z-30 flex h-12 shrink-0 border-b border-line bg-panel"
+            className="sticky top-0 z-30 flex h-14 shrink-0 border-b border-line bg-panel"
             role="row"
           >
-            <div className="sticky left-0 z-40 shrink-0 border-r border-line bg-panel px-4 py-2 text-[11px] font-medium uppercase tracking-[0.06em] text-mute" style={{ width: BERTH_COL_PX }}>
+            <div className="sticky left-0 z-40 flex shrink-0 items-center border-r border-line bg-panel px-5 text-[11px] font-medium uppercase tracking-[0.06em] text-mute" style={{ width: BERTH_COL_PX }}>
               Berth
             </div>
             <div className="grid flex-1" style={{ gridTemplateColumns: gridCols }}>
@@ -465,11 +465,11 @@ export function ScheduleGrid({
                     key={d}
                     role="columnheader"
                     className={`tnum flex flex-col items-center justify-center text-[12px] ${
-                      isToday ? 'bg-today text-sea' : wd >= 5 ? 'text-mute/70' : 'text-mute'
+                      isToday ? 'bg-wash text-ink' : wd >= 5 ? 'text-mute/70' : 'text-mute'
                     }`}
                   >
-                    <div className="text-[10px] uppercase tracking-[0.04em]">{WEEKDAY[wd]}</div>
-                    <div className={`text-[13px] font-medium ${isToday ? 'text-sea' : 'text-ink'}`}>{d}</div>
+                    <div className="text-[11px] uppercase tracking-[0.04em]">{WEEKDAY[wd]}</div>
+                    <div className={`text-[14px] font-medium ${isToday ? 'text-ink' : 'text-ink'}`}>{d}</div>
                   </div>
                 )
               })}
@@ -487,17 +487,17 @@ export function ScheduleGrid({
             return (
               <div
                 key={berth.id}
-                className="flex min-h-[76px] flex-1 border-b border-line"
+                className="flex min-h-[88px] flex-1 border-b border-line"
                 role="row"
               >
                 <div
-                  className="sticky left-0 z-20 flex shrink-0 flex-col justify-center border-r border-line bg-panel px-4 py-3"
+                  className="sticky left-0 z-20 flex shrink-0 flex-col justify-center border-r border-line bg-panel px-5 py-3"
                   style={{ width: BERTH_COL_PX }}
                 >
-                  <div className="text-[13px] font-medium leading-snug tracking-[-0.03em] text-ink">
+                  <div className="text-[14px] font-medium leading-snug text-ink">
                     {berth.name}
                   </div>
-                  <div className="tnum mt-0.5 text-[12px] text-mute">
+                  <div className="tnum mt-0.5 text-[13px] text-mute">
                     {berth.lengthFt != null ? `${berth.lengthFt} ft` : ''}
                   </div>
                 </div>
@@ -521,7 +521,7 @@ export function ScheduleGrid({
                         <div
                           key={d}
                           className={`border-r border-line/70 ${
-                            isToday ? 'bg-today' : wd >= 5 ? 'bg-wash/40' : ''
+                            isToday ? 'bg-wash' : wd >= 5 ? 'bg-wash/40' : ''
                           }`}
                         />
                       )
@@ -579,13 +579,13 @@ export function ScheduleGrid({
       </p>
 
       {visible.length === 0 && occupiedThisMonth.length > 0 && view === 'week' && (
-        <p className="px-5 py-3 text-[13px] text-mute sm:px-8">
+        <p className="px-5 py-4 text-[14px] text-mute sm:px-8">
           No stays in these seven days. Switch to month to see the rest of{' '}
           {monthLabel(year, month)}.
         </p>
       )}
       {visible.length === 0 && occupiedThisMonth.length === 0 && (
-        <p className="px-5 py-3 text-[13px] text-mute sm:px-8">
+        <p className="px-5 py-4 text-[14px] text-mute sm:px-8">
           {monthStart >= Date.UTC(Number(today.slice(0, 4)), Number(today.slice(5, 7)) - 1, 1)
             ? 'Nothing booked from here on. Reserve, or drag across empty days on a berth.'
             : `Nothing was booked in ${monthLabel(year, month)}.`}
@@ -678,8 +678,8 @@ function Bar({
   const fill = alarm
     ? 'border-l-[3px] border-conflict bg-conflict/10 text-conflict'
     : r.kind === 'event'
-      ? 'border-l-[3px] border-event bg-event-fill text-event'
-      : 'border-l-[3px] border-sea bg-sea-fill text-sea'
+      ? 'border-l-[3px] border-mute bg-occupied text-ink'
+      : 'border-l-[3px] border-ink bg-occupied text-ink'
 
   // The old spreadsheet gave each regular vessel its own fill colour, which
   // answered "where else is this hull this month" at a glance. That does not
@@ -709,8 +709,9 @@ function Bar({
       onBlur={onHoverEnd}
       onClick={onToggleTrace}
     >
-      <span className="line-clamp-2 text-[12px] font-medium leading-snug tracking-[-0.02em] [overflow-wrap:anywhere]">
+      <span className="line-clamp-2 text-[12px] font-medium leading-snug [overflow-wrap:anywhere]">
         {clippedStart && <span className="opacity-50">‹ </span>}
+        {r.kind === 'event' && <span className="font-normal text-mute">event · </span>}
         {r.label}
         {clippedEnd && <span className="opacity-50"> ›</span>}
       </span>
@@ -776,7 +777,7 @@ function StayTip({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      <div className="text-[13px] font-medium leading-snug tracking-[-0.03em]">{r.label}</div>
+      <div className="text-[13px] font-medium leading-snug">{r.label}</div>
       <div className="tnum mt-1 text-[12px] text-mute">
         {range}
         <span className="text-mute"> · {n} day{n === 1 ? '' : 's'}</span>

@@ -52,7 +52,7 @@ export function MonthHeader({
   }, [open])
 
   return (
-    <div className="relative flex h-10 shrink-0 items-center gap-1 px-5 sm:px-8" ref={ref}>
+    <div className="relative flex h-14 shrink-0 items-center gap-1 px-5 sm:px-8" ref={ref}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -67,7 +67,7 @@ export function MonthHeader({
           }
         }}
         aria-expanded={open}
-        className="tnum -mx-1 rounded px-1 text-[15px] font-medium tracking-[-0.02em] text-ink hover:bg-wash"
+        className="tnum -mx-1 whitespace-nowrap rounded px-1 text-[18px] font-medium tracking-tight text-ink hover:bg-wash"
       >
         {MONTHS[month - 1]} {year}
       </button>
@@ -89,14 +89,14 @@ export function MonthHeader({
         <Chevron dir="right" />
       </button>
 
-      <div className="ml-3 flex rounded bg-wash p-0.5 text-[12px] font-medium tracking-[-0.02em]">
+      <div className="ml-3 flex rounded bg-wash p-0.5 text-[13px] font-medium">
         {(['month', 'week'] as const).map((v) => (
           <button
             key={v}
             type="button"
             onClick={() => onView(v)}
             aria-pressed={view === v}
-            className={`rounded px-2.5 py-1 ${
+            className={`rounded px-3 py-1.5 ${
               view === v ? 'bg-panel text-ink shadow-[0_1px_1px_rgba(35,31,32,0.06)]' : 'text-mute hover:text-ink'
             }`}
           >
@@ -109,35 +109,21 @@ export function MonthHeader({
       <button
         type="button"
         onClick={onToday}
-        className="rounded px-2 py-1 text-[12px] text-ink hover:bg-wash"
+        className="rounded px-2.5 py-1.5 text-[13px] text-ink hover:bg-wash"
       >
         Today
       </button>
       <button
         type="button"
         onClick={onReserve}
-        className="rounded bg-sea px-3 py-1.5 text-[13px] font-medium text-white"
+        className="rounded bg-ink px-3.5 py-2 text-[13px] font-medium text-paper hover:bg-ink/90"
       >
         Reserve
       </button>
-      <div className="hidden items-center gap-4 text-[11px] tracking-[-0.02em] text-mute lg:flex">
-        <span className="inline-flex items-center gap-1.5">
-          <i className="inline-block h-2.5 w-2.5 rounded-sm bg-sea-fill ring-1 ring-sea/30" />
-          vessel
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <i className="inline-block h-2.5 w-2.5 rounded-sm bg-event-fill ring-1 ring-event/30" />
-          event
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <i className="inline-block h-2.5 w-2.5 rounded-sm bg-conflict/20 ring-1 ring-conflict/50" />
-          conflict
-        </span>
-      </div>
       </div>
 
       {open && (
-        <div className="absolute left-5 top-12 z-50 w-[286px] rounded-[8px] border border-line bg-panel p-2 shadow-[var(--shadow-panel)] sm:left-8">
+        <div className="absolute left-5 top-14 z-50 w-[286px] rounded-[8px] border border-line bg-panel p-2 shadow-[var(--shadow-panel)] sm:left-8">
           <div className="grid grid-cols-3 gap-1">
             {MONTHS.map((m, i) => (
               <button
@@ -148,7 +134,7 @@ export function MonthHeader({
                   setOpen(false)
                 }}
                 className={`rounded px-2 py-1.5 text-[12px] ${
-                  i + 1 === month ? 'bg-sea-fill text-sea' : 'text-mute hover:bg-wash hover:text-ink'
+                  i + 1 === month ? 'bg-ink text-paper' : 'text-mute hover:bg-wash hover:text-ink'
                 }`}
               >
                 {m.slice(0, 3)}
@@ -166,7 +152,7 @@ export function MonthHeader({
                     setOpen(false)
                   }}
                   className={`tnum rounded px-2 py-1 text-[12px] ${
-                    y === year ? 'bg-sea-fill text-sea' : 'text-mute hover:bg-wash hover:text-ink'
+                    y === year ? 'bg-ink text-paper' : 'text-mute hover:bg-wash hover:text-ink'
                   }`}
                 >
                   {y}

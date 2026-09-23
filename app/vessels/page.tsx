@@ -8,10 +8,10 @@ export default async function VesselsPage() {
 
   return (
     <div className="min-h-0 flex-1 overflow-y-auto">
-      <div className="mx-auto max-w-[720px] space-y-8 px-5 py-6">
+      <div className="mx-auto max-w-[800px] space-y-8 px-5 py-10 sm:px-8">
         <div>
-          <h1 className="text-[17px] font-medium tracking-tight">Vessels</h1>
-          <p className="mt-1 text-sm text-mute">
+          <h1 className="text-[20px] font-medium tracking-tight">Vessels</h1>
+          <p className="mt-1.5 text-[14px] text-mute">
             Name and length in feet. If a length is set, a booking that does not fit the berth is
             refused.
           </p>
