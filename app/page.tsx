@@ -1,4 +1,4 @@
-import { getBerths, getVessels, getReservations, getYears } from '@/lib/data'
+import { getBerths, getVessels, getReservations, getYears, getLatestOccupancyDate } from '@/lib/data'
 import { detectOverlaps, checkFit } from '@/lib/validation/engine'
 import { ScheduleGrid, type GridReservation } from '@/components/ScheduleGrid'
 
@@ -6,16 +6,17 @@ export const dynamic = 'force-dynamic'
 
 export default async function SchedulePage(props: PageProps<'/'>) {
   const params = await props.searchParams
-  const years = await getYears()
+  const [years, lastOccupied] = await Promise.all([getYears(), getLatestOccupancyDate()])
 
   const now = new Date()
+  const fallback = lastOccupied ?? now.toISOString().slice(0, 10)
   const latest = years[years.length - 1] ?? now.getUTCFullYear()
   const year = clamp(
-    Number(params.year) || now.getUTCFullYear(),
+    Number(params.year) || Number(fallback.slice(0, 4)),
     years[0] ?? latest,
     latest,
   )
-  const month = clamp(Number(params.month) || now.getUTCMonth() + 1, 1, 12)
+  const month = clamp(Number(params.month) || Number(fallback.slice(5, 7)), 1, 12)
 
   // Serve a window wider than the month so a stay starting in the previous
   // month still draws, and still takes part in conflict detection.

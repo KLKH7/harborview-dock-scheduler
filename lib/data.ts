@@ -180,6 +180,15 @@ export async function getFuzzyMatches() {
  * Years the coordinator can open. Archive years plus the current year and
  * two ahead, so 2026 is a real month you can book into, not a wall after 2019.
  */
+/** Last day that has a booking. The schedule opens here so imported history is visible. */
+export async function getLatestOccupancyDate(): Promise<string | null> {
+  const rows = (await sql`
+    SELECT max(end_date)::text AS d FROM reservation
+  `) as Record<string, unknown>[]
+  const d = rows[0]?.d
+  return typeof d === 'string' && d ? d.slice(0, 10) : null
+}
+
 export async function getYears(): Promise<number[]> {
   const rows = (await sql`
     SELECT

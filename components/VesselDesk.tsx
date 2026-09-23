@@ -20,12 +20,7 @@ export function VesselDesk({ vessels }: Props) {
     const list = needle
       ? vessels.filter((v) => v.displayName.toLowerCase().includes(needle))
       : vessels
-    return [...list].sort((a, b) => {
-      const aMiss = a.lengthFt == null ? 0 : 1
-      const bMiss = b.lengthFt == null ? 0 : 1
-      if (aMiss !== bMiss) return aMiss - bMiss
-      return a.displayName.localeCompare(b.displayName)
-    })
+    return [...list].sort((a, b) => a.displayName.localeCompare(b.displayName))
   }, [vessels, q])
 
   function saveLength(id: string, raw: string) {
