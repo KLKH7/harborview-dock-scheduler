@@ -2,12 +2,14 @@
 
 import { useMemo, useState, useTransition } from 'react'
 import type { BerthRow } from '@/lib/data'
-import { dayCount, type Vessel } from '@/lib/validation/engine'
+import { dayCount, findAvailableBerths, type Reservation, type Vessel } from '@/lib/validation/engine'
 import { createReservation } from '@/app/actions'
 
 type Props = {
   berths: BerthRow[]
   vessels: Vessel[]
+  /** Every stay, all berths. Needed to say which berths are actually free. */
+  reservations: Reservation[]
   defaultStart: string
   onClose: () => void
   onReserved: (id: string, start: string) => void
@@ -17,7 +19,7 @@ type Props = {
  * First-class booking. Drag on the grid is a shortcut for the month in view.
  * This is how you put a vessel or an event on a berth for any dates.
  */
-export function ReserveDialog({ berths, vessels, defaultStart, onClose, onReserved }: Props) {
+export function ReserveDialog({ berths, vessels, reservations, defaultStart, onClose, onReserved }: Props) {
   const [kind, setKind] = useState<'vessel' | 'event'>('vessel')
   const [berthId, setBerthId] = useState(berths[0]?.id ?? '')
   const [start, setStart] = useState(defaultStart)
@@ -42,12 +44,16 @@ export function ReserveDialog({ berths, vessels, defaultStart, onClose, onReserv
     berth?.lengthFt != null &&
     lengthFt > berth.lengthFt
 
-  const fits = useMemo(() => {
-    if (!oversize || lengthFt == null) return []
-    return berths.filter((b) => b.lengthFt != null && b.lengthFt >= lengthFt)
-  }, [oversize, lengthFt, berths])
-
   const datesOk = /^\d{4}-\d{2}-\d{2}$/.test(start) && /^\d{4}-\d{2}-\d{2}$/.test(end) && end >= start
+
+  // The finder. Once dates are known, every berth is sorted into free and long
+  // enough, too short, or occupied, before the user has picked one. This is
+  // the question the coordinator used to answer by scanning rows.
+  const finder = useMemo(() => {
+    if (!datesOk) return null
+    return findAvailableBerths(start, end, kind === 'vessel' ? lengthFt : null, berths, reservations)
+  }, [datesOk, start, end, kind, lengthFt, berths, reservations])
+  const fits = finder?.available ?? []
   const canReserve =
     !pending &&
     !oversize &&
@@ -126,6 +132,38 @@ export function ReserveDialog({ berths, vessels, defaultStart, onClose, onReserv
             ))}
           </select>
         </label>
+
+        {finder && (
+          <div className="tnum mt-2 space-y-0.5 text-[12px]">
+            {finder.available.length > 0 ? (
+              <p className="text-mute">
+                Free:{' '}
+                {finder.available.map((b, i) => (
+                  <span key={b.id}>
+                    {i > 0 && ', '}
+                    <button
+                      type="button"
+                      onClick={() => setBerthId(b.id)}
+                      className={`underline-offset-2 hover:underline ${b.id === berthId ? 'text-ink' : 'text-sea'}`}
+                    >
+                      {b.name}
+                    </button>
+                  </span>
+                ))}
+              </p>
+            ) : (
+              <p className="text-conflict">No berth is free and long enough for these dates.</p>
+            )}
+            {finder.tooShort.length > 0 && (
+              <p className="text-mute">Too short: {finder.tooShort.map((b) => b.name).join(', ')}</p>
+            )}
+            {finder.occupied.length > 0 && (
+              <p className="text-mute">
+                Occupied: {finder.occupied.map((o) => `${o.berth.name} (${o.by[0].label})`).join(', ')}
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="mt-3 grid grid-cols-2 gap-3">
           <label className="block text-[11px] uppercase tracking-[0.06em] text-mute">

@@ -54,14 +54,14 @@
       "displayName": "Barge SALT DORY",
       "lengthFt": 85,
       "lengthSource": "fuzzy_hull_match",
-      "bookedDays": 101
+      "bookedDays": 99
     },
     {
       "hullKey": "LONG ANCHOR",
       "displayName": "R/V Long Anchor",
       "lengthFt": 170,
       "lengthSource": "fuzzy_hull_match",
-      "bookedDays": 96
+      "bookedDays": 95
     },
     {
       "hullKey": "CORAL LANTERN",
@@ -3050,7 +3050,7 @@
     "scheduledVessels": 431,
     "withLength": 65,
     "withoutLength": 366,
-    "bookedDaysWithLength": 2256,
+    "bookedDaysWithLength": 2253,
     "bookedDaysWithoutLength": 5051
   }
 }

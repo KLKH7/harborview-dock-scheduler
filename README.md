@@ -16,9 +16,12 @@ booking, historical and new.
 
 | Screen | Purpose |
 |---|---|
-| **Schedule** | The berth by day grid, and the only place bookings are made. Drag along a row to select days; the drag clamps where the berth is taken. Overlapping bookings stack in separate lanes, so a double booking makes the row visibly taller before any colour is read. |
-| **Findings** | Every double-booking and every oversized vessel across all 23 years, ranked. This replaces reading the grid. |
-| **Data quality** | What the source data cannot tell us, and what it would take to fix. |
+| **Schedule** | The berth by day grid, and where bookings are made. Drag along a row to select days; the drag stops where the berth is taken. Overlapping stays stack in separate lanes, so a double booking makes the row visibly taller before any colour is read. Hover or click a bar and that hull is traced everywhere it appears. |
+| **Problems** | Every stay in 23 years, checked by the rules that refuse a new one: two in one berth, one vessel in two berths, too long for the berth. Oversize is grouped by vessel and berth so 113 stays become 25 decisions, each fixable inline. Ends with what the data cannot tell us. |
+| **Vessels** | The roster. Name and length; a length set here is what the fit check uses. |
+
+The reserve panel is also a finder: give dates and a length and every berth is sorted into
+free and long enough, too short, or occupied, before a berth is chosen.
 
 ---
 
@@ -72,7 +75,20 @@ prefixes:
 | `R/V Long Anchor` | `Tug Long Anchor 170'` |
 
 **58 of 78 matched vessels have a different prefix.** Matching on the hull name with the
-prefix stripped raises coverage from 63 booked days to 2,255.
+prefix stripped raises coverage from 63 booked days to 2,253.
+
+### 4. A month block is not a stay
+
+The workbook draws each month as its own block, so a stay from 28 January to 3 February is
+two colour bands on two blocks. A per-month walk emits two rows. **89 stays** were rejoined
+in a post-pass (same berth, same label, last day of one month to first of the next).
+Conflict detection was never affected, but every night count on them was wrong.
+
+Sheets 2002 to 2004 also open with the *previous* year's December, so December 2001, 2002
+and 2003 were each extracted twice. Only 3 rows were exact duplicates; the two copies mostly
+differ, which means the coordinator kept editing one and not the other. The duplicates are
+dropped, the rest kept, and the disagreement is reported rather than resolved, because the
+sheet is the only witness.
 
 ---
 
@@ -152,12 +168,43 @@ The same-day turnaround that earlier versions allowed is gone. Before removing i
 the archive: in 23 years **no two different vessels share exactly one day**, so the allowance
 was protecting a case the data never contains.
 
+### There are two kinds of double-booking, and a grid only shows one
+
+"Two things in this berth" is what everyone checks, and what the grid makes visible. "This
+vessel is already in *another* berth" is invisible on a grid, because each berth looks fine on
+its own. The archive holds **18** of these; 8 share a single day, which is what a berth shift
+looks like and is allowed, and **10 share 2 to 14 days**, which a hull cannot do.
+
+`detectDoubleAssignment` is a second detector beside `detectOverlaps`. Both grade history and
+both gate a new booking: any same-berth overlap refuses; a cross-berth overlap of two or more
+days refuses; a one-day shift is reported and allowed.
+
+I found this gap by brute-forcing every pair and comparing to the engine. The engine matched
+on same-berth pairs exactly, and the exercise surfaced the class it never looked for.
+
+### Tracing a hull replaces the spreadsheet's colour coding
+
+The source workbook gave each regular vessel a fixed fill colour. This was a real system:
+180 of 208 coloured hulls wore exactly one colour across 23 years, and the busiest was 100%
+consistent over 237 runs. It answered "where else is this vessel this month" without reading
+a label. It also did not survive its own tail: only 49% of stays had any colour, the
+mid-frequency vessels drifted between hues, and red did double duty as an identity and as
+"no usage permitted".
+
+So the question is answered on demand. Hover or click a bar and that hull is traced across
+the whole view; the other bars recede rather than the match brightening, which keeps one
+accent meaning one thing. It scales to all 431 vessels and cannot drift, because identity
+comes from the data rather than from remembering which purple. No entrance animation, since
+it fires every time the pointer crosses a bar; a 120ms opacity change and nothing under
+`prefers-reduced-motion`. Click pins it for keyboard and touch; Escape clears.
+
 ### One validation engine, not two
 
 `lib/validation/engine.ts` is pure — no database, no `fetch`, no `Date.now()`. It is imported
 by both the import path and the grid, so the rules applied to the historical archive
-and to a new reservation provably cannot drift apart. It has 32 unit tests covering the
-inclusive-boundary cases, containment, unknown lengths, events, and refusal.
+and to a new reservation provably cannot drift apart. It has 38 unit tests covering the
+inclusive-boundary cases, containment, unknown lengths, events, both conflict classes, and
+refusal.
 
 ---
 
@@ -165,20 +212,25 @@ inclusive-boundary cases, containment, unknown lengths, events, and refusal.
 
 | | |
 |---|---|
-| Reservations imported | **2,169** (Aug 1997 → Dec 2019) |
-| Double-bookings | **2** (both ≥ 2 shared days) |
-| Vessels exceeding their berth | **115** |
-| Bookings that cannot be fit-checked | **1,454** (5,051 booked days) |
-| Facility events and dock notes (no vessel) | **107** |
+| Stays imported | **2,077** (Aug 1997 to Dec 2019) |
+| Two stays in one berth | **2** |
+| One vessel in two berths | **10** (plus 8 same-day shifts, allowed) |
+| Too long for the berth | **113** stays, across **25** vessel and berth pairings |
+| Cannot be fit-checked | **1,404** (5,051 booked days) |
+| Events and dock notes (no vessel) | **106** |
 
-The worst overhang is `R/V Long Anchor` (170′) repeatedly assigned to `North Pier Face`
-(75′) — 95 feet too long. The double-bookings are both a vessel booked into a berth during a
-multi-day facility closure, which is exactly the class of error a grid makes easy to miss.
+The worst overhang is `R/V Long Anchor` (170 ft) in `North Pier Face` (75 ft), 95 feet too
+long. But the biggest *group* is `S/V Far Horizon` in `South Float East`, **47 times** over
+the years, which is not 49 mistakes. It is one question: is the roster length wrong, or does
+that berth tolerate the overhang? The problems page asks it once, with the fix inline.
 
-Only 2 conflicts in 23 years is a low number, and it is a real result rather than a silent
-failure — verified by re-reading the raw cells for the months in question, and by an
+The same-berth double-bookings are both a vessel booked during a multi-day facility closure,
+which is exactly the class of error a grid makes easy to miss.
+
+Only 2 same-berth conflicts in 23 years is a low number, and it is a real result rather than
+a silent failure: verified by re-reading the raw cells for the months in question, by an
 independent audit script (`npm run audit`) that recounts the workbook without reusing the
-extractor's logic and asserts that no booking was invented or lost.
+extractor's logic, and by brute-forcing every pair of stays and comparing to the engine.
 
 ---
 
@@ -228,8 +280,8 @@ without it. To re-run `npm run extract` yourself, drop the sample workbook at
 Built to the suggested 3–5 hours, so the following are **conscious omissions**, not oversights:
 
 - **Auth / users** — single-tenant internal tool; the source data has no notion of identity.
-- **Editing and deleting reservations** — create + validate demonstrates the engine; full CRUD
-  is surface area, not signal.
+- **Editing a stay in place.** A stay can be removed from its hover card and re-made; moving
+  its dates by dragging the bar is not built.
 - **Uploading a new .xlsx at runtime** — the extraction is the hard part and it is already
   done; re-doing it in a serverless request adds risk without adding capability.
 - **Retired berths over time** — the `8YR Dock Summary` tab references berths that appear in
@@ -239,7 +291,6 @@ Built to the suggested 3–5 hours, so the following are **conscious omissions**
 
 ### The honest limitation
 
-I could not determine a length for **1,454 bookings**. Those are reported as *unverifiable*
-rather than approved. The Data Quality screen ranks the missing vessels by how much schedule
-they occupy — recording a length for just the top ten would make 3,352 booked days
-verifiable — so the gap is actionable rather than merely acknowledged.
+I could not determine a length for **1,404 stays**. Those are reported as *unverifiable*
+rather than approved. The foot of the problems page ranks the missing vessels by how much schedule they occupy,
+so the gap is actionable rather than merely acknowledged.

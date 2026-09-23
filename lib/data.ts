@@ -2,6 +2,7 @@ import 'server-only'
 import { sql } from './db'
 import {
   detectOverlaps,
+  detectDoubleAssignment,
   checkFit,
   dayCount,
   type Berth,
@@ -71,11 +72,16 @@ export async function getReservations(from?: string, to?: string) {
 }
 
 export type Findings = {
+  /** Two things in one berth. */
   conflicts: Conflict[]
+  /** One vessel in two berths. */
+  crossBerth: Conflict[]
   fits: { reservation: Reservation; fit: FitFinding }[]
   stats: {
     reservations: number
     conflicts: number
+    crossBerthViolations: number
+    crossBerthShifts: number
     conflictViolations: number
     conflictWarnings: number
     fitsCount: number
@@ -104,6 +110,7 @@ export async function getFindings(): Promise<Findings> {
   const vesselById = new Map(vessels.map((v) => [v.id, v]))
 
   const conflicts = detectOverlaps(reservations)
+  const crossBerth = detectDoubleAssignment(reservations)
   const fits = reservations.map((r) => {
     const berth = berthById.get(r.berthId)!
     const vessel = r.vesselId ? (vesselById.get(r.vesselId) ?? null) : null
@@ -118,10 +125,13 @@ export async function getFindings(): Promise<Findings> {
 
   return {
     conflicts,
+    crossBerth,
     fits,
     stats: {
       reservations: reservations.length,
       conflicts: conflicts.length,
+      crossBerthViolations: crossBerth.filter((c) => c.severity === 'violation').length,
+      crossBerthShifts: crossBerth.filter((c) => c.severity === 'warning').length,
       conflictViolations: conflicts.filter((c) => c.severity === 'violation').length,
       conflictWarnings: conflicts.filter((c) => c.severity === 'warning').length,
       fitsCount: fits.filter((f) => f.fit.status === 'fits').length,

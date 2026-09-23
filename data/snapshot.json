@@ -543,14 +543,6 @@
       "berth": "North Pier West",
       "label": "OSV Wild Star",
       "start": "1998-07-31",
-      "end": "1998-07-31",
-      "kind": "vessel",
-      "sourceSheet": "1998"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "OSV Wild Star",
-      "start": "1998-08-01",
       "end": "1998-08-01",
       "kind": "vessel",
       "sourceSheet": "1998"
@@ -2599,7 +2591,7 @@
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-08-30",
-      "end": "2001-08-31",
+      "end": "2001-09-01",
       "kind": "vessel",
       "sourceSheet": "2001"
     },
@@ -2615,22 +2607,6 @@
       "berth": "North Pier West",
       "label": "R/V LONG ANCHOR",
       "start": "2001-08-31",
-      "end": "2001-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2001"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V LONG ANCHOR",
-      "start": "2001-09-01",
-      "end": "2001-09-01",
-      "kind": "vessel",
-      "sourceSheet": "2001"
-    },
-    {
-      "berth": "South Float East",
-      "label": "S/V FAR HORIZON",
-      "start": "2001-09-01",
       "end": "2001-09-01",
       "kind": "vessel",
       "sourceSheet": "2001"
@@ -2842,14 +2818,6 @@
       "end": "2001-12-01",
       "kind": "vessel",
       "sourceSheet": "2001"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "Barge SALT DORY",
-      "start": "2001-12-01",
-      "end": "2001-12-01",
-      "kind": "vessel",
-      "sourceSheet": "2002"
     },
     {
       "berth": "North Pier West",
@@ -3119,14 +3087,6 @@
       "berth": "North Pier West",
       "label": "M/V Quiet Petrel",
       "start": "2002-03-31",
-      "end": "2002-03-31",
-      "kind": "vessel",
-      "sourceSheet": "2002"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V Quiet Petrel",
-      "start": "2002-04-01",
       "end": "2002-04-01",
       "kind": "vessel",
       "sourceSheet": "2002"
@@ -3647,7 +3607,7 @@
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2002-07-29",
-      "end": "2002-07-31",
+      "end": "2002-08-03",
       "kind": "vessel",
       "sourceSheet": "2002"
     },
@@ -3680,14 +3640,6 @@
       "label": "R/V CLEAR SEXTANT",
       "start": "2002-08-01",
       "end": "2002-08-06",
-      "kind": "vessel",
-      "sourceSheet": "2002"
-    },
-    {
-      "berth": "South Float East",
-      "label": "S/V FAR HORIZON",
-      "start": "2002-08-01",
-      "end": "2002-08-03",
       "kind": "vessel",
       "sourceSheet": "2002"
     },
@@ -4068,14 +4020,6 @@
       "sourceSheet": "2002"
     },
     {
-      "berth": "North Pier East",
-      "label": "Barge SALT DORY",
-      "start": "2002-12-01",
-      "end": "2002-12-01",
-      "kind": "vessel",
-      "sourceSheet": "2003"
-    },
-    {
       "berth": "North Pier West",
       "label": "M/V Quiet Petrel",
       "start": "2002-12-01",
@@ -4090,14 +4034,6 @@
       "end": "2002-12-12",
       "kind": "vessel",
       "sourceSheet": "2002"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V LONG ANCHOR",
-      "start": "2002-12-12",
-      "end": "2002-12-12",
-      "kind": "vessel",
-      "sourceSheet": "2003"
     },
     {
       "berth": "North Pier West",
@@ -4343,7 +4279,7 @@
       "berth": "North Pier West",
       "label": "Barge BRIGHT STAR",
       "start": "2003-04-29",
-      "end": "2003-04-30",
+      "end": "2003-05-03",
       "kind": "vessel",
       "sourceSheet": "2003"
     },
@@ -4352,14 +4288,6 @@
       "label": "M/V Quiet Reef",
       "start": "2003-05-01",
       "end": "2003-05-31",
-      "kind": "vessel",
-      "sourceSheet": "2003"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "Barge BRIGHT STAR",
-      "start": "2003-05-01",
-      "end": "2003-05-03",
       "kind": "vessel",
       "sourceSheet": "2003"
     },
@@ -5479,14 +5407,6 @@
       "berth": "North Pier West",
       "label": "R/V CLEAR SEXTANT",
       "start": "2004-08-29",
-      "end": "2004-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2004"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2004-09-01",
       "end": "2004-09-06",
       "kind": "vessel",
       "sourceSheet": "2004"
@@ -5679,15 +5599,7 @@
       "berth": "North Pier West",
       "label": "M/V NORTHERN HARBOR",
       "start": "2005-01-24",
-      "end": "2005-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2005"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2005-02-01",
-      "end": "2005-02-28",
+      "end": "2005-04-30",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -5696,14 +5608,6 @@
       "label": "M/V QUIET PETREL",
       "start": "2005-02-25",
       "end": "2005-02-25",
-      "kind": "vessel",
-      "sourceSheet": "2005"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2005-03-01",
-      "end": "2005-03-31",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -5720,14 +5624,6 @@
       "label": "M/Y GREEN LANTERN",
       "start": "2005-03-14",
       "end": "2005-03-14",
-      "kind": "vessel",
-      "sourceSheet": "2005"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2005-04-01",
-      "end": "2005-04-30",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -5863,7 +5759,7 @@
       "berth": "North Pier West",
       "label": "R/V CLEAR SEXTANT",
       "start": "2005-06-19",
-      "end": "2005-06-30",
+      "end": "2005-07-08",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -5912,14 +5808,6 @@
       "label": "F/V LONG BEACON",
       "start": "2005-07-01",
       "end": "2005-07-01",
-      "kind": "vessel",
-      "sourceSheet": "2005"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2005-07-01",
-      "end": "2005-07-08",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -5975,7 +5863,7 @@
       "berth": "North Pier West",
       "label": "R/V CLEAR SEXTANT",
       "start": "2005-07-28",
-      "end": "2005-07-31",
+      "end": "2005-09-04",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -5992,14 +5880,6 @@
       "label": "S/V GOLDEN HERON",
       "start": "2005-07-31",
       "end": "2005-07-31",
-      "kind": "vessel",
-      "sourceSheet": "2005"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2005-08-01",
-      "end": "2005-08-31",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -6080,14 +5960,6 @@
       "label": "M/V SALT MERIDIAN",
       "start": "2005-08-20",
       "end": "2005-08-23",
-      "kind": "vessel",
-      "sourceSheet": "2005"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2005-09-01",
-      "end": "2005-09-04",
       "kind": "vessel",
       "sourceSheet": "2005"
     },
@@ -6199,17 +6071,9 @@
       "berth": "North Pier West",
       "label": "R/V CLEAR SEXTANT",
       "start": "2005-12-05",
-      "end": "2005-12-31",
-      "kind": "vessel",
-      "sourceSheet": "2005"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2006-01-01",
       "end": "2006-01-01",
       "kind": "vessel",
-      "sourceSheet": "2006"
+      "sourceSheet": "2005"
     },
     {
       "berth": "Inner Channel",
@@ -6231,14 +6095,6 @@
       "berth": "North Pier West",
       "label": "R/V CLEAR SEXTANT",
       "start": "2006-01-20",
-      "end": "2006-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2006"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2006-02-01",
       "end": "2006-02-03",
       "kind": "vessel",
       "sourceSheet": "2006"
@@ -6303,7 +6159,7 @@
       "berth": "North Pier West",
       "label": "R/V CLEAR SEXTANT",
       "start": "2006-04-19",
-      "end": "2006-04-30",
+      "end": "2006-05-01",
       "kind": "vessel",
       "sourceSheet": "2006"
     },
@@ -6318,14 +6174,6 @@
     {
       "berth": "North Pier East",
       "label": "OSV Western Reef",
-      "start": "2006-05-01",
-      "end": "2006-05-01",
-      "kind": "vessel",
-      "sourceSheet": "2006"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
       "start": "2006-05-01",
       "end": "2006-05-01",
       "kind": "vessel",
@@ -6351,14 +6199,6 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2006-05-25",
-      "end": "2006-05-31",
-      "kind": "vessel",
-      "sourceSheet": "2006"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2006-06-01",
       "end": "2006-06-02",
       "kind": "vessel",
       "sourceSheet": "2006"
@@ -6399,14 +6239,6 @@
       "berth": "North Pier West",
       "label": "R/V Blue Ledge",
       "start": "2006-07-31",
-      "end": "2006-07-31",
-      "kind": "vessel",
-      "sourceSheet": "2006"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V Blue Ledge",
-      "start": "2006-08-01",
       "end": "2006-08-01",
       "kind": "vessel",
       "sourceSheet": "2006"
@@ -6679,7 +6511,7 @@
       "berth": "North Pier West",
       "label": "R/V CLEAR SEXTANT",
       "start": "2007-01-01",
-      "end": "2007-01-31",
+      "end": "2008-02-29",
       "kind": "vessel",
       "sourceSheet": "2007"
     },
@@ -6692,14 +6524,6 @@
       "sourceSheet": "2007"
     },
     {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-02-01",
-      "end": "2007-02-28",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
       "berth": "North Pier East",
       "label": "M/V CORAL LANTERN",
       "start": "2007-02-03",
@@ -6708,26 +6532,10 @@
       "sourceSheet": "2007"
     },
     {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-03-01",
-      "end": "2007-03-31",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
       "berth": "North Pier East",
       "label": "Barge Silver Voyager",
       "start": "2007-03-24",
       "end": "2007-03-24",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-04-01",
-      "end": "2007-04-30",
       "kind": "vessel",
       "sourceSheet": "2007"
     },
@@ -6744,14 +6552,6 @@
       "label": "R/V Blue Ketch",
       "start": "2007-05-01",
       "end": "2007-05-01",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-05-01",
-      "end": "2007-05-31",
       "kind": "vessel",
       "sourceSheet": "2007"
     },
@@ -6804,14 +6604,6 @@
       "sourceSheet": "2007"
     },
     {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-06-01",
-      "end": "2007-06-30",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2007-06-02",
@@ -6856,14 +6648,6 @@
       "label": "Barge Blue Sextant",
       "start": "2007-06-26",
       "end": "2007-06-26",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-07-01",
-      "end": "2007-07-31",
       "kind": "vessel",
       "sourceSheet": "2007"
     },
@@ -6916,14 +6700,6 @@
       "sourceSheet": "2007"
     },
     {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-08-01",
-      "end": "2007-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
       "berth": "South Float East",
       "label": "OSV SILVER TIDE",
       "start": "2007-08-01",
@@ -6943,7 +6719,7 @@
       "berth": "North Pier East",
       "label": "M/V CORAL LANTERN",
       "start": "2007-08-27",
-      "end": "2007-08-31",
+      "end": "2007-09-03",
       "kind": "vessel",
       "sourceSheet": "2007"
     },
@@ -6952,22 +6728,6 @@
       "label": "S/V Golden Fathom",
       "start": "2007-08-27",
       "end": "2007-08-28",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "M/V CORAL LANTERN",
-      "start": "2007-09-01",
-      "end": "2007-09-03",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-09-01",
-      "end": "2007-09-30",
       "kind": "vessel",
       "sourceSheet": "2007"
     },
@@ -6992,14 +6752,6 @@
       "label": "M/V NORTHERN HARBOR",
       "start": "2007-10-01",
       "end": "2007-10-08",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-10-01",
-      "end": "2007-10-31",
       "kind": "vessel",
       "sourceSheet": "2007"
     },
@@ -7052,14 +6804,6 @@
       "sourceSheet": "2007"
     },
     {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-11-01",
-      "end": "2007-11-30",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
       "berth": "North Pier East",
       "label": "M/V NORTHERN HARBOR",
       "start": "2007-11-05",
@@ -7092,14 +6836,6 @@
       "sourceSheet": "2007"
     },
     {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2007-12-01",
-      "end": "2007-12-31",
-      "kind": "vessel",
-      "sourceSheet": "2007"
-    },
-    {
       "berth": "South Float West",
       "label": "Pier repair - no docking",
       "start": "2007-12-01",
@@ -7114,14 +6850,6 @@
       "end": "2007-12-07",
       "kind": "vessel",
       "sourceSheet": "2007"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2008-01-01",
-      "end": "2008-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2008"
     },
     {
       "berth": "South Float West",
@@ -7144,14 +6872,6 @@
       "label": "Tug Wild Gannet",
       "start": "2008-01-23",
       "end": "2008-01-23",
-      "kind": "vessel",
-      "sourceSheet": "2008"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V CLEAR SEXTANT",
-      "start": "2008-02-01",
-      "end": "2008-02-29",
       "kind": "vessel",
       "sourceSheet": "2008"
     },
@@ -7319,7 +7039,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2008-05-21",
-      "end": "2008-05-31",
+      "end": "2008-06-03",
       "kind": "vessel",
       "sourceSheet": "2008"
     },
@@ -7351,23 +7071,7 @@
       "berth": "North Pier East",
       "label": "R/V GOLDEN COMPASS",
       "start": "2008-05-31",
-      "end": "2008-05-31",
-      "kind": "vessel",
-      "sourceSheet": "2008"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2008-06-01",
       "end": "2008-06-09",
-      "kind": "vessel",
-      "sourceSheet": "2008"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2008-06-01",
-      "end": "2008-06-03",
       "kind": "vessel",
       "sourceSheet": "2008"
     },
@@ -7431,14 +7135,6 @@
       "berth": "South Float East",
       "label": "OSV SILVER TIDE",
       "start": "2008-07-31",
-      "end": "2008-07-31",
-      "kind": "vessel",
-      "sourceSheet": "2008"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV SILVER TIDE",
-      "start": "2008-08-01",
       "end": "2008-08-01",
       "kind": "vessel",
       "sourceSheet": "2008"
@@ -7671,7 +7367,7 @@
       "berth": "North Pier West",
       "label": "M/V NORTHERN HARBOR",
       "start": "2009-06-29",
-      "end": "2009-06-30",
+      "end": "2009-08-25",
       "kind": "vessel",
       "sourceSheet": "2009"
     },
@@ -7688,14 +7384,6 @@
       "label": "S/Y High Gannet",
       "start": "2009-06-30",
       "end": "2009-06-30",
-      "kind": "vessel",
-      "sourceSheet": "2009"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2009-07-01",
-      "end": "2009-07-31",
       "kind": "vessel",
       "sourceSheet": "2009"
     },
@@ -7847,7 +7535,7 @@
       "berth": "South Float East",
       "label": "Arrives AM",
       "start": "2009-07-31",
-      "end": "2009-07-31",
+      "end": "2009-08-01",
       "kind": "event",
       "sourceSheet": "2009"
     },
@@ -7857,22 +7545,6 @@
       "start": "2009-08-01",
       "end": "2009-08-01",
       "kind": "vessel",
-      "sourceSheet": "2009"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2009-08-01",
-      "end": "2009-08-25",
-      "kind": "vessel",
-      "sourceSheet": "2009"
-    },
-    {
-      "berth": "South Float East",
-      "label": "Arrives AM",
-      "start": "2009-08-01",
-      "end": "2009-08-01",
-      "kind": "event",
       "sourceSheet": "2009"
     },
     {
@@ -8463,14 +8135,6 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2010-04-29",
-      "end": "2010-04-30",
-      "kind": "vessel",
-      "sourceSheet": "2010"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2010-05-01",
       "end": "2010-05-02",
       "kind": "vessel",
       "sourceSheet": "2010"
@@ -8775,7 +8439,7 @@
       "berth": "North Pier West",
       "label": "M/V NORTHERN HARBOR",
       "start": "2010-07-17",
-      "end": "2010-07-31",
+      "end": "2010-08-02",
       "kind": "vessel",
       "sourceSheet": "2010"
     },
@@ -8912,14 +8576,6 @@
       "label": "R/V CLEAR TERN",
       "start": "2010-08-01",
       "end": "2010-08-03",
-      "kind": "vessel",
-      "sourceSheet": "2010"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2010-08-01",
-      "end": "2010-08-02",
       "kind": "vessel",
       "sourceSheet": "2010"
     },
@@ -9119,7 +8775,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2010-08-18",
-      "end": "2010-08-31",
+      "end": "2010-09-02",
       "kind": "vessel",
       "sourceSheet": "2010"
     },
@@ -9176,14 +8832,6 @@
       "label": "M/Y Salt Sound",
       "start": "2010-08-31",
       "end": "2010-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2010"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2010-09-01",
-      "end": "2010-09-02",
       "kind": "vessel",
       "sourceSheet": "2010"
     },
@@ -9279,7 +8927,7 @@
       "berth": "North Pier West",
       "label": "M/Y BLUE TIDE",
       "start": "2010-09-21",
-      "end": "2010-09-30",
+      "end": "2010-10-13",
       "kind": "vessel",
       "sourceSheet": "2010"
     },
@@ -9320,14 +8968,6 @@
       "label": "R/V Long Ketch",
       "start": "2010-09-28",
       "end": "2010-09-29",
-      "kind": "vessel",
-      "sourceSheet": "2010"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/Y BLUE TIDE",
-      "start": "2010-10-01",
-      "end": "2010-10-13",
       "kind": "vessel",
       "sourceSheet": "2010"
     },
@@ -9455,14 +9095,6 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2011-01-01",
-      "end": "2011-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2011"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2011-02-01",
       "end": "2011-02-07",
       "kind": "vessel",
       "sourceSheet": "2011"
@@ -10023,7 +9655,7 @@
       "berth": "North Pier West",
       "label": "R/V Wild Ledge",
       "start": "2011-07-19",
-      "end": "2011-07-31",
+      "end": "2011-08-05",
       "kind": "vessel",
       "sourceSheet": "2011"
     },
@@ -10104,14 +9736,6 @@
       "label": "M/V DEEP SOUND",
       "start": "2011-08-01",
       "end": "2011-08-02",
-      "kind": "vessel",
-      "sourceSheet": "2011"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V Wild Ledge",
-      "start": "2011-08-01",
-      "end": "2011-08-05",
       "kind": "vessel",
       "sourceSheet": "2011"
     },
@@ -10295,7 +9919,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2011-08-24",
-      "end": "2011-08-31",
+      "end": "2011-09-02",
       "kind": "vessel",
       "sourceSheet": "2011"
     },
@@ -10319,22 +9943,6 @@
       "berth": "South Float East",
       "label": "M/Y Salt Sound",
       "start": "2011-08-30",
-      "end": "2011-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2011"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2011-09-01",
-      "end": "2011-09-02",
-      "kind": "vessel",
-      "sourceSheet": "2011"
-    },
-    {
-      "berth": "South Float East",
-      "label": "M/Y Salt Sound",
-      "start": "2011-09-01",
       "end": "2011-09-02",
       "kind": "vessel",
       "sourceSheet": "2011"
@@ -10719,7 +10327,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2011-12-01",
-      "end": "2011-12-31",
+      "end": "2012-01-07",
       "kind": "vessel",
       "sourceSheet": "2011"
     },
@@ -10746,14 +10354,6 @@
       "end": "2011-12-31",
       "kind": "event",
       "sourceSheet": "2011"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2012-01-01",
-      "end": "2012-01-07",
-      "kind": "vessel",
-      "sourceSheet": "2012"
     },
     {
       "berth": "North Pier East",
@@ -10831,7 +10431,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2012-04-02",
-      "end": "2012-04-30",
+      "end": "2012-05-31",
       "kind": "vessel",
       "sourceSheet": "2012"
     },
@@ -10839,23 +10439,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2012-04-18",
-      "end": "2012-04-30",
-      "kind": "vessel",
-      "sourceSheet": "2012"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2012-05-01",
-      "end": "2012-05-31",
-      "kind": "vessel",
-      "sourceSheet": "2012"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2012-05-01",
-      "end": "2012-05-31",
+      "end": "2012-07-31",
       "kind": "vessel",
       "sourceSheet": "2012"
     },
@@ -10888,14 +10472,6 @@
       "label": "R/V Long Ketch",
       "start": "2012-05-22",
       "end": "2012-05-22",
-      "kind": "vessel",
-      "sourceSheet": "2012"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2012-06-01",
-      "end": "2012-06-30",
       "kind": "vessel",
       "sourceSheet": "2012"
     },
@@ -10944,14 +10520,6 @@
       "label": "OSV Wild Beacon",
       "start": "2012-06-27",
       "end": "2012-06-27",
-      "kind": "vessel",
-      "sourceSheet": "2012"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2012-07-01",
-      "end": "2012-07-31",
       "kind": "vessel",
       "sourceSheet": "2012"
     },
@@ -11127,7 +10695,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2012-10-23",
-      "end": "2012-10-31",
+      "end": "2012-11-03",
       "kind": "vessel",
       "sourceSheet": "2012"
     },
@@ -11136,14 +10704,6 @@
       "label": "M/V Bright Reef",
       "start": "2012-10-26",
       "end": "2012-10-29",
-      "kind": "vessel",
-      "sourceSheet": "2012"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2012-11-01",
-      "end": "2012-11-03",
       "kind": "vessel",
       "sourceSheet": "2012"
     },
@@ -11175,17 +10735,9 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2012-12-21",
-      "end": "2012-12-31",
-      "kind": "vessel",
-      "sourceSheet": "2012"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2013-01-01",
       "end": "2013-01-01",
       "kind": "vessel",
-      "sourceSheet": "2013"
+      "sourceSheet": "2012"
     },
     {
       "berth": "Inner Channel",
@@ -11519,7 +11071,7 @@
       "berth": "North Pier West",
       "label": "M/Y BLUE TIDE",
       "start": "2013-07-01",
-      "end": "2013-07-31",
+      "end": "2013-09-30",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -11575,7 +11127,7 @@
       "berth": "North Pier East",
       "label": "R/V GOLDEN COMPASS",
       "start": "2013-07-12",
-      "end": "2013-07-31",
+      "end": "2013-08-03",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -11631,7 +11183,7 @@
       "berth": "South Float West",
       "label": "R/V Northern Osprey",
       "start": "2013-07-26",
-      "end": "2013-07-31",
+      "end": "2013-08-02",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -11648,30 +11200,6 @@
       "label": "R/V Long Ketch",
       "start": "2013-07-29",
       "end": "2013-07-29",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2013-08-01",
-      "end": "2013-08-03",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/Y BLUE TIDE",
-      "start": "2013-08-01",
-      "end": "2013-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
-      "berth": "South Float West",
-      "label": "R/V Northern Osprey",
-      "start": "2013-08-01",
-      "end": "2013-08-02",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -11727,7 +11255,7 @@
       "berth": "North Pier East",
       "label": "M/V NORTHERN HARBOR",
       "start": "2013-08-12",
-      "end": "2013-08-31",
+      "end": "2013-10-25",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -11760,22 +11288,6 @@
       "label": "M/V Salt Petrel",
       "start": "2013-08-29",
       "end": "2013-08-30",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2013-09-01",
-      "end": "2013-09-30",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/Y BLUE TIDE",
-      "start": "2013-09-01",
-      "end": "2013-09-30",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -11852,14 +11364,6 @@
       "sourceSheet": "2013"
     },
     {
-      "berth": "North Pier East",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2013-10-01",
-      "end": "2013-10-25",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
       "berth": "North Pier West",
       "label": "M/Y Blue Tide",
       "start": "2013-10-02",
@@ -11919,14 +11423,6 @@
       "berth": "North Pier East",
       "label": "M/Y Blue Tide",
       "start": "2013-10-26",
-      "end": "2013-10-31",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "M/Y Blue Tide",
-      "start": "2013-11-01",
       "end": "2013-11-01",
       "kind": "vessel",
       "sourceSheet": "2013"
@@ -11959,7 +11455,7 @@
       "berth": "North Pier East",
       "label": "M/V NORTHERN HARBOR",
       "start": "2013-11-26",
-      "end": "2013-11-30",
+      "end": "2014-02-16",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -11980,18 +11476,10 @@
       "sourceSheet": "2013"
     },
     {
-      "berth": "North Pier East",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2013-12-01",
-      "end": "2013-12-31",
-      "kind": "vessel",
-      "sourceSheet": "2013"
-    },
-    {
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2013-12-01",
-      "end": "2013-12-31",
+      "end": "2014-01-31",
       "kind": "vessel",
       "sourceSheet": "2013"
     },
@@ -12044,30 +11532,6 @@
       "sourceSheet": "2013"
     },
     {
-      "berth": "North Pier East",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2014-01-01",
-      "end": "2014-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2014-01-01",
-      "end": "2014-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2014-02-01",
-      "end": "2014-02-16",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2014-02-04",
@@ -12079,22 +11543,6 @@
       "berth": "North Pier East",
       "label": "M/V NORTHERN HARBOR",
       "start": "2014-02-21",
-      "end": "2014-02-28",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
-      "berth": "South Float East",
-      "label": "M/V Quiet Current",
-      "start": "2014-02-23",
-      "end": "2014-02-28",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
-      "berth": "North Pier East",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2014-03-01",
       "end": "2014-03-04",
       "kind": "vessel",
       "sourceSheet": "2014"
@@ -12102,7 +11550,7 @@
     {
       "berth": "South Float East",
       "label": "M/V Quiet Current",
-      "start": "2014-03-01",
+      "start": "2014-02-23",
       "end": "2014-03-14",
       "kind": "vessel",
       "sourceSheet": "2014"
@@ -12263,14 +11711,6 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2014-04-28",
-      "end": "2014-04-30",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2014-05-01",
       "end": "2014-05-11",
       "kind": "vessel",
       "sourceSheet": "2014"
@@ -12375,7 +11815,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2014-05-26",
-      "end": "2014-05-31",
+      "end": "2014-06-10",
       "kind": "vessel",
       "sourceSheet": "2014"
     },
@@ -12400,14 +11840,6 @@
       "label": "R/V CORAL TERN",
       "start": "2014-06-01",
       "end": "2014-06-03",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2014-06-01",
-      "end": "2014-06-10",
       "kind": "vessel",
       "sourceSheet": "2014"
     },
@@ -13047,15 +12479,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2014-11-22",
-      "end": "2014-11-30",
-      "kind": "vessel",
-      "sourceSheet": "2014"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2014-12-01",
-      "end": "2014-12-31",
+      "end": "2015-01-03",
       "kind": "vessel",
       "sourceSheet": "2014"
     },
@@ -13066,14 +12490,6 @@
       "end": "2014-12-28",
       "kind": "vessel",
       "sourceSheet": "2014"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2015-01-01",
-      "end": "2015-01-03",
-      "kind": "vessel",
-      "sourceSheet": "2015"
     },
     {
       "berth": "North Pier East",
@@ -13183,14 +12599,6 @@
       "berth": "South Float West",
       "label": "R/V Long Ketch",
       "start": "2015-04-29",
-      "end": "2015-04-30",
-      "kind": "vessel",
-      "sourceSheet": "2015"
-    },
-    {
-      "berth": "South Float West",
-      "label": "R/V Long Ketch",
-      "start": "2015-05-01",
       "end": "2015-05-01",
       "kind": "vessel",
       "sourceSheet": "2015"
@@ -13431,7 +12839,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2015-06-26",
-      "end": "2015-06-30",
+      "end": "2015-07-02",
       "kind": "vessel",
       "sourceSheet": "2015"
     },
@@ -13472,14 +12880,6 @@
       "label": "R/V GOLDEN COMPASS",
       "start": "2015-07-01",
       "end": "2015-07-11",
-      "kind": "vessel",
-      "sourceSheet": "2015"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2015-07-01",
-      "end": "2015-07-02",
       "kind": "vessel",
       "sourceSheet": "2015"
     },
@@ -14359,7 +13759,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2016-05-28",
-      "end": "2016-05-31",
+      "end": "2016-06-04",
       "kind": "vessel",
       "sourceSheet": "2016"
     },
@@ -14376,14 +13776,6 @@
       "label": "R/V Long Ketch",
       "start": "2016-05-31",
       "end": "2016-05-31",
-      "kind": "vessel",
-      "sourceSheet": "2016"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2016-06-01",
-      "end": "2016-06-04",
       "kind": "vessel",
       "sourceSheet": "2016"
     },
@@ -14663,7 +14055,7 @@
       "berth": "North Pier West",
       "label": "Tug Salt Tide",
       "start": "2016-07-30",
-      "end": "2016-07-31",
+      "end": "2016-08-04",
       "kind": "vessel",
       "sourceSheet": "2016"
     },
@@ -14687,7 +14079,7 @@
       "berth": "North Pier Face",
       "label": "R/V Green Star",
       "start": "2016-07-31",
-      "end": "2016-07-31",
+      "end": "2016-08-03",
       "kind": "vessel",
       "sourceSheet": "2016"
     },
@@ -14695,23 +14087,7 @@
       "berth": "North Finger Piers",
       "label": "Barge Deep Tern",
       "start": "2016-08-01",
-      "end": "2016-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2016"
-    },
-    {
-      "berth": "North Pier Face",
-      "label": "R/V Green Star",
-      "start": "2016-08-01",
-      "end": "2016-08-03",
-      "kind": "vessel",
-      "sourceSheet": "2016"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "Tug Salt Tide",
-      "start": "2016-08-01",
-      "end": "2016-08-04",
+      "end": "2016-09-01",
       "kind": "vessel",
       "sourceSheet": "2016"
     },
@@ -14844,14 +14220,6 @@
       "sourceSheet": "2016"
     },
     {
-      "berth": "North Finger Piers",
-      "label": "Barge Deep Tern",
-      "start": "2016-09-01",
-      "end": "2016-09-01",
-      "kind": "vessel",
-      "sourceSheet": "2016"
-    },
-    {
       "berth": "North Pier East",
       "label": "R/V Blue Anchor",
       "start": "2016-09-02",
@@ -14959,14 +14327,6 @@
       "berth": "North Pier West",
       "label": "Tug Salt Tide",
       "start": "2016-09-30",
-      "end": "2016-09-30",
-      "kind": "vessel",
-      "sourceSheet": "2016"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "Tug Salt Tide",
-      "start": "2016-10-01",
       "end": "2016-10-04",
       "kind": "vessel",
       "sourceSheet": "2016"
@@ -15431,7 +14791,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2017-06-10",
-      "end": "2017-06-30",
+      "end": "2017-07-02",
       "kind": "vessel",
       "sourceSheet": "2017"
     },
@@ -15505,14 +14865,6 @@
       "start": "2017-07-01",
       "end": "2017-07-01",
       "kind": "event",
-      "sourceSheet": "2017"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2017-07-01",
-      "end": "2017-07-02",
-      "kind": "vessel",
       "sourceSheet": "2017"
     },
     {
@@ -15831,14 +15183,6 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2017-08-30",
-      "end": "2017-08-31",
-      "kind": "vessel",
-      "sourceSheet": "2017"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2017-09-01",
       "end": "2017-09-07",
       "kind": "vessel",
       "sourceSheet": "2017"
@@ -16207,7 +15551,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2017-12-01",
-      "end": "2017-12-31",
+      "end": "2018-01-13",
       "kind": "vessel",
       "sourceSheet": "2017"
     },
@@ -16218,14 +15562,6 @@
       "end": "2017-12-07",
       "kind": "vessel",
       "sourceSheet": "2017"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2018-01-01",
-      "end": "2018-01-13",
-      "kind": "vessel",
-      "sourceSheet": "2018"
     },
     {
       "berth": "North Pier East",
@@ -16239,15 +15575,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2018-01-18",
-      "end": "2018-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2018"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2018-02-01",
-      "end": "2018-02-28",
+      "end": "2018-04-17",
       "kind": "vessel",
       "sourceSheet": "2018"
     },
@@ -16264,14 +15592,6 @@
       "label": "OSV Quiet Ketch",
       "start": "2018-02-08",
       "end": "2018-02-08",
-      "kind": "vessel",
-      "sourceSheet": "2018"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2018-03-01",
-      "end": "2018-03-31",
       "kind": "vessel",
       "sourceSheet": "2018"
     },
@@ -16296,14 +15616,6 @@
       "label": "Barge Silver Voyager",
       "start": "2018-03-23",
       "end": "2018-03-23",
-      "kind": "vessel",
-      "sourceSheet": "2018"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2018-04-01",
-      "end": "2018-04-17",
       "kind": "vessel",
       "sourceSheet": "2018"
     },
@@ -16543,14 +15855,6 @@
       "berth": "North Pier West",
       "label": "M/V NORTHERN HARBOR",
       "start": "2018-06-28",
-      "end": "2018-06-30",
-      "kind": "vessel",
-      "sourceSheet": "2018"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "M/V NORTHERN HARBOR",
-      "start": "2018-07-01",
       "end": "2018-07-02",
       "kind": "vessel",
       "sourceSheet": "2018"
@@ -16655,7 +15959,7 @@
       "berth": "South Float East",
       "label": "OSV AMBER REEF",
       "start": "2018-07-25",
-      "end": "2018-07-31",
+      "end": "2018-08-05",
       "kind": "vessel",
       "sourceSheet": "2018"
     },
@@ -16696,14 +16000,6 @@
       "label": "OSV Green Current",
       "start": "2018-07-31",
       "end": "2018-07-31",
-      "kind": "vessel",
-      "sourceSheet": "2018"
-    },
-    {
-      "berth": "South Float East",
-      "label": "OSV AMBER REEF",
-      "start": "2018-08-01",
-      "end": "2018-08-05",
       "kind": "vessel",
       "sourceSheet": "2018"
     },
@@ -16959,7 +16255,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2018-11-28",
-      "end": "2018-11-30",
+      "end": "2018-12-31",
       "kind": "vessel",
       "sourceSheet": "2010"
     },
@@ -16970,14 +16266,6 @@
       "end": "2018-11-30",
       "kind": "vessel",
       "sourceSheet": "2010"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2018-12-01",
-      "end": "2018-12-31",
-      "kind": "vessel",
-      "sourceSheet": "2018"
     },
     {
       "berth": "North Pier Face",
@@ -17015,15 +16303,7 @@
       "berth": "North Pier West",
       "label": "R/V GOLDEN COMPASS",
       "start": "2019-01-18",
-      "end": "2019-01-31",
-      "kind": "vessel",
-      "sourceSheet": "2019"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2019-02-01",
-      "end": "2019-02-28",
+      "end": "2019-04-17",
       "kind": "vessel",
       "sourceSheet": "2019"
     },
@@ -17040,14 +16320,6 @@
       "label": "OSV Quiet Ketch",
       "start": "2019-02-12",
       "end": "2019-02-12",
-      "kind": "vessel",
-      "sourceSheet": "2019"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2019-03-01",
-      "end": "2019-03-31",
       "kind": "vessel",
       "sourceSheet": "2019"
     },
@@ -17072,14 +16344,6 @@
       "label": "Barge Silver Voyager",
       "start": "2019-03-27",
       "end": "2019-03-27",
-      "kind": "vessel",
-      "sourceSheet": "2019"
-    },
-    {
-      "berth": "North Pier West",
-      "label": "R/V GOLDEN COMPASS",
-      "start": "2019-04-01",
-      "end": "2019-04-17",
       "kind": "vessel",
       "sourceSheet": "2019"
     },
@@ -17389,11 +16653,13 @@
     }
   ],
   "stats": {
-    "bookings": 2169,
+    "bookings": 2077,
     "monthBlocks": 272,
     "monthBlocksWeekdayVerified": 267,
     "firstDate": "1997-08-02",
-    "lastDate": "2019-12-31"
+    "lastDate": "2019-12-31",
+    "monthEdgeSplitsRejoined": 89,
+    "exactDuplicatesDropped": 3
   },
   "staleWeekdayBlocks": [
     "2002 2001-12: weekday letters are uniformly 1 day(s) off (stale template pasted from another year). Day numbers used instead.",

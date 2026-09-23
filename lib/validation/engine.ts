@@ -184,6 +184,54 @@ export function detectOverlaps(reservations: Reservation[]): Conflict[] {
   return conflicts
 }
 
+/**
+ * One vessel in two berths at the same time.
+ *
+ * detectOverlaps asks "are two things in this berth?" and cannot see this case
+ * at all, because each berth looks fine on its own. The archive holds 18 of
+ * them, including a hull recorded in two berths for a fortnight.
+ *
+ * A single shared day is graded a warning, not a violation: that is what a
+ * berth shift looks like (out of one berth, into the next, same day) and it is
+ * normal practice. Two or more shared days cannot be a shift.
+ */
+export function detectDoubleAssignment(reservations: Reservation[]): Conflict[] {
+  const byHull = new Map<string, Reservation[]>()
+  for (const r of reservations) {
+    if (!r.vesselId) continue
+    const list = byHull.get(r.vesselId)
+    if (list) list.push(r)
+    else byHull.set(r.vesselId, [r])
+  }
+
+  const out: Conflict[] = []
+  for (const list of byHull.values()) {
+    list.sort((x, y) => parseDay(x.start) - parseDay(y.start))
+    for (let i = 0; i < list.length; i++) {
+      for (let j = i + 1; j < list.length; j++) {
+        if (parseDay(list[j].start) > parseDay(list[i].end)) break
+        const a = list[i]
+        const b = list[j]
+        if (a.berthId === b.berthId) continue // that is detectOverlaps' case
+        const shared = sharedDayCount(a, b)
+        if (shared <= 0) continue
+        const severity = gradeOverlap(shared)
+        out.push({
+          a,
+          b,
+          severity,
+          sharedDays: shared,
+          reason:
+            severity === 'violation'
+              ? `${a.label} is in ${a.berthId} and ${b.berthId} for ${shared} days`
+              : `${a.label} moves from ${a.berthId} to ${b.berthId} on the same day`,
+        })
+      }
+    }
+  }
+  return out
+}
+
 function sameOccupant(a: Reservation, b: Reservation): boolean {
   if (a.vesselId && b.vesselId) return a.vesselId === b.vesselId
   return a.label.trim().toUpperCase() === b.label.trim().toUpperCase()
@@ -260,7 +308,10 @@ export type DraftReservation = {
 
 export type ValidationReport = {
   ok: boolean
+  /** Something else is in this berth on these days. */
   conflicts: Conflict[]
+  /** This vessel is in another berth on these days. */
+  crossBerth: Conflict[]
   fit: FitFinding
   errors: string[]
 }
@@ -294,6 +345,7 @@ export function validateProposed(
     return {
       ok: false,
       conflicts: [],
+      crossBerth: [],
       fit: {
         status: 'not_applicable',
         vesselLengthFt: null,
@@ -331,12 +383,27 @@ export function validateProposed(
           (c) => c.a.id === '__draft__' || c.b.id === '__draft__',
         )
 
-  // Any overlap at all, not just a multi-day one.
-  const blocked = conflicts.length > 0 || fit.status === 'violation'
+  // The same hull already somewhere else. `existing` spans every berth, and
+  // the filter keeps only this vessel, so the scan is tiny.
+  const crossBerth =
+    errors.length > 0 || !draft.vesselId
+      ? []
+      : detectDoubleAssignment([
+          ...existing.filter((r) => r.vesselId === draft.vesselId),
+          candidate,
+        ]).filter((c) => c.a.id === '__draft__' || c.b.id === '__draft__')
+
+  // Same-berth: any overlap at all. Cross-berth: a one-day shift is allowed,
+  // two or more shared days is a hull in two places.
+  const blocked =
+    conflicts.length > 0 ||
+    crossBerth.some((c) => c.severity === 'violation') ||
+    fit.status === 'violation'
 
   return {
     ok: errors.length === 0 && !blocked,
     conflicts,
+    crossBerth,
     fit,
     errors,
   }

@@ -4,6 +4,7 @@ import {
   sharedDayCount,
   gradeOverlap,
   detectOverlaps,
+  detectDoubleAssignment,
   checkFit,
   validateProposed,
   findAvailableBerths,
@@ -145,6 +146,44 @@ describe('detectOverlaps', () => {
   })
 })
 
+describe('detectDoubleAssignment', () => {
+  // The case detectOverlaps cannot see: each berth looks fine on its own.
+  it('finds one vessel in two berths at once', () => {
+    const found = detectDoubleAssignment([
+      res({ id: 'a', start: '2019-06-01', end: '2019-06-10', berthId: 'npw', vesselId: 'v1', label: 'S/V Wild Drift' }),
+      res({ id: 'b', start: '2019-06-05', end: '2019-06-12', berthId: 'ic', vesselId: 'v1', label: 'S/V Wild Drift' }),
+    ])
+    expect(found).toHaveLength(1)
+    expect(found[0].severity).toBe('violation')
+    expect(found[0].sharedDays).toBe(6)
+  })
+
+  it('grades a same-day berth shift as a warning, not a violation', () => {
+    const found = detectDoubleAssignment([
+      res({ id: 'a', start: '2019-06-01', end: '2019-06-10', berthId: 'npw', vesselId: 'v1', label: 'S/V Wild Drift' }),
+      res({ id: 'b', start: '2019-06-10', end: '2019-06-15', berthId: 'ic', vesselId: 'v1', label: 'S/V Wild Drift' }),
+    ])
+    expect(found).toHaveLength(1)
+    expect(found[0].severity).toBe('warning')
+  })
+
+  it('leaves same-berth pairs to detectOverlaps', () => {
+    const found = detectDoubleAssignment([
+      res({ id: 'a', start: '2019-06-01', end: '2019-06-10', berthId: 'npw', vesselId: 'v1', label: 'X' }),
+      res({ id: 'b', start: '2019-06-05', end: '2019-06-12', berthId: 'npw', vesselId: 'v1', label: 'X' }),
+    ])
+    expect(found).toHaveLength(0)
+  })
+
+  it('ignores rows with no vessel identity', () => {
+    const found = detectDoubleAssignment([
+      res({ id: 'a', start: '2019-06-01', end: '2019-06-10', berthId: 'npw', label: 'Community sail day' }),
+      res({ id: 'b', start: '2019-06-01', end: '2019-06-10', berthId: 'ic', label: 'Community sail day' }),
+    ])
+    expect(found).toHaveLength(0)
+  })
+})
+
 describe('checkFit', () => {
   it('passes a vessel that fits', () => {
     expect(checkFit(SMALL, INNER_CHANNEL).status).toBe('fits')
@@ -249,6 +288,33 @@ describe('validateProposed', () => {
     )
     expect(r.ok).toBe(true)
     expect(r.fit.status).toBe('unverifiable')
+  })
+
+  it('refuses a booking that puts the vessel in a second berth for 2+ days', () => {
+    const elsewhere = [
+      res({ id: 'e2', start: '2019-07-01', end: '2019-07-10', berthId: 'npw', vesselId: 'v1', label: 'S/V Wild Drift' }),
+    ]
+    const r = validateProposed(
+      { berthId: 'ic', start: '2019-07-05', end: '2019-07-08', kind: 'vessel', vesselId: 'v1', label: 'S/V Wild Drift' },
+      elsewhere, BERTHS, VESSELS,
+    )
+    expect(r.ok).toBe(false)
+    expect(r.conflicts).toHaveLength(0)
+    expect(r.crossBerth).toHaveLength(1)
+    expect(r.crossBerth[0].severity).toBe('violation')
+  })
+
+  it('allows a same-day berth shift and reports it', () => {
+    const elsewhere = [
+      res({ id: 'e2', start: '2019-07-01', end: '2019-07-10', berthId: 'npw', vesselId: 'v1', label: 'S/V Wild Drift' }),
+    ]
+    const r = validateProposed(
+      { berthId: 'ic', start: '2019-07-10', end: '2019-07-14', kind: 'vessel', vesselId: 'v1', label: 'S/V Wild Drift' },
+      elsewhere, BERTHS, VESSELS,
+    )
+    expect(r.ok).toBe(true)
+    expect(r.crossBerth).toHaveLength(1)
+    expect(r.crossBerth[0].severity).toBe('warning')
   })
 
   it('rejects an end date before the start date', () => {

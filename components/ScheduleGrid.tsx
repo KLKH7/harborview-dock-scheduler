@@ -605,6 +605,7 @@ export function ScheduleGrid({
         <ReserveDialog
           berths={berths}
           vessels={vessels}
+          reservations={reservations}
           defaultStart={today}
           onClose={() => setFormOpen(false)}
           onReserved={(id, start) => {

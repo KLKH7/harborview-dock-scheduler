@@ -388,7 +388,41 @@ function main() {
       // Longest first; unmeasured areas sort last.
       .sort((a, b) => (b.lengthFt ?? -1) - (a.lengthFt ?? -1))
 
+    // Two post-passes the per-month walk cannot do on its own.
+    //
+    // 1. A stay that crosses a month edge was emitted as two rows, one per
+    //    month block (the walk never sees both). Rejoin them: same berth, same
+    //    label, first ends on the last day of its month, second starts on day
+    //    1 of the next. 89 stays in the archive; conflicts were unaffected but
+    //    every night count on them was wrong.
+    // 2. Sheets 2002 to 2004 open with the PRIOR year's December, so those
+    //    months were extracted twice. The two copies mostly differ (the
+    //    coordinator kept editing one and not the other), so only exact
+    //    duplicates are dropped; the rest stay and are reported.
+    const key = (b: Booking) => `${b.berth}|${b.label.replace(/\s+/g, ' ').trim().toUpperCase()}`
+    bookings.sort((a, b) => key(a).localeCompare(key(b)) || a.start.localeCompare(b.start))
+    const merged: Booking[] = []
+    let rejoined = 0
+    let deduped = 0
+    for (const b of bookings) {
+      const prev = merged[merged.length - 1]
+      if (prev && key(prev) === key(b)) {
+        if (prev.start === b.start && prev.end === b.end) { deduped++; continue }
+        const pe = new Date(`${prev.end}T00:00:00Z`)
+        const lastOfMonth = daysInMonth(pe.getUTCFullYear(), pe.getUTCMonth() + 1)
+        const nextDay = new Date(pe.getTime() + 86_400_000).toISOString().slice(0, 10)
+        if (pe.getUTCDate() === lastOfMonth && b.start === nextDay) {
+          prev.end = b.end > prev.end ? b.end : prev.end
+          rejoined++
+          continue
+        }
+      }
+      merged.push({ ...b })
+    }
+    bookings.length = 0
+    bookings.push(...merged)
     bookings.sort((a, b) => a.start.localeCompare(b.start) || a.berth.localeCompare(b.berth))
+    console.log(`post-pass: rejoined ${rejoined} month-edge splits, dropped ${deduped} exact duplicates`)
 
     const snapshot = {
       generatedFrom: SOURCE,
@@ -400,6 +434,8 @@ function main() {
         monthBlocksWeekdayVerified: blocksVerified,
         firstDate: bookings[0]?.start ?? null,
         lastDate: bookings.reduce((mx, b) => (b.end > mx ? b.end : mx), ''),
+        monthEdgeSplitsRejoined: rejoined,
+        exactDuplicatesDropped: deduped,
       },
       staleWeekdayBlocks,
     }

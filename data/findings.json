@@ -6,13 +6,13 @@
       "sharedDays": 5,
       "reason": "OSV AMBER REEF and Utility work on pier face both occupy this berth for 5 days",
       "a": {
-        "id": "r1944",
+        "id": "r1863",
         "label": "OSV AMBER REEF",
         "start": "2017-07-09",
         "end": "2017-07-18"
       },
       "b": {
-        "id": "r1946",
+        "id": "r1865",
         "label": "Utility work on pier face",
         "start": "2017-07-11",
         "end": "2017-07-15"
@@ -24,13 +24,13 @@
       "sharedDays": 5,
       "reason": "R/V Silver Petrel and M/V HIGH COVE both occupy this berth for 5 days",
       "a": {
-        "id": "r1976",
+        "id": "r1894",
         "label": "R/V Silver Petrel",
         "start": "2017-09-01",
         "end": "2017-09-10"
       },
       "b": {
-        "id": "r1977",
+        "id": "r1895",
         "label": "M/V HIGH COVE",
         "start": "2017-09-04",
         "end": "2017-09-08"
@@ -149,7 +149,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r65",
+      "id": "r64",
       "berth": "South Float West",
       "label": "M/V Deep Reef",
       "start": "1998-08-01",
@@ -159,7 +159,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r68",
+      "id": "r67",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1998-08-03",
@@ -169,7 +169,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r70",
+      "id": "r69",
       "berth": "South Float West",
       "label": "M/V Deep Reef",
       "start": "1998-08-04",
@@ -179,7 +179,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r74",
+      "id": "r73",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1998-08-15",
@@ -189,7 +189,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r78",
+      "id": "r77",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1998-08-24",
@@ -199,7 +199,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r85",
+      "id": "r84",
       "berth": "South Float East",
       "label": "OSV Blue Osprey",
       "start": "1998-09-09",
@@ -209,7 +209,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r90",
+      "id": "r89",
       "berth": "North Pier Face",
       "label": "F/V Long Heron",
       "start": "1998-09-22",
@@ -219,7 +219,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r94",
+      "id": "r93",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1998-10-04",
@@ -229,7 +229,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r98",
+      "id": "r97",
       "berth": "North Pier Face",
       "label": "F/V Long Heron",
       "start": "1998-10-15",
@@ -239,7 +239,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r114",
+      "id": "r113",
       "berth": "South Float West",
       "label": "M/V Wild Reef",
       "start": "1999-04-01",
@@ -249,7 +249,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r116",
+      "id": "r115",
       "berth": "South Float West",
       "label": "M/V Wild Reef",
       "start": "1999-05-05",
@@ -259,7 +259,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r120",
+      "id": "r119",
       "berth": "South Float West",
       "label": "Tug Long Reef",
       "start": "1999-05-29",
@@ -269,7 +269,7 @@
       "overhangFt": 30
     },
     {
-      "id": "r129",
+      "id": "r128",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1999-06-19",
@@ -279,7 +279,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r132",
+      "id": "r131",
       "berth": "South Float West",
       "label": "S/V Deep Wind",
       "start": "1999-07-03",
@@ -289,7 +289,7 @@
       "overhangFt": 30
     },
     {
-      "id": "r134",
+      "id": "r133",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1999-07-05",
@@ -299,7 +299,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r139",
+      "id": "r138",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1999-07-28",
@@ -309,7 +309,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r141",
+      "id": "r140",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1999-08-06",
@@ -319,7 +319,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r146",
+      "id": "r145",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1999-08-18",
@@ -329,7 +329,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r152",
+      "id": "r151",
       "berth": "South Float West",
       "label": "S/V Swift Reef",
       "start": "1999-08-28",
@@ -339,7 +339,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r158",
+      "id": "r157",
       "berth": "North Pier Face",
       "label": "R/V Long Anchor",
       "start": "1999-09-21",
@@ -349,7 +349,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r163",
+      "id": "r162",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "1999-10-09",
@@ -359,7 +359,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r186",
+      "id": "r185",
       "berth": "South Float East",
       "label": "M/Y Wild Sextant",
       "start": "2000-05-24",
@@ -369,7 +369,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r187",
+      "id": "r186",
       "berth": "South Float West",
       "label": "M/V Wild Reef",
       "start": "2000-05-25",
@@ -379,7 +379,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r190",
+      "id": "r189",
       "berth": "South Float West",
       "label": "M/V Wild Reef",
       "start": "2000-06-01",
@@ -389,7 +389,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r194",
+      "id": "r193",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "2000-06-16",
@@ -399,7 +399,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r199",
+      "id": "r198",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "2000-07-03",
@@ -409,7 +409,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r205",
+      "id": "r204",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "2000-07-26",
@@ -419,7 +419,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r211",
+      "id": "r210",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "2000-08-08",
@@ -429,7 +429,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r218",
+      "id": "r217",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "2000-08-20",
@@ -439,7 +439,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r221",
+      "id": "r220",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "2000-08-25",
@@ -449,7 +449,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r242",
+      "id": "r241",
       "berth": "South Float East",
       "label": "S/V Far Horizon",
       "start": "2000-10-07",
@@ -459,7 +459,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r248",
+      "id": "r247",
       "berth": "Inner Channel",
       "label": "Tug WESTERN CURRENT",
       "start": "2000-12-01",
@@ -469,7 +469,7 @@
       "overhangFt": 30
     },
     {
-      "id": "r273",
+      "id": "r272",
       "berth": "North Pier Face",
       "label": "R/V Iron Harbor",
       "start": "2001-06-01",
@@ -479,7 +479,7 @@
       "overhangFt": 25
     },
     {
-      "id": "r285",
+      "id": "r284",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-06-16",
@@ -489,7 +489,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r286",
+      "id": "r285",
       "berth": "South Float West",
       "label": "R/V Iron Harbor",
       "start": "2001-06-18",
@@ -499,7 +499,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r291",
+      "id": "r290",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-07-04",
@@ -509,7 +509,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r299",
+      "id": "r298",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-07-17",
@@ -519,7 +519,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r304",
+      "id": "r303",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-07-27",
@@ -529,7 +529,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r311",
+      "id": "r310",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-08-08",
@@ -539,7 +539,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r316",
+      "id": "r315",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-08-20",
@@ -549,7 +549,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r318",
+      "id": "r317",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-08-23",
@@ -559,27 +559,17 @@
       "overhangFt": 80
     },
     {
-      "id": "r320",
+      "id": "r319",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-08-30",
-      "end": "2001-08-31",
-      "vesselLengthFt": 170,
-      "berthLengthFt": 90,
-      "overhangFt": 80
-    },
-    {
-      "id": "r324",
-      "berth": "South Float East",
-      "label": "S/V FAR HORIZON",
-      "start": "2001-09-01",
       "end": "2001-09-01",
       "vesselLengthFt": 170,
       "berthLengthFt": 90,
       "overhangFt": 80
     },
     {
-      "id": "r339",
+      "id": "r336",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2001-10-09",
@@ -589,7 +579,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r345",
+      "id": "r342",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2001-11-07",
@@ -599,7 +589,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r348",
+      "id": "r345",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2001-11-11",
@@ -609,7 +599,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r365",
+      "id": "r361",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-01-02",
@@ -619,7 +609,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r366",
+      "id": "r362",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-01-04",
@@ -629,7 +619,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r384",
+      "id": "r380",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-03-27",
@@ -639,7 +629,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r393",
+      "id": "r388",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-05-02",
@@ -649,7 +639,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r396",
+      "id": "r391",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-05-04",
@@ -659,7 +649,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r399",
+      "id": "r394",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-05-08",
@@ -669,7 +659,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r403",
+      "id": "r398",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-05-11",
@@ -679,7 +669,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r418",
+      "id": "r413",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-06-09",
@@ -689,7 +679,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r428",
+      "id": "r423",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-06-28",
@@ -699,7 +689,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r432",
+      "id": "r427",
       "berth": "South Float West",
       "label": "M/V DEEP REEF",
       "start": "2002-07-04",
@@ -709,7 +699,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r434",
+      "id": "r429",
       "berth": "South Float East",
       "label": "M/V DEEP REEF",
       "start": "2002-07-06",
@@ -719,27 +709,17 @@
       "overhangFt": 10
     },
     {
-      "id": "r451",
+      "id": "r446",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2002-07-29",
-      "end": "2002-07-31",
-      "vesselLengthFt": 170,
-      "berthLengthFt": 90,
-      "overhangFt": 80
-    },
-    {
-      "id": "r456",
-      "berth": "South Float East",
-      "label": "S/V FAR HORIZON",
-      "start": "2002-08-01",
       "end": "2002-08-03",
       "vesselLengthFt": 170,
       "berthLengthFt": 90,
       "overhangFt": 80
     },
     {
-      "id": "r461",
+      "id": "r455",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2002-08-11",
@@ -749,7 +729,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r471",
+      "id": "r465",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2002-08-22",
@@ -759,7 +739,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r474",
+      "id": "r468",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2002-08-28",
@@ -769,7 +749,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r490",
+      "id": "r484",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2002-10-08",
@@ -779,7 +759,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r494",
+      "id": "r488",
       "berth": "South Float West",
       "label": "M/V DEEP REEF",
       "start": "2002-10-17",
@@ -789,7 +769,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r510",
+      "id": "r502",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2002-12-31",
@@ -799,7 +779,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r513",
+      "id": "r505",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2003-01-03",
@@ -809,7 +789,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r514",
+      "id": "r506",
       "berth": "North Pier Face",
       "label": "R/V LONG ANCHOR",
       "start": "2003-01-06",
@@ -819,7 +799,7 @@
       "overhangFt": 95
     },
     {
-      "id": "r562",
+      "id": "r553",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2003-06-12",
@@ -829,7 +809,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r569",
+      "id": "r560",
       "berth": "South Float East",
       "label": "M/V DEEP REEF",
       "start": "2003-06-26",
@@ -839,7 +819,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r574",
+      "id": "r565",
       "berth": "South Float West",
       "label": "M/V DEEP REEF",
       "start": "2003-07-03",
@@ -849,7 +829,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r576",
+      "id": "r567",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2003-07-04",
@@ -859,7 +839,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r578",
+      "id": "r569",
       "berth": "South Float West",
       "label": "M/V DEEP REEF",
       "start": "2003-07-08",
@@ -869,7 +849,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r580",
+      "id": "r571",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2003-07-16",
@@ -879,7 +859,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r582",
+      "id": "r573",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2003-07-27",
@@ -889,7 +869,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r584",
+      "id": "r575",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2003-08-02",
@@ -899,7 +879,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r589",
+      "id": "r580",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2003-08-11",
@@ -909,7 +889,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r593",
+      "id": "r584",
       "berth": "South Float East",
       "label": "S/V FAR HORIZON",
       "start": "2003-08-22",
@@ -919,7 +899,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r596",
+      "id": "r587",
       "berth": "South Float East",
       "label": "M/V DEEP REEF",
       "start": "2003-09-07",
@@ -929,7 +909,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r600",
+      "id": "r591",
       "berth": "North Pier Face",
       "label": "Barge SALT DORY",
       "start": "2003-09-23",
@@ -939,7 +919,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r658",
+      "id": "r649",
       "berth": "South Float West",
       "label": "M/V DEEP REEF",
       "start": "2004-07-06",
@@ -949,7 +929,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r659",
+      "id": "r650",
       "berth": "South Float East",
       "label": "M/V DEEP REEF",
       "start": "2004-07-12",
@@ -959,7 +939,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r664",
+      "id": "r655",
       "berth": "Inner Channel",
       "label": "M/V DEEP REEF",
       "start": "2004-07-21",
@@ -969,7 +949,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r757",
+      "id": "r741",
       "berth": "South Float East",
       "label": "M/V DEEP REEF",
       "start": "2005-09-01",
@@ -979,7 +959,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r777",
+      "id": "r759",
       "berth": "Inner Channel",
       "label": "M/V Iron Heron",
       "start": "2006-02-04",
@@ -989,7 +969,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r780",
+      "id": "r762",
       "berth": "Inner Channel",
       "label": "M/V Iron Heron",
       "start": "2006-03-13",
@@ -999,7 +979,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r803",
+      "id": "r782",
       "berth": "Inner Channel",
       "label": "M/V Iron Heron",
       "start": "2006-09-15",
@@ -1009,7 +989,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r810",
+      "id": "r789",
       "berth": "South Float East",
       "label": "M/V DEEP REEF",
       "start": "2006-10-08",
@@ -1019,7 +999,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r815",
+      "id": "r794",
       "berth": "Inner Channel",
       "label": "M/V Iron Heron",
       "start": "2006-10-20",
@@ -1029,7 +1009,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r871",
+      "id": "r840",
       "berth": "South Float East",
       "label": "M/V DEEP REEF",
       "start": "2007-10-05",
@@ -1039,7 +1019,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r913",
+      "id": "r878",
       "berth": "South Float West",
       "label": "M/V DEEP REEF",
       "start": "2008-05-27",
@@ -1049,7 +1029,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r956",
+      "id": "r918",
       "berth": "South Float East",
       "label": "S/Y High Gannet",
       "start": "2009-06-30",
@@ -1059,7 +1039,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r965",
+      "id": "r926",
       "berth": "South Float East",
       "label": "M/Y Wild Tern",
       "start": "2009-07-14",
@@ -1069,7 +1049,7 @@
       "overhangFt": 55
     },
     {
-      "id": "r1009",
+      "id": "r968",
       "berth": "South Float East",
       "label": "M/V Deep Reef",
       "start": "2009-10-05",
@@ -1079,7 +1059,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r1052",
+      "id": "r1011",
       "berth": "Inner Channel",
       "label": "S/V Iron Petrel",
       "start": "2010-04-26",
@@ -1089,7 +1069,7 @@
       "overhangFt": 65
     },
     {
-      "id": "r1099",
+      "id": "r1057",
       "berth": "North Pier Face",
       "label": "S/V Iron Petrel",
       "start": "2010-07-22",
@@ -1099,7 +1079,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r1101",
+      "id": "r1059",
       "berth": "North Pier Face",
       "label": "S/V Iron Petrel",
       "start": "2010-07-25",
@@ -1109,7 +1089,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r1105",
+      "id": "r1063",
       "berth": "North Pier Face",
       "label": "R/V CLEAR TERN",
       "start": "2010-07-29",
@@ -1119,7 +1099,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r1109",
+      "id": "r1067",
       "berth": "North Pier Face",
       "label": "R/V CLEAR TERN",
       "start": "2010-08-01",
@@ -1129,7 +1109,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r1128",
+      "id": "r1085",
       "berth": "North Pier Face",
       "label": "S/V Iron Petrel",
       "start": "2010-08-13",
@@ -1139,7 +1119,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r1131",
+      "id": "r1088",
       "berth": "North Pier Face",
       "label": "S/V Iron Petrel",
       "start": "2010-08-15",
@@ -1149,7 +1129,7 @@
       "overhangFt": 45
     },
     {
-      "id": "r1266",
+      "id": "r1219",
       "berth": "South Float East",
       "label": "M/V Deep Reef",
       "start": "2011-08-06",
@@ -1159,7 +1139,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r1382",
+      "id": "r1328",
       "berth": "South Float East",
       "label": "S/Y Clear Beacon",
       "start": "2012-09-14",
@@ -1169,7 +1149,7 @@
       "overhangFt": 80
     },
     {
-      "id": "r1448",
+      "id": "r1392",
       "berth": "South Float West",
       "label": "M/V Deep Reef",
       "start": "2013-07-23",
@@ -1179,7 +1159,7 @@
       "overhangFt": 10
     },
     {
-      "id": "r1497",
+      "id": "r1433",
       "berth": "South Float West",
       "label": "OSV Blue Osprey",
       "start": "2013-12-04",
@@ -1190,14 +1170,14 @@
     }
   ],
   "stats": {
-    "reservations": 2169,
+    "reservations": 2077,
     "conflicts": 2,
     "conflictViolations": 2,
     "conflictWarnings": 0,
-    "fitsCount": 493,
-    "oversizedCount": 115,
-    "unverifiableCount": 1454,
-    "eventCount": 107,
+    "fitsCount": 454,
+    "oversizedCount": 113,
+    "unverifiableCount": 1404,
+    "eventCount": 106,
     "unverifiableBookedDays": 5051
   }
 }

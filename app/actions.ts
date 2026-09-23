@@ -72,12 +72,25 @@ export async function createReservation(draft: CreateInput): Promise<CreateResul
     if (report.fit.status === 'violation') {
       return { status: 'refused', message: report.fit.reason }
     }
-    const c = report.conflicts[0]
-    const other = c.a.id === '__draft__' ? c.b : c.a
-    return {
-      status: 'refused',
-      message: `${other.label} holds this berth from ${other.start} to ${other.end}.`,
+    if (report.conflicts.length > 0) {
+      const c = report.conflicts[0]
+      const other = c.a.id === '__draft__' ? c.b : c.a
+      return {
+        status: 'refused',
+        message: `${other.label} holds this berth from ${other.start} to ${other.end}.`,
+      }
     }
+    // The only thing left that can block is this vessel already being in
+    // another berth for two or more of these days.
+    const x = report.crossBerth.find((c) => c.severity === 'violation')
+    if (x) {
+      const other = x.a.id === '__draft__' ? x.b : x.a
+      return {
+        status: 'refused',
+        message: `${resolved.label} is already in ${other.berthId} from ${other.start} to ${other.end}.`,
+      }
+    }
+    return { status: 'refused', message: 'This booking was refused.' }
   }
 
   const rows = (await sql`
@@ -88,7 +101,7 @@ export async function createReservation(draft: CreateInput): Promise<CreateResul
   `) as Record<string, unknown>[]
 
   revalidatePath('/')
-  revalidatePath('/conflicts')
+  revalidatePath('/problems')
   revalidatePath('/vessels')
   return { status: 'created', id: String(rows[0].id) }
 }
@@ -99,7 +112,7 @@ export async function deleteReservation(id: string): Promise<{ status: 'ok' } | 
   `) as Record<string, unknown>[]
   if (rows.length === 0) return { status: 'refused', message: 'That stay is already gone.' }
   revalidatePath('/')
-  revalidatePath('/conflicts')
+  revalidatePath('/problems')
   return { status: 'ok' }
 }
 
@@ -118,7 +131,7 @@ export async function updateVesselLength(
     WHERE id = ${id}
   `
   revalidatePath('/')
-  revalidatePath('/conflicts')
+  revalidatePath('/problems')
   revalidatePath('/vessels')
   return { status: 'ok' }
 }
