@@ -1,0 +1,3273 @@
+{
+  "vessels": [
+    {
+      "hullKey": "GOLDEN COMPASS",
+      "displayName": "R/V GOLDEN COMPASS",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1445
+    },
+    {
+      "hullKey": "CLEAR SEXTANT",
+      "displayName": "R/V Clear Sextant",
+      "lengthFt": 145,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 945
+    },
+    {
+      "hullKey": "AMBER REEF",
+      "displayName": "OSV AMBER REEF",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 932
+    },
+    {
+      "hullKey": "NORTHERN HARBOR",
+      "displayName": "M/V NORTHERN HARBOR",
+      "lengthFt": 52,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 632
+    },
+    {
+      "hullKey": "LONG KETCH",
+      "displayName": "R/V Long Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 412
+    },
+    {
+      "hullKey": "BLUE TIDE",
+      "displayName": "M/Y BLUE TIDE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 134
+    },
+    {
+      "hullKey": "FAR HORIZON",
+      "displayName": "S/V FAR HORIZON",
+      "lengthFt": 170,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 120
+    },
+    {
+      "hullKey": "SALT DORY",
+      "displayName": "Barge SALT DORY",
+      "lengthFt": 85,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 101
+    },
+    {
+      "hullKey": "LONG ANCHOR",
+      "displayName": "R/V Long Anchor",
+      "lengthFt": 170,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 96
+    },
+    {
+      "hullKey": "CORAL LANTERN",
+      "displayName": "M/V CORAL LANTERN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 95
+    },
+    {
+      "hullKey": "SALT FATHOM",
+      "displayName": "F/V SALT FATHOM",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 72
+    },
+    {
+      "hullKey": "GREY SOUND",
+      "displayName": "Barge Grey Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 70
+    },
+    {
+      "hullKey": "WILD LEDGE",
+      "displayName": "R/V Wild Ledge",
+      "lengthFt": 120,
+      "lengthSource": "roster_exact",
+      "bookedDays": 69
+    },
+    {
+      "hullKey": "GREEN LANTERN",
+      "displayName": "M/Y GREEN LANTERN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 68
+    },
+    {
+      "hullKey": "GREY COMPASS",
+      "displayName": "M/V GREY COMPASS",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 64
+    },
+    {
+      "hullKey": "SALT TIDE",
+      "displayName": "Tug Salt Tide",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 60
+    },
+    {
+      "hullKey": "WILD STAR",
+      "displayName": "OSV Wild Star",
+      "lengthFt": 24,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 50
+    },
+    {
+      "hullKey": "SALT TERN",
+      "displayName": "M/V Salt Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 48
+    },
+    {
+      "hullKey": "GOLDEN HERON",
+      "displayName": "S/V Golden Heron",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 46
+    },
+    {
+      "hullKey": "BLUE STAR",
+      "displayName": "R/V Blue Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 46
+    },
+    {
+      "hullKey": "BLUE FATHOM",
+      "displayName": "Tug Blue Fathom",
+      "lengthFt": 46,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 44
+    },
+    {
+      "hullKey": "GREEN OSPREY",
+      "displayName": "S/V GREEN OSPREY",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 44
+    },
+    {
+      "hullKey": "GOLDEN SOUND",
+      "displayName": "Tug Golden Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 44
+    },
+    {
+      "hullKey": "QUIET PETREL",
+      "displayName": "M/V QUIET PETREL",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 42
+    },
+    {
+      "hullKey": "SILVER VOYAGER",
+      "displayName": "Barge Silver Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 35
+    },
+    {
+      "hullKey": "WESTERN SEXTANT",
+      "displayName": "R/V Western Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 33
+    },
+    {
+      "hullKey": "DEEP TERN",
+      "displayName": "Barge Deep Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 32
+    },
+    {
+      "hullKey": "QUIET REEF",
+      "displayName": "M/V Quiet Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 31
+    },
+    {
+      "hullKey": "AMBER SKUA",
+      "displayName": "M/V Amber Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 31
+    },
+    {
+      "hullKey": "NORTHERN BEACON",
+      "displayName": "Tug Northern Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 31
+    },
+    {
+      "hullKey": "DEEP REEF",
+      "displayName": "M/V Deep Reef",
+      "lengthFt": 100,
+      "lengthSource": "roster_exact",
+      "bookedDays": 30
+    },
+    {
+      "hullKey": "IRON OSPREY",
+      "displayName": "R/V Iron Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 28
+    },
+    {
+      "hullKey": "CORAL STRAND",
+      "displayName": "R/V Coral Strand",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 24
+    },
+    {
+      "hullKey": "SILVER TIDE",
+      "displayName": "OSV SILVER TIDE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 22
+    },
+    {
+      "hullKey": "GREEN STAR",
+      "displayName": "R/V Green Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 22
+    },
+    {
+      "hullKey": "WESTERN CURRENT",
+      "displayName": "Tug WESTERN CURRENT",
+      "lengthFt": 85,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 21
+    },
+    {
+      "hullKey": "WILD GANNET",
+      "displayName": "Tug Wild Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 21
+    },
+    {
+      "hullKey": "GOLDEN ANCHOR",
+      "displayName": "S/V Golden Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 21
+    },
+    {
+      "hullKey": "IRON COVE",
+      "displayName": "R/V Iron Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 21
+    },
+    {
+      "hullKey": "IRON PETREL",
+      "displayName": "S/V IRON PETREL",
+      "lengthFt": 120,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 20
+    },
+    {
+      "hullKey": "QUIET CURRENT",
+      "displayName": "M/V Quiet Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 20
+    },
+    {
+      "hullKey": "HIGH MERIDIAN",
+      "displayName": "S/V High Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 20
+    },
+    {
+      "hullKey": "QUIET WIND",
+      "displayName": "Barge Quiet Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 20
+    },
+    {
+      "hullKey": "CLEAR LANTERN",
+      "displayName": "OSV Clear Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 19
+    },
+    {
+      "hullKey": "BRIGHT CURRENT",
+      "displayName": "R/V Bright Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 17
+    },
+    {
+      "hullKey": "NORTHERN LANTERN",
+      "displayName": "R/V Northern Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 15
+    },
+    {
+      "hullKey": "BOLLARD REPLACEMENT, WEST FACE",
+      "displayName": "Bollard replacement, west face",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 15
+    },
+    {
+      "hullKey": "BRIGHT STRAND",
+      "displayName": "R/V Bright Strand",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 15
+    },
+    {
+      "hullKey": "FAR TIDE",
+      "displayName": "OSV Far Tide",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 15
+    },
+    {
+      "hullKey": "SWIFT LANTERN",
+      "displayName": "R/V Swift Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 14
+    },
+    {
+      "hullKey": "DEPARTURE 0800",
+      "displayName": "Departure 0800",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 14
+    },
+    {
+      "hullKey": "AMBER KESTREL",
+      "displayName": "Tug Amber Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 14
+    },
+    {
+      "hullKey": "DEEP COMPASS",
+      "displayName": "M/Y Deep Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 14
+    },
+    {
+      "hullKey": "GOLDEN HORIZON",
+      "displayName": "R/V Golden Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 13
+    },
+    {
+      "hullKey": "CORAL TERN",
+      "displayName": "R/V CORAL TERN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 12
+    },
+    {
+      "hullKey": "LONG KESTREL",
+      "displayName": "Tug Long Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 12
+    },
+    {
+      "hullKey": "HOLIDAY",
+      "displayName": "Holiday",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 12
+    },
+    {
+      "hullKey": "SCIENCE STROLL",
+      "displayName": "Science stroll",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 12
+    },
+    {
+      "hullKey": "CORAL MARLIN",
+      "displayName": "F/V Coral Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 12
+    },
+    {
+      "hullKey": "WILD COMPASS",
+      "displayName": "M/V Wild Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 12
+    },
+    {
+      "hullKey": "LONG COVE",
+      "displayName": "M/V Long Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 12
+    },
+    {
+      "hullKey": "DEPARTS 0600",
+      "displayName": "Departs 0600",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 11
+    },
+    {
+      "hullKey": "WESTERN GANNET",
+      "displayName": "F/V Western Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 11
+    },
+    {
+      "hullKey": "WESTERN DORY",
+      "displayName": "Barge Western Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 11
+    },
+    {
+      "hullKey": "IRON HARBOR",
+      "displayName": "R/V Iron Harbor",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "GREEN ANCHOR",
+      "displayName": "M/V Green Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "QUIET HERON",
+      "displayName": "R/V Quiet Heron",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "SALT SOUND",
+      "displayName": "M/Y Salt Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "ROAD RACE - ACCESS LIMITED",
+      "displayName": "Road race - access limited",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "BRIGHT REEF",
+      "displayName": "M/V Bright Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "SILVER PETREL",
+      "displayName": "R/V Silver Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "NORTHERN STAR",
+      "displayName": "R/V Northern Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 10
+    },
+    {
+      "hullKey": "SILVER SOUND",
+      "displayName": "M/V SILVER SOUND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 9
+    },
+    {
+      "hullKey": "LONG MERIDIAN",
+      "displayName": "M/Y Long Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 9
+    },
+    {
+      "hullKey": "GOLDEN KETCH",
+      "displayName": "OSV Golden Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 9
+    },
+    {
+      "hullKey": "NORTHERN MERIDIAN",
+      "displayName": "R/V NORTHERN MERIDIAN",
+      "lengthFt": 85,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "WESTERN COVE",
+      "displayName": "Barge WESTERN COVE",
+      "lengthFt": 24,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "ETD PM",
+      "displayName": "ETD PM",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "ETA 1200",
+      "displayName": "ETA 1200",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "IRON SEXTANT",
+      "displayName": "F/V IRON SEXTANT",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "NORTHERN OSPREY",
+      "displayName": "R/V Northern Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "CLEAR KESTREL",
+      "displayName": "S/V Clear Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "GREEN REEF",
+      "displayName": "F/V Green Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "BLUE ANCHOR",
+      "displayName": "R/V Blue Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "QUIET OSPREY",
+      "displayName": "R/V Quiet Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 8
+    },
+    {
+      "hullKey": "WILD SKUA",
+      "displayName": "Barge Wild Skua",
+      "lengthFt": 40,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "FLOAT REBUILD - NO USAGE PERMITTED",
+      "displayName": "Float rebuild - no usage permitted",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "NORTHERN HERON",
+      "displayName": "M/V NORTHERN HERON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "NORTHERN VOYAGER",
+      "displayName": "F/V NORTHERN VOYAGER",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "SWIFT COMPASS",
+      "displayName": "F/V Swift Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "DONOR RECEPTION",
+      "displayName": "Donor reception",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "BLUE VOYAGER",
+      "displayName": "R/V Blue Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "GREY SKUA",
+      "displayName": "S/V Grey Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "BUNKER BARGE",
+      "displayName": "Bunker barge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "BRIGHT BEACON",
+      "displayName": "M/V Bright Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "GREY VOYAGER",
+      "displayName": "Tug Grey Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "HIGH MARLIN",
+      "displayName": "S/V High Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "HIGH HORIZON",
+      "displayName": "R/V High Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 7
+    },
+    {
+      "hullKey": "HIGH WIND",
+      "displayName": "M/V High Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "SALT HERON",
+      "displayName": "R/V SALT HERON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "DELAYED DUE TO WEATHER",
+      "displayName": "Delayed due to weather",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "SALT MERIDIAN",
+      "displayName": "M/V SALT MERIDIAN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "DEEP LEDGE",
+      "displayName": "M/V Deep Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "WILD KETCH",
+      "displayName": "M/Y Wild Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "DEEP DORY",
+      "displayName": "S/V Deep Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "BRIGHT MARLIN",
+      "displayName": "M/Y Bright Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "GOLDEN REEF",
+      "displayName": "S/V Golden Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "LONG SOUND",
+      "displayName": "M/V Long Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "SILVER HERON",
+      "displayName": "R/V Silver Heron",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "GREEN LEDGE",
+      "displayName": "M/V Green Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "BLUE LANTERN",
+      "displayName": "M/V Blue Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "GOLDEN DRIFT",
+      "displayName": "M/V Golden Drift",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "SALT HARBOR",
+      "displayName": "F/V Salt Harbor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "CLEAR LEDGE",
+      "displayName": "Barge Clear Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "BRIGHT OSPREY",
+      "displayName": "Barge Bright Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "SALT KETCH",
+      "displayName": "F/V Salt Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 6
+    },
+    {
+      "hullKey": "QUIET TERN",
+      "displayName": "R/V Quiet Tern",
+      "lengthFt": 145,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "IRON KETCH",
+      "displayName": "R/V Iron Ketch",
+      "lengthFt": 65,
+      "lengthSource": "roster_exact",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "LONG VOYAGER",
+      "displayName": "Barge Long Voyager",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "WILD KESTREL",
+      "displayName": "R/V Wild Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "IRON REEF",
+      "displayName": "R/V IRON REEF",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "BRIGHT STAR",
+      "displayName": "Barge BRIGHT STAR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "STUDENT TOUR",
+      "displayName": "Student tour",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "CLEAR TERN",
+      "displayName": "R/V CLEAR TERN",
+      "lengthFt": 120,
+      "lengthSource": "roster_exact",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "BLUE BEACON",
+      "displayName": "S/V Blue Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "WESTERN BEACON",
+      "displayName": "M/Y Western Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "SILVER DRIFT",
+      "displayName": "F/V SILVER DRIFT",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "BLUE DORY",
+      "displayName": "M/Y Blue Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "QUIET COMPASS",
+      "displayName": "M/V Quiet Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "CLEAR DRIFT",
+      "displayName": "R/V Clear Drift",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "LONG TERN",
+      "displayName": "M/V Long Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "CORAL REEF",
+      "displayName": "Tug Coral Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "SILVER LANTERN",
+      "displayName": "F/V Silver Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "GREY GANNET",
+      "displayName": "F/V Grey Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "WESTERN OSPREY",
+      "displayName": "F/V Western Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "HIGH COVE",
+      "displayName": "M/V HIGH COVE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "IRON STAR",
+      "displayName": "M/V Iron Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 5
+    },
+    {
+      "hullKey": "WILD REEF",
+      "displayName": "M/V Wild Reef",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "EMERGENCY PORT CALL",
+      "displayName": "Emergency port call",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "SWIFT SEXTANT",
+      "displayName": "R/V Swift Sextant",
+      "lengthFt": 72,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "IRON HORIZON",
+      "displayName": "M/V Iron Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "QUIET KESTREL",
+      "displayName": "R/V Quiet Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "HIGH HERON",
+      "displayName": "S/V HIGH HERON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "CLEAR FATHOM",
+      "displayName": "R/V CLEAR FATHOM",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "IRON HERON",
+      "displayName": "M/V Iron Heron",
+      "lengthFt": 100,
+      "lengthSource": "roster_exact",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "BLUE LEDGE",
+      "displayName": "R/V Blue Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "FAR STAR",
+      "displayName": "R/V FAR STAR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "FAR SKUA",
+      "displayName": "M/Y Far Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "HIGH VOYAGER",
+      "displayName": "Barge High Voyager",
+      "lengthFt": 100,
+      "lengthSource": "roster_exact",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "SALT HORIZON",
+      "displayName": "M/Y Salt Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "DEEP SOUND",
+      "displayName": "M/V DEEP SOUND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "FAR SEXTANT",
+      "displayName": "R/V Far Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "HIGH FATHOM",
+      "displayName": "S/Y High Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "GOLDEN LANTERN",
+      "displayName": "R/V Golden Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "HIGH HARBOR",
+      "displayName": "OSV High Harbor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "QUIET HORIZON",
+      "displayName": "Barge Quiet Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "WILD PETREL",
+      "displayName": "S/Y Wild Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "WESTERN TIDE",
+      "displayName": "R/V Western Tide",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "BLUE WIND",
+      "displayName": "Barge Blue Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "LONG HORIZON",
+      "displayName": "R/V Long Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 4
+    },
+    {
+      "hullKey": "SWIFT ANCHOR",
+      "displayName": "Tug Swift Anchor",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "LONG HERON",
+      "displayName": "F/V Long Heron",
+      "lengthFt": 85,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SALT DRIFT",
+      "displayName": "R/V SALT DRIFT",
+      "lengthFt": 85,
+      "lengthSource": "roster_exact",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "IRON WIND",
+      "displayName": "F/V Iron Wind",
+      "lengthFt": 46,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "GOLDEN FATHOM",
+      "displayName": "S/V GOLDEN FATHOM",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "WILD TIDE",
+      "displayName": "R/V WILD TIDE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SWIFT MERIDIAN",
+      "displayName": "F/V SWIFT MERIDIAN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "WESTERN REEF",
+      "displayName": "OSV Western Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "GOLDEN HARBOR",
+      "displayName": "M/Y Golden Harbor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "DEEP DRIFT",
+      "displayName": "M/V Deep Drift",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SILVER COVE",
+      "displayName": "S/V Silver Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "CLEAR DORY",
+      "displayName": "OSV Clear Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "ARRIVES AM",
+      "displayName": "Arrives AM",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "GOLDEN SEXTANT",
+      "displayName": "F/V Golden Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "ARRIVAL 1400",
+      "displayName": "Arrival 1400",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "FAR WIND",
+      "displayName": "OSV Far Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "AMBER STRAND",
+      "displayName": "Tug Amber Strand",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "BRIGHT SKUA",
+      "displayName": "M/V Bright Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "RESCUE DRILL",
+      "displayName": "Rescue drill",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "BLUE HERON",
+      "displayName": "R/V Blue Heron",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SILVER FATHOM",
+      "displayName": "Tug Silver Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SWIFT TERN",
+      "displayName": "Barge Swift Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "GREEN MARLIN",
+      "displayName": "R/V Green Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SWIFT WIND",
+      "displayName": "S/V Swift Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "BRIGHT COVE",
+      "displayName": "M/V Bright Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "HIGH SKUA",
+      "displayName": "F/V High Skua",
+      "lengthFt": 120,
+      "lengthSource": "roster_exact",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "OS/V GOLDEN OSPREY",
+      "displayName": "OS/V Golden Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "QUIET BEACON",
+      "displayName": "S/V Quiet Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "FUELING @0800",
+      "displayName": "Fueling @0800",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SWIFT BEACON",
+      "displayName": "S/V SWIFT BEACON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SWIFT CURRENT",
+      "displayName": "R/V Swift Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "SILVER KETCH",
+      "displayName": "M/Y Silver Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 3
+    },
+    {
+      "hullKey": "WESTERN TERN",
+      "displayName": "OSV Western Tern",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WILD DORY",
+      "displayName": "R/V Wild Dory",
+      "lengthFt": 52,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BLUE OSPREY",
+      "displayName": "OSV Blue Osprey",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "QUIET DRIFT",
+      "displayName": "S/V Quiet Drift",
+      "lengthFt": 46,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WILD HARBOR",
+      "displayName": "R/V Wild Harbor",
+      "lengthFt": 65,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WESTERN HERON",
+      "displayName": "Tug Western Heron",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREEN SEXTANT",
+      "displayName": "R/V Green Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "AMBER FATHOM",
+      "displayName": "S/V AMBER FATHOM",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "AMBER PETREL",
+      "displayName": "M/V Amber Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "CORAL KESTREL",
+      "displayName": "M/V Coral Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREY HARBOR",
+      "displayName": "M/V GREY HARBOR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GOLDEN MARLIN",
+      "displayName": "R/V GOLDEN MARLIN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREEN SOUND",
+      "displayName": "Tug Green Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "FAR TERN",
+      "displayName": "S/V Far Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BLUE HORIZON",
+      "displayName": "Barge BLUE HORIZON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "LONG STRAND",
+      "displayName": "F/V LONG STRAND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "NORTHERN COMPASS",
+      "displayName": "M/Y Northern Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "DEEP OSPREY",
+      "displayName": "R/V DEEP OSPREY",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREEN FATHOM",
+      "displayName": "Tug Green Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GOLDEN VOYAGER",
+      "displayName": "R/V GOLDEN VOYAGER",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "IRON DORY",
+      "displayName": "R/V IRON DORY",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BRIGHT HARBOR",
+      "displayName": "R/V BRIGHT HARBOR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BLUE KETCH",
+      "displayName": "R/V Blue Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREY FATHOM",
+      "displayName": "OSV Grey Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "FAR COMPASS",
+      "displayName": "Tug Far Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WILD TERN",
+      "displayName": "M/Y Wild Tern",
+      "lengthFt": 145,
+      "lengthSource": "roster_exact",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "QUIET VOYAGER",
+      "displayName": "M/Y Quiet Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "CORAL SEXTANT",
+      "displayName": "F/V Coral Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SILVER CURRENT",
+      "displayName": "S/V Silver Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "PAVING NEAR DOCK ENTRANCE",
+      "displayName": "Paving near dock entrance",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "DEEP HORIZON",
+      "displayName": "M/Y Deep Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BLUE GANNET",
+      "displayName": "M/V Blue Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SILVER BEACON",
+      "displayName": "Barge SILVER BEACON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WESTERN COMPASS",
+      "displayName": "S/V Western Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BRIGHT GANNET",
+      "displayName": "M/V BRIGHT GANNET",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SALT COVE",
+      "displayName": "M/Y Salt Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WESTERN STRAND",
+      "displayName": "M/Y Western Strand",
+      "lengthFt": 52,
+      "lengthSource": "roster_exact",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "DEEP STAR",
+      "displayName": "R/V Deep Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SALT VOYAGER",
+      "displayName": "OSV Salt Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SAFETY TRAINING (RIBS)",
+      "displayName": "Safety training (RIBs)",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "FILM CREW ON DOCK",
+      "displayName": "Film crew on dock",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "NORTHERN ANCHOR",
+      "displayName": "Barge Northern Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WILD CURRENT",
+      "displayName": "R/V Wild Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "LOAD EQUIPMENT",
+      "displayName": "Load equipment",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GOLDEN LEDGE",
+      "displayName": "M/V Golden Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SALT MARLIN",
+      "displayName": "OSV Salt Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREY DRIFT",
+      "displayName": "S/V Grey Drift",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SALT PETREL",
+      "displayName": "M/V Salt Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WESTERN MARLIN",
+      "displayName": "M/V Western Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "CORAL HARBOR",
+      "displayName": "R/V Coral Harbor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SILVER MERIDIAN",
+      "displayName": "S/Y Silver Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SWIFT TIDE",
+      "displayName": "S/V Swift Tide",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BRIGHT KETCH",
+      "displayName": "F/V Bright Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "PROVISIONING",
+      "displayName": "Provisioning",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BRIGHT PETREL",
+      "displayName": "Tug Bright Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "HIGH SEXTANT",
+      "displayName": "M/Y High Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "TOUCH AND GO",
+      "displayName": "Touch and go",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "DEEP ANCHOR",
+      "displayName": "M/V Deep Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREY WIND",
+      "displayName": "R/V Grey Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "WESTERN MERIDIAN",
+      "displayName": "F/V Western Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "GREY DORY",
+      "displayName": "Barge Grey Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "FAR SOUND",
+      "displayName": "F/V Far Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SALT BEACON",
+      "displayName": "S/V Salt Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BLUE COVE",
+      "displayName": "R/V BLUE COVE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "AMBER LANTERN",
+      "displayName": "Tug Amber Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "FUELING",
+      "displayName": "Fueling",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BRIGHT SEXTANT",
+      "displayName": "S/V Bright Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SALT ANCHOR",
+      "displayName": "S/V Salt Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SWIFT FATHOM",
+      "displayName": "F/V Swift Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "CLEAR CURRENT",
+      "displayName": "M/V Clear Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "BUNKERING",
+      "displayName": "Bunkering",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "LONG FATHOM",
+      "displayName": "R/V Long Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "FUEL TRUCK",
+      "displayName": "Fuel truck",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "QUIET KETCH",
+      "displayName": "OSV Quiet Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 2
+    },
+    {
+      "hullKey": "SWIFT DORY",
+      "displayName": "F/V Swift Dory",
+      "lengthFt": 85,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP COVE",
+      "displayName": "F/V Deep Cove",
+      "lengthFt": 145,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT PETREL",
+      "displayName": "M/V Swift Petrel",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CLEAR STAR",
+      "displayName": "R/V CLEAR STAR",
+      "lengthFt": 120,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG DRIFT",
+      "displayName": "F/V Long Drift",
+      "lengthFt": 52,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN STAR",
+      "displayName": "Barge Golden Star",
+      "lengthFt": 40,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN SKUA",
+      "displayName": "M/V Golden Skua",
+      "lengthFt": 52,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER LEDGE",
+      "displayName": "R/V Amber Ledge",
+      "lengthFt": 72,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG GANNET",
+      "displayName": "S/V Long Gannet",
+      "lengthFt": 24,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY REEF",
+      "displayName": "S/V Grey Reef",
+      "lengthFt": 170,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE TERN",
+      "displayName": "M/V Blue Tern",
+      "lengthFt": 52,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BRIGHT DRIFT",
+      "displayName": "M/V Bright Drift",
+      "lengthFt": 32,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CLEAR REEF",
+      "displayName": "M/Y Clear Reef",
+      "lengthFt": 46,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG REEF",
+      "displayName": "Tug Long Reef",
+      "lengthFt": 120,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE DRIFT",
+      "displayName": "OSV Blue Drift",
+      "lengthFt": 120,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET FATHOM",
+      "displayName": "R/V Quiet Fathom",
+      "lengthFt": 40,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP WIND",
+      "displayName": "S/V Deep Wind",
+      "lengthFt": 120,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG WIND",
+      "displayName": "M/V Long Wind",
+      "lengthFt": 40,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL WIND",
+      "displayName": "M/Y Coral Wind",
+      "lengthFt": 40,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN BEACON",
+      "displayName": "M/V Green Beacon",
+      "lengthFt": 145,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD HORIZON",
+      "displayName": "S/V Wild Horizon",
+      "lengthFt": 52,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT REEF",
+      "displayName": "S/V Swift Reef",
+      "lengthFt": 170,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER HARBOR",
+      "displayName": "S/V Silver Harbor",
+      "lengthFt": 46,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD SEXTANT",
+      "displayName": "M/Y Wild Sextant",
+      "lengthFt": 100,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SALT LEDGE",
+      "displayName": "R/V Salt Ledge",
+      "lengthFt": 52,
+      "lengthSource": "fuzzy_hull_match",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SALT SEXTANT",
+      "displayName": "M/V Salt Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG OSPREY",
+      "displayName": "Tug Long Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR REEF",
+      "displayName": "Tug Far Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON TIDE",
+      "displayName": "F/V Iron Tide",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR COVE",
+      "displayName": "Barge Far Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON DRIFT",
+      "displayName": "R/V IRON DRIFT",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON STRAND",
+      "displayName": "R/V IRON STRAND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN GANNET",
+      "displayName": "M/V Golden Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SALT REEF",
+      "displayName": "Barge Salt Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER WIND",
+      "displayName": "S/V SILVER WIND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON MERIDIAN",
+      "displayName": "OSV Iron Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY COVE",
+      "displayName": "M/V Grey Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET LEDGE",
+      "displayName": "M/V Quiet Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER GANNET",
+      "displayName": "S/V Amber Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL COMPASS",
+      "displayName": "S/V CORAL COMPASS",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER OSPREY",
+      "displayName": "R/V Silver Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG MARLIN",
+      "displayName": "R/V Long Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN PETREL",
+      "displayName": "S/V Green Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN PETREL",
+      "displayName": "M/V NORTHERN PETREL",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP HARBOR",
+      "displayName": "OSV DEEP HARBOR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY BEACON",
+      "displayName": "R/V Grey Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE REEF",
+      "displayName": "R/V Blue Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP PETREL",
+      "displayName": "M/Y Deep Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY MARLIN",
+      "displayName": "R/V Grey Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER COVE",
+      "displayName": "OSV Amber Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL CURRENT",
+      "displayName": "R/V Coral Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY LEDGE",
+      "displayName": "R/V Grey Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "HIGH OSPREY",
+      "displayName": "Barge High Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN WIND",
+      "displayName": "M/Y Golden Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY SEXTANT",
+      "displayName": "R/V GREY SEXTANT",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG SEXTANT",
+      "displayName": "S/V LONG SEXTANT",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD OSPREY",
+      "displayName": "Barge WILD OSPREY",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR DORY",
+      "displayName": "S/V FAR DORY",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN COMPASS",
+      "displayName": "S/V GREEN COMPASS",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SALT STAR",
+      "displayName": "Tug SALT STAR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT KETCH",
+      "displayName": "R/V Swift Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON COMPASS",
+      "displayName": "R/V Iron Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL STAR",
+      "displayName": "M/V CORAL STAR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET SEXTANT",
+      "displayName": "M/V Quiet Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG HARBOR",
+      "displayName": "OSV LONG HARBOR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER OSPREY",
+      "displayName": "R/V Amber Osprey",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR KETCH",
+      "displayName": "Tug Far Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY OSPREY",
+      "displayName": "M/Y GREY OSPREY",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET MARLIN",
+      "displayName": "R/V Quiet Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN TERN",
+      "displayName": "F/V NORTHERN TERN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP LANTERN",
+      "displayName": "Barge DEEP LANTERN",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER KETCH",
+      "displayName": "M/V Amber Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BRIGHT DORY",
+      "displayName": "R/V Bright Dory",
+      "lengthFt": 52,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON FATHOM",
+      "displayName": "M/V Iron Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER TERN",
+      "displayName": "M/V Amber Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER CURRENT",
+      "displayName": "F/V Amber Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL TIDE",
+      "displayName": "Barge CORAL TIDE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN GANNET",
+      "displayName": "M/V GREEN GANNET",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN STRAND",
+      "displayName": "R/V GREEN STRAND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG BEACON",
+      "displayName": "F/V LONG BEACON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR GANNET",
+      "displayName": "S/V FAR GANNET",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD FATHOM",
+      "displayName": "M/V WILD FATHOM",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET DORY",
+      "displayName": "R/V Quiet Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN VOYAGER",
+      "displayName": "R/V Green Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN DORY",
+      "displayName": "F/V Green Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR STRAND",
+      "displayName": "Tug FAR STRAND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR KESTREL",
+      "displayName": "M/V FAR KESTREL",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE SEXTANT",
+      "displayName": "Barge Blue Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON LEDGE",
+      "displayName": "F/V IRON LEDGE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "HIGH GANNET",
+      "displayName": "S/Y High Gannet",
+      "lengthFt": 100,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WESTERN DRIFT",
+      "displayName": "R/V WESTERN DRIFT",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN DORY",
+      "displayName": "F/V Northern Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY HERON",
+      "displayName": "M/Y Grey Heron",
+      "lengthFt": 52,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER MERIDIAN",
+      "displayName": "M/V Amber Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY MERIDIAN",
+      "displayName": "F/V Grey Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN KESTREL",
+      "displayName": "M/V Northern Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WESTERN SOUND",
+      "displayName": "F/V Western Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CLEAR VOYAGER",
+      "displayName": "F/V Clear Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN BEACON",
+      "displayName": "S/V Golden Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CAMPUS EVENT",
+      "displayName": "Campus event",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD WIND",
+      "displayName": "M/Y Wild Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE CURRENT",
+      "displayName": "Barge Blue Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET ANCHOR",
+      "displayName": "R/V Quiet Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL COVE",
+      "displayName": "S/V CORAL COVE",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN HARBOR",
+      "displayName": "R/V GREEN HARBOR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG STAR",
+      "displayName": "R/V LONG STAR",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON VOYAGER",
+      "displayName": "M/Y Iron Voyager",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER STRAND",
+      "displayName": "F/V Silver Strand",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE PETREL",
+      "displayName": "Barge Blue Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET STAR",
+      "displayName": "R/V Quiet Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN TERN",
+      "displayName": "M/V Green Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BRIGHT ANCHOR",
+      "displayName": "Tug Bright Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER SEXTANT",
+      "displayName": "M/Y Silver Sextant",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL SOUND",
+      "displayName": "R/V Coral Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR MARLIN",
+      "displayName": "R/V Far Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON MARLIN",
+      "displayName": "S/V Iron Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "HIGH STAR",
+      "displayName": "OSV High Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT SKUA",
+      "displayName": "M/Y Swift Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL SKUA",
+      "displayName": "Barge Coral Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN COVE",
+      "displayName": "S/V Golden Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN WIND",
+      "displayName": "R/V Green Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CLEAR GANNET",
+      "displayName": "M/Y Clear Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT GANNET",
+      "displayName": "R/V Swift Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL HERON",
+      "displayName": "Tug CORAL HERON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "HIGH BEACON",
+      "displayName": "M/V HIGH BEACON",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON ANCHOR",
+      "displayName": "Tug Iron Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER COMPASS",
+      "displayName": "R/V Amber Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL PETREL",
+      "displayName": "M/V Coral Petrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD SOUND",
+      "displayName": "R/V Wild Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "HIGH COMPASS",
+      "displayName": "R/V High Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD BEACON",
+      "displayName": "OSV Wild Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR DRIFT",
+      "displayName": "M/V Far Drift",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WESTERN HARBOR",
+      "displayName": "M/V Western Harbor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR BEACON",
+      "displayName": "M/V Far Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "HIGH KETCH",
+      "displayName": "S/V High Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CLEAR BEACON",
+      "displayName": "S/Y Clear Beacon",
+      "lengthFt": 170,
+      "lengthSource": "roster_exact",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "LONG COMPASS",
+      "displayName": "R/V Long Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP KESTREL",
+      "displayName": "R/V Deep Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WESTERN WIND",
+      "displayName": "S/V Western Wind",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET MERIDIAN",
+      "displayName": "R/V Quiet Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER SOUND",
+      "displayName": "F/V Amber Sound",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP SKUA",
+      "displayName": "S/V Deep Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE COMPASS",
+      "displayName": "M/Y Blue Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL DORY",
+      "displayName": "M/Y Coral Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN LEDGE",
+      "displayName": "R/V Northern Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "HIGH TERN",
+      "displayName": "M/Y High Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR LEDGE",
+      "displayName": "Tug Far Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE MARLIN",
+      "displayName": "R/V Blue Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "IRON LANTERN",
+      "displayName": "R/V Iron Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD VOYAGER",
+      "displayName": "M/Y WILD VOYAGER",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET HARBOR",
+      "displayName": "R/V Quiet Harbor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CLEAR COMPASS",
+      "displayName": "F/V Clear Compass",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER MARLIN",
+      "displayName": "M/V Silver Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP TIDE",
+      "displayName": "S/V Deep Tide",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER DORY",
+      "displayName": "M/V Amber Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN CURRENT",
+      "displayName": "M/V Northern Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN WIND",
+      "displayName": "R/V NORTHERN WIND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER REEF",
+      "displayName": "F/V Silver Reef",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CLEAR KETCH",
+      "displayName": "F/V CLEAR KETCH",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN KETCH",
+      "displayName": "OSV Green Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL BEACON",
+      "displayName": "M/V Coral Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "CORAL HORIZON",
+      "displayName": "M/V Coral Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SALT CURRENT",
+      "displayName": "R/V Salt Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER TERN",
+      "displayName": "Tug Silver Tern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN KESTREL",
+      "displayName": "M/Y Golden Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BRIGHT LEDGE",
+      "displayName": "OSV Bright Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "QUIET STRAND",
+      "displayName": "R/V Quiet Strand",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR MERIDIAN",
+      "displayName": "Tug Far Meridian",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GOLDEN STRAND",
+      "displayName": "M/V GOLDEN STRAND",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER HORIZON",
+      "displayName": "Tug Amber Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER DORY",
+      "displayName": "M/V Silver Dory",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT HORIZON",
+      "displayName": "F/V Swift Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN HORIZON",
+      "displayName": "R/V Northern Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE KESTREL",
+      "displayName": "R/V Blue Kestrel",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WILD ANCHOR",
+      "displayName": "M/Y Wild Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN HORIZON",
+      "displayName": "M/Y Green Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "FAR HARBOR",
+      "displayName": "S/Y Far Harbor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WESTERN LANTERN",
+      "displayName": "Tug Western Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREY LANTERN",
+      "displayName": "R/V Grey Lantern",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT LEDGE",
+      "displayName": "Tug Swift Ledge",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT STAR",
+      "displayName": "R/V Swift Star",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "BLUE STRAND",
+      "displayName": "M/V Blue Strand",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "NORTHERN FATHOM",
+      "displayName": "S/V Northern Fathom",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "OS/V SILVER SKUA",
+      "displayName": "OS/V Silver Skua",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT DRIFT",
+      "displayName": "M/Y Swift Drift",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WIRE SPOOLING",
+      "displayName": "Wire spooling",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SILVER GANNET",
+      "displayName": "OSV Silver Gannet",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WATER/SLOPS PUMPING",
+      "displayName": "Water/slops pumping",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN COVE",
+      "displayName": "OSV Green Cove",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "DEEP BEACON",
+      "displayName": "M/V Deep Beacon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "SWIFT MARLIN",
+      "displayName": "S/V Swift Marlin",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "AMBER ANCHOR",
+      "displayName": "R/V Amber Anchor",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WESTERN HORIZON",
+      "displayName": "M/V Western Horizon",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "GREEN CURRENT",
+      "displayName": "OSV Green Current",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "1400",
+      "displayName": "1400",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    },
+    {
+      "hullKey": "WESTERN KETCH",
+      "displayName": "M/V Western Ketch",
+      "lengthFt": null,
+      "lengthSource": "unknown",
+      "bookedDays": 1
+    }
+  ],
+  "rosterSize": 161,
+  "conflictingLoa": [
+    {
+      "name": "R/V High Sound",
+      "nameLen": 32,
+      "loa": 65
+    },
+    {
+      "name": "F/V Far Petrel",
+      "nameLen": 24,
+      "loa": 65
+    },
+    {
+      "name": "Barge NORTHERN MARLIN",
+      "nameLen": 24,
+      "loa": 65
+    },
+    {
+      "name": "M/Y Western Strand",
+      "nameLen": 52,
+      "loa": 65
+    },
+    {
+      "name": "M/V Wild Star",
+      "nameLen": 24,
+      "loa": 145
+    }
+  ],
+  "stats": {
+    "scheduledVessels": 462,
+    "withLength": 64,
+    "withoutLength": 398,
+    "bookedDaysWithLength": 2255,
+    "bookedDaysWithoutLength": 5212
+  }
+}

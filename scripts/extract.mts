@@ -47,6 +47,17 @@ const EVENT_RE =
 
 const BERTH_RE = /^(.*?)\s*-\s*(\d+)\s*'/
 
+/**
+ * Berthing areas that carry NO length in their row label.
+ *
+ * These appear partway through the archive (Small craft slips from 2011,
+ * North Finger Piers from 2014) and hold ~195 real bookings between them. A
+ * length-only regex silently drops every one. They are grouped areas rather
+ * than single measured berths, so their capacity is genuinely unknown and is
+ * recorded as null -- never as 0, which would make every vessel "too long".
+ */
+const UNMEASURED_BERTHS = new Set(['North Finger Piers:', 'Small craft slips (institution boats)'])
+
 export type Booking = {
   berth: string
   label: string
@@ -88,6 +99,15 @@ function fillColor(cell: ExcelJS.Cell): string | null {
 function isOccupied(cell: ExcelJS.Cell): boolean {
   const c = fillColor(cell)
   return c !== null && !NEUTRAL_FILLS.has(c)
+}
+
+/** True when any day cell in this berth row carries a booking. */
+function rowHasAnyContent(row: ExcelJS.Row, dayCols: [number, number][]): boolean {
+  for (const [col] of dayCols) {
+    const cell = row.getCell(col)
+    if (isOccupied(cell) || cellText(cell) !== '') return true
+  }
+  return false
 }
 
 function daysInMonth(year: number, month: number): number {
@@ -247,7 +267,7 @@ function main() {
   const wb = new ExcelJS.Workbook()
   return wb.xlsx.readFile(SOURCE).then(() => {
     const bookings: Booking[] = []
-    const berthLengths = new Map<string, number>()
+    const berthLengths = new Map<string, number | null>()
     let blocksFound = 0
     let blocksVerified = 0
     const staleWeekdayBlocks: string[] = []
@@ -291,6 +311,14 @@ function main() {
         // Berth rows follow the header until the NEXT month block begins.
         // Blocks sit ~11 rows apart, so an over-wide window would re-parse the
         // following month's berth rows against this month's dates.
+        //
+        // 27 month blocks repeat a berth label on consecutive rows. They are
+        // the SAME physical berth written twice (a formatting slip), so their
+        // bookings are merged into one lane -- splitting them would hide real
+        // double-bookings, e.g. a vessel booked during a pier closure that was
+        // recorded on the duplicate row.
+        const seenBerthRows = new Set<string>()
+
         for (let br = r + 1; br <= ws.rowCount; br++) {
           const brow = ws.getRow(br)
           const label = cellText(brow.getCell(1))
@@ -299,9 +327,12 @@ function main() {
           if (MONTHS.some((mo) => upper.startsWith(mo))) break
 
           const m = BERTH_RE.exec(label)
-          if (!m) continue
-          const berth = m[1].trim()
-          berthLengths.set(berth, Number(m[2]))
+          const unmeasured = UNMEASURED_BERTHS.has(label.trim())
+          if (!m && !unmeasured) continue
+
+          const berth = m ? m[1].trim() : label.trim().replace(/:$/, '')
+          seenBerthRows.add(berth)
+          if (!berthLengths.has(berth)) berthLengths.set(berth, m ? Number(m[2]) : null)
 
           // Walk the row left-to-right, accumulating colour bands into runs.
           let run: { label: string; color: string | null; start: number; end: number } | null = null
@@ -326,10 +357,18 @@ function main() {
 
             if (!occupied) { flush(); continue }
 
-            // Continue the current run only when this cell adds no NEW label
-            // and carries the same colour. A new label always starts a new
-            // booking, even mid-band (that is how back-to-back stays appear).
-            if (run && !text && color === run.color) {
+            // A stay continues across this cell when either:
+            //   (a) the cell is blank but carries the run's fill colour
+            //       (the common "colour band" encoding), or
+            //   (b) the cell REPEATS the same vessel name. Some years write the
+            //       name into every day of the stay instead of banding it;
+            //       treating those as separate bookings would both inflate the
+            //       count and invent conflicts between a vessel and itself.
+            const sameName =
+              run !== null && text !== '' && text.toUpperCase() === run.label.toUpperCase()
+            const bandContinues = run !== null && text === '' && color === run.color
+
+            if (run && (sameName || bandContinues) && day === run.end + 1) {
               run.end = day
             } else {
               flush()
@@ -343,7 +382,8 @@ function main() {
 
     const berths = [...berthLengths.entries()]
       .map(([name, lengthFt]) => ({ name, lengthFt }))
-      .sort((a, b) => b.lengthFt - a.lengthFt)
+      // Longest first; unmeasured areas sort last.
+      .sort((a, b) => (b.lengthFt ?? -1) - (a.lengthFt ?? -1))
 
     bookings.sort((a, b) => a.start.localeCompare(b.start) || a.berth.localeCompare(b.berth))
 
@@ -363,7 +403,9 @@ function main() {
     writeFileSync(OUT, JSON.stringify(snapshot, null, 2))
 
     console.log(`berths: ${berths.length}`)
-    for (const b of berths) console.log(`   ${b.name} — ${b.lengthFt}'`)
+    for (const b of berths) {
+      console.log(`   ${b.name} — ${b.lengthFt === null ? 'length not recorded' : b.lengthFt + "'"}`)
+    }
     console.log(`month blocks: ${blocksFound}, weekday-verified: ${blocksVerified}`)
     if (staleWeekdayBlocks.length) {
       console.log(`stale weekday templates (day numbers used): ${staleWeekdayBlocks.length}`)
