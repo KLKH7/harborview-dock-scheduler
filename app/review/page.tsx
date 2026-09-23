@@ -6,11 +6,12 @@ import { FindingDetail } from './FindingDetail'
 export const dynamic = 'force-dynamic'
 
 /**
- * Review. A list of what the checks found, and one selected finding beside it.
+ * Review. One list of everything the checks found that nobody has decided
+ * on yet, and one selected finding beside it.
  *
- * Open findings (a stay ending on or after today) come first, soonest first.
- * Everything older is the archive: kept, listed, never red. A stay that ended
- * in 2003 is a record, not an alarm.
+ * Soonest first. A finding whose stay is live or upcoming is red; one whose
+ * stays all ended years ago is not, because a stay that ended in 2003 is a
+ * record, not an alarm. Both sit in the same list until someone decides.
  */
 export default async function ReviewPage(props: PageProps<'/review'>) {
   const params = await props.searchParams
@@ -20,31 +21,23 @@ export default async function ReviewPage(props: PageProps<'/review'>) {
   const [findings, changes] = await Promise.all([getFindings(), getRecentChanges(20)])
   const all = buildFindingRows(findings)
   const dismissed = all.filter((r) => findings.dispositions.has(r.fingerprint))
-  const live = all.filter((r) => !findings.dispositions.has(r.fingerprint))
-  const rows = showDismissed ? all : live
+  const todo = all.filter((r) => !findings.dispositions.has(r.fingerprint))
+  const rows = showDismissed ? all : todo
 
-  const open = live.filter((r) => r.open)
-  const archive = live.filter((r) => !r.open)
-  const lever = rosterLever(live)
+  const lever = rosterLever(todo)
   const current = selected ? all.find((r) => r.fingerprint === selected) ?? null : null
 
   const counts = {
-    overlap: archive.filter((r) => r.kind === 'overlap').length,
-    cross: archive.filter((r) => r.kind === 'cross').length,
-    oversize: archive.filter((r) => r.kind === 'oversize').length,
-    oversizeStays: archive.filter((r) => r.kind === 'oversize').reduce((s, r) => s + (r.count ?? 1), 0),
+    overlap: todo.filter((r) => r.kind === 'overlap').length,
+    cross: todo.filter((r) => r.kind === 'cross').length,
+    oversize: todo.filter((r) => r.kind === 'oversize').length,
   }
-  const range = findings.stats.firstDate && findings.stats.lastDate
-    ? `${findings.stats.firstDate.slice(0, 4)} to ${findings.stats.lastDate.slice(0, 4)}`
-    : ''
 
   return (
     <div className="flex min-h-0 flex-1">
       <FindingList
         rows={rows}
-        openCount={open.length}
-        archiveCounts={counts}
-        archiveRange={range}
+        todoCount={todo.length}
         dismissedCount={dismissed.length}
         showDismissed={showDismissed}
         dispositions={Object.fromEntries(findings.dispositions)}
@@ -55,8 +48,8 @@ export default async function ReviewPage(props: PageProps<'/review'>) {
       <FindingDetail
         row={current}
         disposition={current ? findings.dispositions.get(current.fingerprint) ?? null : null}
-        openCount={open.length}
-        archiveCounts={counts}
+        todoCount={todo.length}
+        counts={counts}
         changes={changes}
       />
     </div>

@@ -17,12 +17,11 @@ booking, historical and new.
 | Screen | Purpose |
 |---|---|
 | **Schedule** | Opens on today. One line above the grid says what is true at the dock right now: in port, arriving, departing, berths free tonight. The berth by day grid is where bookings are made: drag along a row to select days, and the drag stops where the berth is taken. Overlapping stays stack in separate lanes, so a double booking makes the row visibly taller before any colour is read. Hover or click a bar and that hull is traced everywhere it appears. |
-| **Review** | What the checks found, as a list beside one selected finding. Open findings (a stay ending on or after today) come first, soonest first, in red. Everything older is the archive: kept, listed, collapsed, and never red, because a stay that ended in 2003 is a record, not an alarm. Each finding can be accepted or marked a data error, and the decision is kept across re-imports. |
+| **Review** | What the checks found, as one list beside one selected finding. Everything not yet decided is in the list, soonest first. A finding whose stay is live or upcoming is red; one whose stays ended years ago is not, because a stay that ended in 2003 is a record, not an alarm. Each finding can be accepted or marked a data error, and the decision is kept across re-imports. |
 | **Vessels** | The roster. Name and length; a length set here is what the fit check uses, and it survives a re-import of the sheet. |
 
-Navigation is a 48px rail (schedule, review, vessels) that `[` expands and `1` `2` `3` jump
-between. On a phone it is a bottom bar. Import notes, the account of what the sheet could and
-could not tell us, live behind a footer link rather than in the daily tool.
+Navigation is a top bar (schedule, review, vessels). Import notes, the account of what the
+sheet could and could not tell us, live behind a footer link rather than in the daily tool.
 
 The reserve panel is also a finder: give dates and a length and every berth is sorted into
 free and long enough, too short, or occupied, before a berth is chosen.

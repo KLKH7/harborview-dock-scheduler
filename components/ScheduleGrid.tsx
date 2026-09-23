@@ -13,6 +13,12 @@ const DAY_MS = 86_400_000
 const WEEKDAY = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 const BERTH_COL_PX = 268
 const MONTH_DAY_PX = 64
+/**
+ * The narrowest a day can go before a one-day stay's name collapses to a
+ * letter. Measured: the widest single-day label needs 40px across its two
+ * clamped lines. Below this the month scrolls instead of shrinking further.
+ */
+const MIN_DAY_PX = 40
 const WEEK_DAY_PX = 128
 
 export type GridReservation = Reservation & {
@@ -394,8 +400,18 @@ export function ScheduleGrid({
         }
       : null
 
-  const gridCols = `repeat(${visCount}, minmax(${dayPx}px, 1fr))`
-  const minWidth = BERTH_COL_PX + visCount * dayPx
+  // Month view fits the viewport: 31 days at a fixed 64px is 2,252px, which
+  // never fits a 1,280px screen, and the only sign it scrolled was a thin
+  // paper-coloured scrollbar that macOS hides until you already know to
+  // swipe. Days 17 to 31 read as cut off. Letting each day shrink to fill
+  // the row removes the horizontal scroll rather than decorating it. Week
+  // view keeps a fixed width because seven days always fit.
+  // Days shrink to fill the row, down to a floor that keeps a one-day name
+  // legible. Past the floor the grid scrolls, and the scrollbar is drawn
+  // (see .grid-scroller in globals.css), so overflow is never a secret.
+  const floor = view === 'week' ? dayPx : MIN_DAY_PX
+  const gridCols = `repeat(${visCount}, minmax(${floor}px, 1fr))`
+  const minWidth = BERTH_COL_PX + visCount * floor
 
   return (
     <div
@@ -429,6 +445,7 @@ export function ScheduleGrid({
         ref={scrollerRef}
         className="min-h-0 flex-1 overflow-auto bg-panel"
         role="grid"
+        data-scroller=""
         aria-label={`Berth occupancy, ${monthLabel(year, month)}`}
       >
         <div className="flex min-h-full flex-col" style={{ minWidth }}>
@@ -674,7 +691,7 @@ function Bar({
     <button
       type="button"
       aria-pressed={pinned}
-      className={`bar-trace relative z-[1] mx-px my-1 flex items-center overflow-hidden px-2.5 text-left ${fill} ${
+      className={`bar-trace relative z-[1] mx-px my-1 flex items-center overflow-hidden px-1.5 text-left ${fill} ${
         placed ? 'bar-placed' : ''
       }`}
       data-dimmed={dimmed ? '' : undefined}
@@ -692,7 +709,7 @@ function Bar({
       onBlur={onHoverEnd}
       onClick={onToggleTrace}
     >
-      <span className="line-clamp-2 text-[12px] font-medium leading-snug tracking-[-0.02em]">
+      <span className="line-clamp-2 text-[12px] font-medium leading-snug tracking-[-0.02em] [overflow-wrap:anywhere]">
         {clippedStart && <span className="opacity-50">‹ </span>}
         {r.label}
         {clippedEnd && <span className="opacity-50"> ›</span>}

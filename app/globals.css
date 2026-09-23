@@ -95,6 +95,36 @@ body {
   background: #d4cfc4;
 }
 
+/*
+  The schedule's horizontal scrollbar is always drawn.
+
+  Everywhere else a thin paper-toned thumb on a transparent track is right:
+  it recedes. On the schedule it hid the fact that half the month was off
+  screen. macOS overlay scrollbars then hid it entirely until a horizontal
+  swipe, so days 17 to 31 read as cut off. Here the track is visible and
+  the thumb is ink, because this scrollbar is information, not chrome.
+*/
+[data-scroller] {
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-mute) var(--color-wash);
+  scrollbar-gutter: stable;
+}
+
+[data-scroller]::-webkit-scrollbar {
+  height: 12px;
+}
+
+[data-scroller]::-webkit-scrollbar-track {
+  background: var(--color-wash);
+  border-top: 1px solid var(--color-line);
+}
+
+[data-scroller]::-webkit-scrollbar-thumb {
+  background: var(--color-mute);
+  border: 3px solid var(--color-wash);
+  border-radius: 6px;
+}
+
 .tnum {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;

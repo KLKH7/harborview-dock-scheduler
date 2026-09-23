@@ -12,8 +12,8 @@ import { PairLengthFix } from './PairLengthFix'
 type Props = {
   row: FindingRow | null
   disposition: Disposition | null
-  openCount: number
-  archiveCounts: { overlap: number; cross: number; oversize: number }
+  todoCount: number
+  counts: { overlap: number; cross: number; oversize: number }
   changes: ChangeEntry[]
 }
 
@@ -26,7 +26,7 @@ function fmt(iso: string) {
  * without leaving the page. Nothing selected shows one glyph and one
  * computed sentence, not an illustration.
  */
-export function FindingDetail({ row, disposition, openCount, archiveCounts, changes }: Props) {
+export function FindingDetail({ row, disposition, todoCount, counts, changes }: Props) {
   const router = useRouter()
   const [pending, start] = useTransition()
   const [note, setNote] = useState('')
@@ -37,8 +37,9 @@ export function FindingDetail({ row, disposition, openCount, archiveCounts, chan
         <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
           <Inbox size={40} strokeWidth={1} aria-hidden className="text-line" />
           <p className="tnum max-w-[36ch] text-[13px] text-mute">
-            {openCount === 0 ? 'Nothing open. ' : `${openCount} open. `}
-            {archiveCounts.overlap} overlaps, {archiveCounts.cross} in two berths and {archiveCounts.oversize} oversize pairings in the archive.
+            {todoCount === 0
+              ? 'Nothing to review.'
+              : `${todoCount} to review: ${counts.overlap} overlap${counts.overlap === 1 ? '' : 's'}, ${counts.cross} in two berths and ${counts.oversize} oversize pairing${counts.oversize === 1 ? '' : 's'}.`}
           </p>
         </div>
         <RecentChanges changes={changes} />
@@ -58,7 +59,6 @@ export function FindingDetail({ row, disposition, openCount, archiveCounts, chan
       <div className="mx-auto w-full max-w-[720px] px-6 py-6">
         <p className="text-[12px] uppercase tracking-[0.06em] text-mute">
           {row.kind === 'overlap' ? 'Two stays in one berth' : row.kind === 'cross' ? 'One vessel in two berths' : 'Too long for the berth'}
-          {row.open ? '' : ' · archive'}
         </p>
         <h2 className="mt-1 text-[17px] font-medium tracking-[-0.02em] text-ink">{row.title}</h2>
         <p className="tnum mt-1 text-[13px] text-mute">{row.detail}</p>
