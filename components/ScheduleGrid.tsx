@@ -127,6 +127,10 @@ export function ScheduleGrid({
     scrollerRef.current?.scrollTo({ left: 0 })
   }, [year, month])
 
+  useEffect(() => {
+    if (view === 'week') setWeekStart(firstOccupied)
+  }, [year, month])
+
   // Keep the URL in step without a server round-trip. A navigation here would
   // remount the scroll container and throw away keyboard focus.
   useEffect(() => {
@@ -135,6 +139,24 @@ export function ScheduleGrid({
     u.searchParams.set('month', String(month))
     window.history.replaceState(null, '', u)
   }, [year, month])
+
+  const occupiedThisMonth = useMemo(
+    () =>
+      reservations.filter(
+        (r) => parseDay(r.end) >= monthStart && parseDay(r.start) <= monthEnd,
+      ),
+    [reservations, monthStart, monthEnd],
+  )
+
+  const firstOccupied = useMemo(() => {
+    let min = Infinity
+    for (const r of occupiedThisMonth) {
+      const day =
+        Math.floor((Math.max(parseDay(r.start), monthStart) - monthStart) / DAY_MS) + 1
+      if (day < min) min = day
+    }
+    return Number.isFinite(min) ? min : 1
+  }, [occupiedThisMonth, monthStart])
 
   const visible = useMemo(
     () =>
@@ -326,7 +348,7 @@ export function ScheduleGrid({
         view={view}
         onView={(v) => {
           setView(v)
-          if (v === 'week') setWeekStart(1)
+          if (v === 'week') setWeekStart(firstOccupied)
         }}
         onShift={shiftRange}
         onJump={(y, m) => {
@@ -472,9 +494,15 @@ export function ScheduleGrid({
         {announcement}
       </p>
 
-      {visible.length === 0 && (
+      {visible.length === 0 && occupiedThisMonth.length > 0 && view === 'week' && (
         <p className="px-5 py-3 text-[13px] text-mute sm:px-8">
-          Nothing booked this {view}. Reserve, or drag across empty days on a berth.
+          No stays in these seven days. Switch to month to see the rest of{' '}
+          {monthLabel(year, month)}.
+        </p>
+      )}
+      {visible.length === 0 && occupiedThisMonth.length === 0 && (
+        <p className="px-5 py-3 text-[13px] text-mute sm:px-8">
+          Nothing booked this month. Reserve, or drag across empty days on a berth.
         </p>
       )}
 

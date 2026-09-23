@@ -90,7 +90,7 @@ export function MonthHeader({
       </button>
 
       <div className="ml-3 flex rounded bg-wash p-0.5 text-[12px] font-medium tracking-[-0.02em]">
-        {(['week', 'month'] as const).map((v) => (
+        {(['month', 'week'] as const).map((v) => (
           <button
             key={v}
             type="button"
