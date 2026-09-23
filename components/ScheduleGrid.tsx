@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import type { BerthRow } from '@/lib/data'
 import { parseDay, dayCount, type Reservation, type Vessel } from '@/lib/validation/engine'
 import { ReservePopover, type PendingSelection } from './ReservePopover'
@@ -109,6 +110,7 @@ export function ScheduleGrid({
   const [placedId, setPlacedId] = useState<string | null>(null)
   const [announcement, setAnnounce] = useState('')
   const [formOpen, setFormOpen] = useState(false)
+  const router = useRouter()
 
   const scrollerRef = useRef<HTMLDivElement>(null)
   const nDays = daysInMonth(year, month)
@@ -515,6 +517,7 @@ export function ScheduleGrid({
           onReserved={(id) => {
             setPlacedId(id)
             dispatch({ type: 'cancel' })
+            router.refresh()
           }}
         />
       )}
@@ -532,6 +535,7 @@ export function ScheduleGrid({
             setWeekStart(1)
             setPlacedId(id)
             setFormOpen(false)
+            router.refresh()
           }}
         />
       )}

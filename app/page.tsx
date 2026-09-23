@@ -18,12 +18,12 @@ export default async function SchedulePage(props: PageProps<'/'>) {
   )
   const month = clamp(Number(params.month) || Number(fallback.slice(5, 7)), 1, 12)
 
-  // Serve a window wider than the month so a stay starting in the previous
-  // month still draws, and still takes part in conflict detection.
+  // Load the whole schedule. Month changes are client-side and must not
+  // require a refetch; a 2k-row import is small enough to keep in memory.
   const [berths, vessels, reservations] = await Promise.all([
     getBerths(),
     getVessels(),
-    getReservations(`${year - 1}-11-01`, `${year + 1}-02-28`),
+    getReservations(),
   ])
 
   const vesselById = new Map(vessels.map((v) => [v.id, v]))
