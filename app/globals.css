@@ -3,28 +3,29 @@
 /*
   Harborview dock schedule.
 
-  Paper and one ink. Occupancy is a tint of the ink rather than a second
-  hue, so a vessel and an event are told apart by their label, every
-  control is ink, and the only colour on the page is conflict red.
+  One cool grey, one ink. Paper, wash, line, mute and ink are all tinted
+  the same grey, occupancy is a tint of the ink rather than a second hue,
+  so a vessel and an event are told apart by their label, every control is
+  ink, and the only colour on the page is conflict red.
 */
 @theme {
-  --color-paper: #fafaf8;
-  --color-ink: #231f20;
-  --color-mute: #6b645c;
-  --color-line: #e6e2d8;
-  --color-wash: #f3f0ea;
+  --color-paper: #f5f7f8;
+  --color-ink: #1b2228;
+  --color-mute: #66717b;
+  --color-line: #dfe4e8;
+  --color-wash: #eceff2;
   --color-panel: #ffffff;
 
-  --color-conflict: #c72215;
+  --color-conflict: #c4261a;
 
   /* Ink over paper at roughly 8% and 14%. */
-  --color-occupied: #ebe8e3;
-  --color-occupied-strong: #ddd8d0;
+  --color-occupied: #e5e9ec;
+  --color-occupied-strong: #d4dbe0;
 
   --radius-cell: 4px;
   --radius-panel: 8px;
 
-  --shadow-panel: 0 1px 2px rgba(35, 31, 32, 0.06);
+  --shadow-panel: 0 1px 2px rgba(27, 34, 40, 0.06);
 
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
@@ -86,7 +87,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #d4cfc4;
+  background: #cfd6dc;
 }
 
 /*
