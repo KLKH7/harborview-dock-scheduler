@@ -12,12 +12,11 @@ import {
   type Reservation,
   type Vessel,
 } from '../lib/validation/engine'
+import { hullKey } from '../lib/vessel-name'
 
 const snapshot = JSON.parse(readFileSync('data/snapshot.json', 'utf8'))
 const vesselData = JSON.parse(readFileSync('data/vessels.json', 'utf8'))
 
-const PREFIX_RE = /^(R\/V|M\/V|F\/V|S\/V|M\/Y|S\/Y|OSV|Tug|Barge)\s+/i
-const hullKey = (s: string) => s.replace(PREFIX_RE, '').replace(/\s+/g, ' ').trim().toUpperCase()
 
 const berths: Berth[] = snapshot.berths.map((b: { name: string; lengthFt: number }) => ({
   id: b.name,

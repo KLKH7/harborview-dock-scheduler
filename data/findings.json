@@ -1194,10 +1194,10 @@
     "conflicts": 2,
     "conflictViolations": 2,
     "conflictWarnings": 0,
-    "fitsCount": 492,
+    "fitsCount": 493,
     "oversizedCount": 115,
-    "unverifiableCount": 1540,
-    "eventCount": 22,
-    "unverifiableBookedDays": 5212
+    "unverifiableCount": 1454,
+    "eventCount": 107,
+    "unverifiableBookedDays": 5051
   }
 }

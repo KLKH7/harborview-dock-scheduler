@@ -13,15 +13,8 @@
  */
 import ExcelJS from 'exceljs'
 import { readFileSync, writeFileSync } from 'node:fs'
+import { ROSTER_NAME_RE, hullKey } from '../lib/vessel-name'
 
-const PREFIXES = ['R/V', 'M/V', 'F/V', 'S/V', 'M/Y', 'S/Y', 'OSV', 'Tug', 'Barge']
-const PREFIX_RE = new RegExp(`^(${PREFIXES.join('|').replace(/\//g, '\\/')})\\s+`, 'i')
-
-/** "R/V High Drift 120'" -> name + length */
-const NAMED_LENGTH_RE = new RegExp(
-  `^((?:${PREFIXES.join('|').replace(/\//g, '\\/')})\\s+.+?)\\s+(\\d+)\\s*'\\s*$`,
-  'i',
-)
 const LOA_RE = /LOA:\s*(\d+)\s*'/i
 
 export type RosterVessel = {
@@ -33,10 +26,6 @@ export type RosterVessel = {
   sourceTab: string
 }
 
-/** Strip the prefix and normalise case/whitespace so the two tabs can be joined. */
-export function hullKey(label: string): string {
-  return label.replace(PREFIX_RE, '').replace(/\s+/g, ' ').trim().toUpperCase()
-}
 
 async function main() {
   const wb = new ExcelJS.Workbook()
@@ -58,7 +47,7 @@ async function main() {
       for (let c = 1; c <= ws.columnCount; c++) {
         const v = row.getCell(c).value
         if (typeof v !== 'string') continue
-        const m = NAMED_LENGTH_RE.exec(v.trim())
+        const m = ROSTER_NAME_RE.exec(v.trim())
         if (!m) continue
 
         const canonicalName = m[1].trim()

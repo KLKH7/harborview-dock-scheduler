@@ -21,6 +21,7 @@
  */
 import ExcelJS from 'exceljs'
 import { writeFileSync } from 'node:fs'
+import { VESSEL_PREFIX_RE } from '../lib/vessel-name'
 
 const SOURCE = 'data/source.xlsx'
 const OUT = 'data/snapshot.json'
@@ -40,10 +41,21 @@ const DOW: Record<string, number[]> = {
   M: [0], T: [1], W: [2], TR: [3], R: [3], TH: [3], F: [4], S: [5, 6],
 }
 
-/** Labels that describe facility activity rather than a vessel visit. These
- *  still occupy a berth -- they just have no hull to length-check. */
-const EVENT_RE =
-  /community|sail day|maintenance|dredg|concrete|closed|repair|inspect|open house|regatta|festival|survey|haul|no docking|clean|utility|test|power/i
+/**
+ * A booking is a VESSEL visit only if its label starts with a vessel prefix.
+ *
+ * This is an allow-list, deliberately. The first version of this was a
+ * keyword deny-list ("maintenance|repair|dredging|…"), which can only catch
+ * the phrases someone thought of in advance — it silently typed 85 bookings
+ * as vessels that were nothing of the kind: schedule annotations ("ETA 1200",
+ * "Departs 0600"), facility work ("Bollard replacement, west face"), and
+ * events ("Student tour", "Donor reception"). Each then counted as a vessel
+ * of unknown length, inflating the "cannot be fit-checked" total.
+ *
+ * Every genuine vessel in this workbook carries one of these prefixes, so
+ * matching on them is exact rather than approximate. Note OS/V as well as
+ * OSV — both spellings appear, in the schedule and on the roster.
+ */
 
 const BERTH_RE = /^(.*?)\s*-\s*(\d+)\s*'/
 
@@ -343,7 +355,7 @@ function main() {
               label: run.label,
               start: iso(year, month, run.start),
               end: iso(year, month, run.end),
-              kind: EVENT_RE.test(run.label) ? 'event' : 'vessel',
+              kind: VESSEL_PREFIX_RE.test(run.label) ? 'vessel' : 'event',
               sourceSheet: ws.name,
             })
             run = null

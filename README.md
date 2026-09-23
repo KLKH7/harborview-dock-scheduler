@@ -95,7 +95,7 @@ turnaround) rather than a *violation*.
 type FitStatus = 'fits' | 'violation' | 'unverifiable' | 'not_applicable'
 ```
 
-`unverifiable` is the important one. **1,540 bookings — 5,212 booked days — reference vessels
+`unverifiable` is the important one. **1,454 bookings — 5,051 booked days — reference vessels
 with no length recorded anywhere in the workbook**, including the busiest (`R/V Golden
 Compass`, 1,445 days). Their fit cannot be computed.
 
@@ -108,6 +108,27 @@ The same applies to berths. Two grouped areas (`North Finger Piers`, `Small craf
 carry no length in the source, so a vessel placed there is also `unverifiable`. Their capacity
 is stored as `null` — never `0` (which would flag everything) and never `Infinity` (which
 would approve everything).
+
+### "Is this a vessel?" is an allow-list, not a keyword search
+
+Not every cell in the grid names a ship. The schedule is also used for annotations
+(`ETA 1200`, `Departs 0600`, `Delayed due to weather`), facility work (`Bollard replacement,
+west face`, `Float rebuild - no usage permitted`) and events (`Student tour`,
+`Donor reception`).
+
+My first version classified these with a keyword deny-list — `maintenance|repair|dredging|…`.
+That can only catch the phrases you think of in advance, and it silently typed **85 bookings
+as vessels that were nothing of the kind**, each then counted as a vessel of unknown length
+and inflating the "cannot be fit-checked" total.
+
+It is now an allow-list on the vessel prefix (`R/V`, `M/V`, `F/V`, `S/V`, `M/Y`, `S/Y`,
+`OS/V`, `OSV`, `Tug`, `Barge`), which is exact rather than approximate because every genuine
+vessel in this workbook carries one. Note `OS/V` as well as `OSV` — both spellings appear,
+and missing the former dropped two vessels from the roster.
+
+The prefix list lives in one module (`lib/vessel-name.ts`) rather than being repeated in each
+script, because when `OS/V` turned up it had to be fixed everywhere or the scripts would
+disagree about what counts as a vessel.
 
 ### History is observed; new bookings are governed
 
@@ -139,8 +160,8 @@ inclusive-boundary cases, containment, unknown lengths, and events.
 | Reservations imported | **2,169** (Aug 1997 → Dec 2019) |
 | Double-bookings | **2** (both ≥ 2 shared days) |
 | Vessels exceeding their berth | **115** |
-| Bookings that cannot be fit-checked | **1,540** (5,212 booked days) |
-| Facility events (no vessel) | **22** |
+| Bookings that cannot be fit-checked | **1,454** (5,051 booked days) |
+| Facility events and dock notes (no vessel) | **107** |
 
 The worst overhang is `R/V Long Anchor` (170′) repeatedly assigned to `North Pier Face`
 (75′) — 95 feet too long. The double-bookings are both a vessel booked into a berth during a
@@ -201,7 +222,7 @@ Built to the suggested 3–5 hours, so the following are **conscious omissions**
 
 ### The honest limitation
 
-I could not determine a length for **1,540 bookings**. Those are reported as *unverifiable*
+I could not determine a length for **1,454 bookings**. Those are reported as *unverifiable*
 rather than approved. The Data Quality screen ranks the missing vessels by how much schedule
 they occupy — recording a length for just the top ten would make 3,352 booked days
 verifiable — so the gap is actionable rather than merely acknowledged.

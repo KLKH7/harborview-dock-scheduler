@@ -323,13 +323,6 @@
       "bookedDays": 15
     },
     {
-      "hullKey": "BOLLARD REPLACEMENT, WEST FACE",
-      "displayName": "Bollard replacement, west face",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 15
-    },
-    {
       "hullKey": "BRIGHT STRAND",
       "displayName": "R/V Bright Strand",
       "lengthFt": null,
@@ -346,13 +339,6 @@
     {
       "hullKey": "SWIFT LANTERN",
       "displayName": "R/V Swift Lantern",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 14
-    },
-    {
-      "hullKey": "DEPARTURE 0800",
-      "displayName": "Departure 0800",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 14
@@ -393,20 +379,6 @@
       "bookedDays": 12
     },
     {
-      "hullKey": "HOLIDAY",
-      "displayName": "Holiday",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 12
-    },
-    {
-      "hullKey": "SCIENCE STROLL",
-      "displayName": "Science stroll",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 12
-    },
-    {
       "hullKey": "CORAL MARLIN",
       "displayName": "F/V Coral Marlin",
       "lengthFt": null,
@@ -426,13 +398,6 @@
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 12
-    },
-    {
-      "hullKey": "DEPARTS 0600",
-      "displayName": "Departs 0600",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 11
     },
     {
       "hullKey": "WESTERN GANNET",
@@ -472,13 +437,6 @@
     {
       "hullKey": "SALT SOUND",
       "displayName": "M/Y Salt Sound",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 10
-    },
-    {
-      "hullKey": "ROAD RACE - ACCESS LIMITED",
-      "displayName": "Road race - access limited",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 10
@@ -540,20 +498,6 @@
       "bookedDays": 8
     },
     {
-      "hullKey": "ETD PM",
-      "displayName": "ETD PM",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 8
-    },
-    {
-      "hullKey": "ETA 1200",
-      "displayName": "ETA 1200",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 8
-    },
-    {
       "hullKey": "IRON SEXTANT",
       "displayName": "F/V IRON SEXTANT",
       "lengthFt": null,
@@ -603,13 +547,6 @@
       "bookedDays": 7
     },
     {
-      "hullKey": "FLOAT REBUILD - NO USAGE PERMITTED",
-      "displayName": "Float rebuild - no usage permitted",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 7
-    },
-    {
       "hullKey": "NORTHERN HERON",
       "displayName": "M/V NORTHERN HERON",
       "lengthFt": null,
@@ -631,13 +568,6 @@
       "bookedDays": 7
     },
     {
-      "hullKey": "DONOR RECEPTION",
-      "displayName": "Donor reception",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 7
-    },
-    {
       "hullKey": "BLUE VOYAGER",
       "displayName": "R/V Blue Voyager",
       "lengthFt": null,
@@ -647,13 +577,6 @@
     {
       "hullKey": "GREY SKUA",
       "displayName": "S/V Grey Skua",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 7
-    },
-    {
-      "hullKey": "BUNKER BARGE",
-      "displayName": "Bunker barge",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 7
@@ -696,13 +619,6 @@
     {
       "hullKey": "SALT HERON",
       "displayName": "R/V SALT HERON",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 6
-    },
-    {
-      "hullKey": "DELAYED DUE TO WEATHER",
-      "displayName": "Delayed due to weather",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 6
@@ -855,13 +771,6 @@
       "bookedDays": 5
     },
     {
-      "hullKey": "STUDENT TOUR",
-      "displayName": "Student tour",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 5
-    },
-    {
       "hullKey": "CLEAR TERN",
       "displayName": "R/V CLEAR TERN",
       "lengthFt": 120,
@@ -964,13 +873,6 @@
       "displayName": "M/V Wild Reef",
       "lengthFt": 100,
       "lengthSource": "fuzzy_hull_match",
-      "bookedDays": 4
-    },
-    {
-      "hullKey": "EMERGENCY PORT CALL",
-      "displayName": "Emergency port call",
-      "lengthFt": null,
-      "lengthSource": "unknown",
       "bookedDays": 4
     },
     {
@@ -1205,22 +1107,8 @@
       "bookedDays": 3
     },
     {
-      "hullKey": "ARRIVES AM",
-      "displayName": "Arrives AM",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 3
-    },
-    {
       "hullKey": "GOLDEN SEXTANT",
       "displayName": "F/V Golden Sextant",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 3
-    },
-    {
-      "hullKey": "ARRIVAL 1400",
-      "displayName": "Arrival 1400",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 3
@@ -1242,13 +1130,6 @@
     {
       "hullKey": "BRIGHT SKUA",
       "displayName": "M/V Bright Skua",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 3
-    },
-    {
-      "hullKey": "RESCUE DRILL",
-      "displayName": "Rescue drill",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 3
@@ -1303,7 +1184,7 @@
       "bookedDays": 3
     },
     {
-      "hullKey": "OS/V GOLDEN OSPREY",
+      "hullKey": "GOLDEN OSPREY",
       "displayName": "OS/V Golden Osprey",
       "lengthFt": null,
       "lengthSource": "unknown",
@@ -1312,13 +1193,6 @@
     {
       "hullKey": "QUIET BEACON",
       "displayName": "S/V Quiet Beacon",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 3
-    },
-    {
-      "hullKey": "FUELING @0800",
-      "displayName": "Fueling @0800",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 3
@@ -1548,13 +1422,6 @@
       "bookedDays": 2
     },
     {
-      "hullKey": "PAVING NEAR DOCK ENTRANCE",
-      "displayName": "Paving near dock entrance",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
       "hullKey": "DEEP HORIZON",
       "displayName": "M/Y Deep Horizon",
       "lengthFt": null,
@@ -1618,20 +1485,6 @@
       "bookedDays": 2
     },
     {
-      "hullKey": "SAFETY TRAINING (RIBS)",
-      "displayName": "Safety training (RIBs)",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
-      "hullKey": "FILM CREW ON DOCK",
-      "displayName": "Film crew on dock",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
       "hullKey": "NORTHERN ANCHOR",
       "displayName": "Barge Northern Anchor",
       "lengthFt": null,
@@ -1641,13 +1494,6 @@
     {
       "hullKey": "WILD CURRENT",
       "displayName": "R/V Wild Current",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
-      "hullKey": "LOAD EQUIPMENT",
-      "displayName": "Load equipment",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 2
@@ -1716,13 +1562,6 @@
       "bookedDays": 2
     },
     {
-      "hullKey": "PROVISIONING",
-      "displayName": "Provisioning",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
       "hullKey": "BRIGHT PETREL",
       "displayName": "Tug Bright Petrel",
       "lengthFt": null,
@@ -1732,13 +1571,6 @@
     {
       "hullKey": "HIGH SEXTANT",
       "displayName": "M/Y High Sextant",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
-      "hullKey": "TOUCH AND GO",
-      "displayName": "Touch and go",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 2
@@ -1800,13 +1632,6 @@
       "bookedDays": 2
     },
     {
-      "hullKey": "FUELING",
-      "displayName": "Fueling",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
       "hullKey": "BRIGHT SEXTANT",
       "displayName": "S/V Bright Sextant",
       "lengthFt": null,
@@ -1835,22 +1660,8 @@
       "bookedDays": 2
     },
     {
-      "hullKey": "BUNKERING",
-      "displayName": "Bunkering",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
       "hullKey": "LONG FATHOM",
       "displayName": "R/V Long Fathom",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 2
-    },
-    {
-      "hullKey": "FUEL TRUCK",
-      "displayName": "Fuel truck",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 2
@@ -2556,13 +2367,6 @@
       "bookedDays": 1
     },
     {
-      "hullKey": "CAMPUS EVENT",
-      "displayName": "Campus event",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 1
-    },
-    {
       "hullKey": "WILD WIND",
       "displayName": "M/Y Wild Wind",
       "lengthFt": null,
@@ -3144,10 +2948,10 @@
       "bookedDays": 1
     },
     {
-      "hullKey": "OS/V SILVER SKUA",
+      "hullKey": "SILVER SKUA",
       "displayName": "OS/V Silver Skua",
-      "lengthFt": null,
-      "lengthSource": "unknown",
+      "lengthFt": 24,
+      "lengthSource": "roster_exact",
       "bookedDays": 1
     },
     {
@@ -3158,22 +2962,8 @@
       "bookedDays": 1
     },
     {
-      "hullKey": "WIRE SPOOLING",
-      "displayName": "Wire spooling",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 1
-    },
-    {
       "hullKey": "SILVER GANNET",
       "displayName": "OSV Silver Gannet",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 1
-    },
-    {
-      "hullKey": "WATER/SLOPS PUMPING",
-      "displayName": "Water/slops pumping",
       "lengthFt": null,
       "lengthSource": "unknown",
       "bookedDays": 1
@@ -3221,13 +3011,6 @@
       "bookedDays": 1
     },
     {
-      "hullKey": "1400",
-      "displayName": "1400",
-      "lengthFt": null,
-      "lengthSource": "unknown",
-      "bookedDays": 1
-    },
-    {
       "hullKey": "WESTERN KETCH",
       "displayName": "M/V Western Ketch",
       "lengthFt": null,
@@ -3235,7 +3018,7 @@
       "bookedDays": 1
     }
   ],
-  "rosterSize": 161,
+  "rosterSize": 163,
   "conflictingLoa": [
     {
       "name": "R/V High Sound",
@@ -3264,10 +3047,10 @@
     }
   ],
   "stats": {
-    "scheduledVessels": 462,
-    "withLength": 64,
-    "withoutLength": 398,
-    "bookedDaysWithLength": 2255,
-    "bookedDaysWithoutLength": 5212
+    "scheduledVessels": 431,
+    "withLength": 65,
+    "withoutLength": 366,
+    "bookedDaysWithLength": 2256,
+    "bookedDaysWithoutLength": 5051
   }
 }
