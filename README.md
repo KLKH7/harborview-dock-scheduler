@@ -1,5 +1,7 @@
 # Harborview Dock Scheduling
 
+**Live:** https://harborview-dock-scheduler.vercel.app
+
 A system for managing berth reservations at a marine research facility, built from 23 years
 of existing schedule data (1997–2019).
 
