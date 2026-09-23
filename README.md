@@ -17,7 +17,7 @@ booking, historical and new.
 | Screen | Purpose |
 |---|---|
 | **Schedule** | Opens on today. One line above the grid says what is true at the dock right now: in port, arriving, departing, berths free tonight. The berth by day grid is where bookings are made: drag along a row to select days, and the drag stops where the berth is taken. Overlapping stays stack in separate lanes, so a double booking makes the row visibly taller before any colour is read. Hover or click a bar and that hull is traced everywhere it appears. |
-| **Review** | Every stay, checked by the same rules that refuse a new one, in one column: two stays in one berth, one vessel in two berths, and vessels too long for their berth grouped by vessel and berth pair with the length fix inline. A finding whose stay is live or upcoming is red; one whose stays ended years ago is not, because a stay that ended in 2003 is a record, not an alarm. |
+| **Review** | What the checks found, as one list beside one selected finding. Everything not yet decided is in the list, soonest first. A finding whose stay is live or upcoming is red; one whose stays ended years ago is not, because a stay that ended in 2003 is a record, not an alarm. Each finding can be accepted or marked a data error, and the decision is kept across re-imports. |
 | **Vessels** | The roster. Name and length; a length set here is what the fit check uses, and it survives a re-import of the sheet. |
 
 Navigation is a top bar (schedule, review, vessels). Import notes, the account of what the
@@ -228,9 +228,8 @@ it fires every time the pointer crosses a bar; a 120ms opacity change and nothin
 A finding is computed by the engine on every read. It is never stored, so it can never go
 stale. What is stored is the human's answer to it: `finding_disposition`, keyed by a
 fingerprint. Accept means the situation was fine in practice (rafted alongside, agreed with
-the skipper). Data error means the sheet or the roster is wrong. Either way the decision is
-kept. The table and the server action exist; the review page does not yet expose them, because
-the list-and-detail layout that did was more chrome than a desk with 35 archived findings needs.
+the skipper). Data error means the sheet or the roster is wrong. Either way the row leaves the
+list and the decision is kept.
 
 The fingerprint is the subtle part. Archive rows get SERIAL ids that any reseed reassigns, so
 a decision keyed on an id would silently detach. Fingerprints use a `source_key` instead: a
@@ -245,7 +244,7 @@ destroy every stay the coordinator had made. It is now two scripts. `migrate` is
 and never drops. `import` upserts: archive rows match on `source_key`, vessels on the hull,
 app-made rows are never touched, and a length the coordinator corrected by hand is kept over
 whatever the roster says. Every change to a stay or a vessel is written to a `change_log` by
-a trigger, so no code path can forget it.
+a trigger, so no code path can forget it, and the last twenty appear on the review page.
 
 ### A one-day-early bug, fixed before it shipped anywhere it would show
 
