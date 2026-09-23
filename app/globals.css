@@ -27,6 +27,28 @@
   --color-occupied: var(--color-sea-fill);
   --color-occupied-strong: #c1d6df;
 
+  /*
+    Eight hull hues. Same lightness band for every fill and every ink, all
+    tinted toward the cool grey of the page, none of them green (moss is the
+    event) or red (conflict). Which hull gets which is lib/hue.ts.
+  */
+  --color-hue-0: #1e4a5e;
+  --color-hue-0-fill: #d3e3ea;
+  --color-hue-1: #3b3f7a;
+  --color-hue-1-fill: #dcdcef;
+  --color-hue-2: #5c3d6e;
+  --color-hue-2-fill: #e6dcea;
+  --color-hue-3: #6e3a55;
+  --color-hue-3-fill: #ecdbe3;
+  --color-hue-4: #6b4f1a;
+  --color-hue-4-fill: #efe4cc;
+  --color-hue-5: #5a5220;
+  --color-hue-5-fill: #e9e7cc;
+  --color-hue-6: #2f5aa8;
+  --color-hue-6-fill: #d8e2f5;
+  --color-hue-7: #3f4f5e;
+  --color-hue-7-fill: #dde3e8;
+
   --radius-cell: 4px;
   --radius-panel: 8px;
 
@@ -171,6 +193,21 @@ body {
 .bar-trace {
   transition: opacity 120ms ease;
 }
+
+/* A vessel bar: fill, ink and left rule all from its hull's hue. */
+.bar-hue {
+  background: var(--bar-fill);
+  color: var(--bar-ink);
+  border-color: var(--bar-ink);
+}
+.hue-0 { --bar-ink: var(--color-hue-0); --bar-fill: var(--color-hue-0-fill); }
+.hue-1 { --bar-ink: var(--color-hue-1); --bar-fill: var(--color-hue-1-fill); }
+.hue-2 { --bar-ink: var(--color-hue-2); --bar-fill: var(--color-hue-2-fill); }
+.hue-3 { --bar-ink: var(--color-hue-3); --bar-fill: var(--color-hue-3-fill); }
+.hue-4 { --bar-ink: var(--color-hue-4); --bar-fill: var(--color-hue-4-fill); }
+.hue-5 { --bar-ink: var(--color-hue-5); --bar-fill: var(--color-hue-5-fill); }
+.hue-6 { --bar-ink: var(--color-hue-6); --bar-fill: var(--color-hue-6-fill); }
+.hue-7 { --bar-ink: var(--color-hue-7); --bar-fill: var(--color-hue-7-fill); }
 
 .bar-trace[data-dimmed] {
   opacity: 0.32;

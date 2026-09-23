@@ -8,6 +8,8 @@ import { deleteReservation } from '@/app/actions'
 import { ReservePopover, type PendingSelection } from './ReservePopover'
 import { ReserveDialog } from './ReserveDialog'
 import { MonthHeader, type ScheduleView } from './MonthHeader'
+import { hullKey } from '@/lib/vessel-name'
+import { hueIndex } from '@/lib/hue'
 
 const DAY_MS = 86_400_000
 const WEEKDAY = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
@@ -675,16 +677,16 @@ function Bar({
   const clippedStart = parseDay(r.start) < visStart
   const clippedEnd = parseDay(r.end) > visEnd
   const alarm = r.conflicted || r.oversize
+  // The old spreadsheet gave each regular vessel its own fill colour, which
+  // answered "where else is this hull this month" at a glance. Eight hues
+  // cannot be unique across 462 hulls, so the hue is a hint keyed on the
+  // hull name and the trace (hover or click) is the exact answer: the other
+  // stays recede rather than this one shouting.
   const fill = alarm
     ? 'border-l-[3px] border-conflict bg-conflict/10 text-conflict'
     : r.kind === 'event'
       ? 'border-l-[3px] border-event bg-event-fill text-event'
-      : 'border-l-[3px] border-sea bg-sea-fill text-sea'
-
-  // The old spreadsheet gave each regular vessel its own fill colour, which
-  // answered "where else is this hull this month" at a glance. That does not
-  // survive 462 vessels and one accent, so the same question is answered on
-  // demand instead: the other stays recede rather than this one shouting.
+      : `border-l-[3px] bar-hue hue-${hueIndex(hullKey(r.label))}`
   const dimmed = traced === false
 
   return (

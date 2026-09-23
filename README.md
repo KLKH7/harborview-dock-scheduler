@@ -207,7 +207,7 @@ days refuses; a one-day shift is reported and allowed.
 I found this gap by brute-forcing every pair and comparing to the engine. The engine matched
 on same-berth pairs exactly, and the exercise surfaced the class it never looked for.
 
-### Tracing a hull replaces the spreadsheet's colour coding
+### Eight hues and a trace replace the spreadsheet's colour coding
 
 The source workbook gave each regular vessel a fixed fill colour. This was a real system:
 180 of 208 coloured hulls wore exactly one colour across 23 years, and the busiest was 100%
@@ -216,10 +216,14 @@ a label. It also did not survive its own tail: only 49% of stays had any colour,
 mid-frequency vessels drifted between hues, and red did double duty as an identity and as
 "no usage permitted".
 
-So the question is answered on demand. Hover or click a bar and that hull is traced across
-the whole view; the other bars recede rather than the match brightening, which keeps one
-accent meaning one thing. It scales to all 431 vessels and cannot drift, because identity
-comes from the data rather than from remembering which purple. No entrance animation, since
+So it is answered twice. At rest, every vessel bar wears one of eight hues, chosen by hashing
+the hull name (`lib/hue.ts`), so a regular is recognisable across a month at a glance and the
+same hull is the same hue on every machine with no table to maintain. Eight cannot be unique
+across 431 hulls, so the hue is a hint: two vessels sharing one is a near miss, never a wrong
+claim, and none of the eight is green (events) or red (conflict). The exact answer is on
+demand: hover or click a bar and that hull is traced across the whole view; the other bars
+recede rather than the match brightening. It scales to every vessel and cannot drift, because
+identity comes from the data rather than from remembering which purple. No entrance animation, since
 it fires every time the pointer crosses a bar; a 120ms opacity change and nothing under
 `prefers-reduced-motion`. Click pins it for keyboard and touch; Escape clears.
 
