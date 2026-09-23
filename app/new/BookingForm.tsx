@@ -8,6 +8,11 @@ import { checkDraft, createReservation } from './actions'
 
 type Props = { berths: BerthRow[]; vessels: Vessel[] }
 
+/** Stable identity for a draft, used to tie a verdict to the input it came from. */
+function keyOf(d: DraftReservation): string {
+  return [d.berthId, d.start, d.end, d.kind, d.vesselId ?? '', d.label].join('\u0000')
+}
+
 export function BookingForm({ berths, vessels }: Props) {
   const [kind, setKind] = useState<'vessel' | 'event'>('vessel')
   const [berthId, setBerthId] = useState(berths[0]?.id ?? '')
@@ -17,8 +22,10 @@ export function BookingForm({ berths, vessels }: Props) {
   const [end, setEnd] = useState('')
   const [overrideReason, setOverrideReason] = useState('')
 
-  const [report, setReport] = useState<ValidationReport | null>(null)
-  const [created, setCreated] = useState<string | null>(null)
+  // Keyed by the draft it describes, so a stale verdict can never be shown
+  // against a draft the user has since edited.
+  const [stored, setReport] = useState<{ forDraft: string; value: ValidationReport } | null>(null)
+  const [created, setCreated] = useState<{ id: string; forDraft: string } | null>(null)
   const [pending, startTransition] = useTransition()
   const [saving, setSaving] = useState(false)
 
@@ -41,25 +48,31 @@ export function BookingForm({ berths, vessels }: Props) {
 
   // Live validation: the user sees the verdict before committing, using the
   // same engine the server will re-run on submit.
+  //
+  // Only the async result is written to state. Clearing the previous report is
+  // handled by deriving it below rather than by calling setState synchronously
+  // here, which would force a second render pass on every keystroke.
   useEffect(() => {
-    if (!draft) {
-      setReport(null)
-      return
-    }
-    setCreated(null)
+    if (!draft) return
     startTransition(async () => {
-      setReport(await checkDraft(draft))
+      const r = await checkDraft(draft)
+      setReport({ forDraft: keyOf(draft), value: r })
     })
   }, [draft])
+
+  // A stored report is only meaningful for the draft it was computed from. When
+  // the draft changes, the old verdict is stale and must not be shown as if it
+  // described the new one.
+  const report = draft && stored?.forDraft === keyOf(draft) ? stored.value : null
 
   async function submit() {
     if (!draft) return
     setSaving(true)
     try {
       const res = await createReservation(draft, overrideReason || undefined)
-      setReport(res.report)
+      setReport({ forDraft: keyOf(draft), value: res.report })
       if (res.status === 'created') {
-        setCreated(res.id)
+        setCreated({ id: res.id, forDraft: keyOf(draft) })
         setOverrideReason('')
       }
     } finally {
@@ -188,9 +201,9 @@ export function BookingForm({ berths, vessels }: Props) {
           {saving ? 'Saving…' : blocked ? 'Book anyway with reason' : 'Create booking'}
         </button>
 
-        {created && (
+        {created && draft && created.forDraft === keyOf(draft) && (
           <p className="rounded bg-emerald-50 px-3 py-2 text-sm text-emerald-900 ring-1 ring-emerald-200">
-            Booking #{created} created.{' '}
+            Booking #{created.id} created.{' '}
             <Link href={`/?year=${start.slice(0, 4)}&month=${Number(start.slice(5, 7))}`} className="underline">
               View it on the schedule →
             </Link>

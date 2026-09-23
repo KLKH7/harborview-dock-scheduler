@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # The validation engine is pure -- no database, no workbook, no network --
+      # so its tests run on a bare checkout. That is the point of keeping it pure.
+      - name: Validation engine tests
+        run: npm test
+
+      - name: Typecheck and build
+        run: npm run build
+        env:
+          # The build only needs this to satisfy the module-load check in lib/db.ts;
+          # no query runs at build time. Not a real credential.
+          DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+
+      - name: Lint
+        run: npm run lint

@@ -113,15 +113,6 @@ function isOccupied(cell: ExcelJS.Cell): boolean {
   return c !== null && !NEUTRAL_FILLS.has(c)
 }
 
-/** True when any day cell in this berth row carries a booking. */
-function rowHasAnyContent(row: ExcelJS.Row, dayCols: [number, number][]): boolean {
-  for (const [col] of dayCols) {
-    const cell = row.getCell(col)
-    if (isOccupied(cell) || cellText(cell) !== '') return true
-  }
-  return false
-}
-
 function daysInMonth(year: number, month: number): number {
   return new Date(Date.UTC(year, month, 0)).getUTCDate()
 }

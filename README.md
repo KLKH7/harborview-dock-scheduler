@@ -198,11 +198,20 @@ place because the brief says *manage* — new bookings must persist.
 ```bash
 npm install
 npm test                        # 31 engine tests
-npm run extract                 # rebuild snapshot from data/source.xlsx
+npm run extract                 # rebuild snapshot from data/source.xlsx (see note)
 npm run audit                   # verify the extraction independently
 npm run seed                    # load Postgres (needs DATABASE_URL)
 npm run dev
 ```
+
+`npm test` works on a fresh clone with no setup — the engine is pure, so its tests need
+neither the workbook nor a database.
+
+The source workbook is **not committed** (it is the employer's sample data, and a 394 KB
+binary does not belong in git). `data/snapshot.json`, `data/vessels.json` and
+`data/findings.json` — the extractor's committed output — are, so the app and the audit run
+without it. To re-run `npm run extract` yourself, drop the sample workbook at
+`data/source.xlsx` first.
 
 ---
 
