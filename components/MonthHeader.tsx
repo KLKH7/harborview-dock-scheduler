@@ -52,7 +52,7 @@ export function MonthHeader({
   }, [open])
 
   return (
-    <div className="relative flex h-14 shrink-0 items-center gap-1 px-5 sm:px-8" ref={ref}>
+    <div className="relative flex h-10 shrink-0 items-center gap-1 px-5 sm:px-8" ref={ref}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -67,7 +67,7 @@ export function MonthHeader({
           }
         }}
         aria-expanded={open}
-        className="tnum -mx-1 rounded px-1 text-[18px] font-medium tracking-[-0.04em] text-ink hover:bg-wash"
+        className="tnum -mx-1 rounded px-1 text-[15px] font-medium tracking-[-0.02em] text-ink hover:bg-wash"
       >
         {MONTHS[month - 1]} {year}
       </button>
@@ -109,7 +109,7 @@ export function MonthHeader({
       <button
         type="button"
         onClick={onToday}
-        className="hidden rounded px-2 py-1 text-[12px] text-mute hover:bg-wash hover:text-ink sm:inline"
+        className="rounded px-2 py-1 text-[12px] text-ink hover:bg-wash"
       >
         Today
       </button>

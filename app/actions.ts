@@ -2,8 +2,22 @@
 
 import { revalidatePath } from 'next/cache'
 import { sql } from '@/lib/db'
-import { getBerths, getVessels, getReservations, findVesselByHull, insertVessel } from '@/lib/data'
+import { getBerths, getVessels, getReservations, findVesselByHull, insertVessel, upsertVesselStatement } from '@/lib/data'
 import { validateProposed, type DraftReservation } from '@/lib/validation/engine'
+import { hullKey } from '@/lib/vessel-name'
+
+/** Postgres SQLSTATE for an exclusion-constraint violation. */
+const EXCLUSION_VIOLATION = '23P01'
+
+function pgCode(e: unknown): string | undefined {
+  return typeof e === 'object' && e !== null && 'code' in e ? String((e as { code?: unknown }).code) : undefined
+}
+
+function revalidateAll() {
+  revalidatePath('/')
+  revalidatePath('/review')
+  revalidatePath('/vessels')
+}
 
 export type CreateResult =
   | { status: 'created'; id: string }
@@ -29,21 +43,24 @@ export type CreateInput = DraftReservation & {
  * message names the numbers so the refusal is actionable.
  */
 export async function createReservation(draft: CreateInput): Promise<CreateResult> {
-  let vesselId = draft.vesselId
   const label = draft.label.trim()
+  let vesselId = draft.vesselId
+  let newVessel: { name: string; lengthFt: number | null } | null = null
 
-  if (draft.kind === 'vessel') {
-    if (!vesselId) {
-      const existingHull = await findVesselByHull(label)
-      if (existingHull) vesselId = existingHull.id
-      else {
-        const length =
-          draft.newVesselLengthFt != null && Number.isFinite(draft.newVesselLengthFt)
-            ? Math.round(draft.newVesselLengthFt)
-            : null
-        const created = await insertVessel(label, length)
-        vesselId = created.id
-      }
+  // Resolve the name to a hull. If it is genuinely new, remember that, but do
+  // NOT insert it yet: a refused booking used to leave an orphan vessel behind.
+  if (draft.kind === 'vessel' && !vesselId) {
+    const existingHull = await findVesselByHull(label)
+    if (existingHull) vesselId = existingHull.id
+    else {
+      const length =
+        draft.newVesselLengthFt != null && Number.isFinite(draft.newVesselLengthFt)
+          ? Math.round(draft.newVesselLengthFt)
+          : null
+      newVessel = { name: label, lengthFt: length }
+      // The engine needs an id to check cross-berth and fit. Use the hull key,
+      // which is what the row will resolve to once it exists.
+      vesselId = `pending:${hullKey(label)}`
     }
   }
 
@@ -62,7 +79,13 @@ export async function createReservation(draft: CreateInput): Promise<CreateResul
     getReservations(resolved.start, resolved.end),
   ])
 
-  const report = validateProposed(resolved, existing, berths, vessels)
+  // A vessel that does not exist yet is validated as if it did, with the
+  // length the coordinator typed.
+  const vesselsForCheck = newVessel
+    ? [...vessels, { id: vesselId!, displayName: label, lengthFt: newVessel.lengthFt, lengthSource: newVessel.lengthFt != null ? 'manual_override' as const : 'unknown' as const }]
+    : vessels
+
+  const report = validateProposed(resolved, existing, berths, vesselsForCheck)
 
   if (report.errors.length > 0) {
     return { status: 'refused', message: report.errors.join('. ') }
@@ -93,26 +116,69 @@ export async function createReservation(draft: CreateInput): Promise<CreateResul
     return { status: 'refused', message: 'This booking was refused.' }
   }
 
-  const rows = (await sql`
-    INSERT INTO reservation (berth_id, start_date, end_date, kind, vessel_id, label, source)
-    VALUES (${resolved.berthId}, ${resolved.start}::date, ${resolved.end}::date, ${resolved.kind},
-            ${resolved.vesselId}, ${resolved.label}, 'app')
-    RETURNING id
-  `) as Record<string, unknown>[]
+  // Everything the engine can see is fine. Now the part it cannot see: two
+  // requests that both passed validation a moment apart. The exclusion
+  // constraint holds that line; the engine only ever produced the good
+  // message. Vessel and stay go in one transaction so a refusal here leaves
+  // no orphan vessel either.
+  try {
+    if (newVessel) {
+      const [vesselRows, stayRows] = await sql.transaction([
+        upsertVesselStatement(newVessel.name, newVessel.lengthFt),
+        sql`
+          INSERT INTO reservation (berth_id, start_date, end_date, kind, vessel_id, label, source)
+          SELECT ${resolved.berthId}, ${resolved.start}::date, ${resolved.end}::date, ${resolved.kind},
+                 (SELECT id FROM vessel WHERE hull_key = ${hullKey(newVessel.name)}), ${resolved.label}, 'app'
+          RETURNING id`,
+      ])
+      void vesselRows
+      revalidateAll()
+      return { status: 'created', id: String((stayRows as Record<string, unknown>[])[0].id) }
+    }
+    const rows = (await sql`
+      INSERT INTO reservation (berth_id, start_date, end_date, kind, vessel_id, label, source)
+      VALUES (${resolved.berthId}, ${resolved.start}::date, ${resolved.end}::date, ${resolved.kind},
+              ${resolved.vesselId}, ${resolved.label}, 'app')
+      RETURNING id
+    `) as Record<string, unknown>[]
+    revalidateAll()
+    return { status: 'created', id: String(rows[0].id) }
+  } catch (e) {
+    if (pgCode(e) === EXCLUSION_VIOLATION) {
+      return { status: 'refused', message: 'That berth was just taken for those dates.' }
+    }
+    throw e
+  }
+}
 
-  revalidatePath('/')
-  revalidatePath('/problems')
-  revalidatePath('/vessels')
-  return { status: 'created', id: String(rows[0].id) }
+export async function dismissFinding(
+  fingerprint: string,
+  status: 'accepted' | 'data_error' | 'resolved' | null,
+  note?: string,
+): Promise<{ status: 'ok' }> {
+  if (status === null) {
+    await sql`DELETE FROM finding_disposition WHERE fingerprint = ${fingerprint}`
+  } else {
+    await sql`
+      INSERT INTO finding_disposition (fingerprint, status, note)
+      VALUES (${fingerprint}, ${status}, ${note?.trim() || null})
+      ON CONFLICT (fingerprint) DO UPDATE SET status = EXCLUDED.status, note = EXCLUDED.note, decided_at = now()`
+  }
+  revalidatePath('/review')
+  return { status: 'ok' }
 }
 
 export async function deleteReservation(id: string): Promise<{ status: 'ok' } | { status: 'refused'; message: string }> {
   const rows = (await sql`
-    DELETE FROM reservation WHERE id = ${id} RETURNING id
+    DELETE FROM reservation WHERE id = ${id} AND source = 'app' RETURNING id
   `) as Record<string, unknown>[]
-  if (rows.length === 0) return { status: 'refused', message: 'That stay is already gone.' }
-  revalidatePath('/')
-  revalidatePath('/problems')
+  if (rows.length === 0) {
+    const archive = (await sql`SELECT 1 FROM reservation WHERE id = ${id} AND source = 'spreadsheet'`) as unknown[]
+    return archive.length
+      ? { status: 'refused', message: 'The archive is a record. Mark the finding instead of removing the stay.' }
+      : { status: 'refused', message: 'That stay is already gone.' }
+  }
+  revalidateAll()
   return { status: 'ok' }
 }
 
@@ -120,8 +186,8 @@ export async function updateVesselLength(
   id: string,
   lengthFt: number | null,
 ): Promise<{ status: 'ok' } | { status: 'refused'; message: string }> {
-  if (lengthFt != null && (!Number.isFinite(lengthFt) || lengthFt <= 0)) {
-    return { status: 'refused', message: 'Length must be a positive number of feet.' }
+  if (lengthFt != null && (!Number.isFinite(lengthFt) || lengthFt <= 0 || lengthFt > 1000)) {
+    return { status: 'refused', message: 'Length must be between 1 and 1000 feet.' }
   }
   const ft = lengthFt == null ? null : Math.round(lengthFt)
   const source = ft == null ? 'unknown' : 'manual_override'
@@ -131,7 +197,7 @@ export async function updateVesselLength(
     WHERE id = ${id}
   `
   revalidatePath('/')
-  revalidatePath('/problems')
+  revalidatePath('/review')
   revalidatePath('/vessels')
   return { status: 'ok' }
 }

@@ -10,10 +10,13 @@
     "test": "vitest run",
     "extract": "tsx scripts/extract.mts && tsx scripts/roster.mts",
     "audit": "tsx scripts/audit.mts",
-    "seed": "tsx scripts/seed.mts"
+    "seed": "npm run migrate && npm run import",
+    "migrate": "tsx scripts/migrate.mts",
+    "import": "tsx scripts/import.mts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
+    "lucide-react": "^1.47.0",
     "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"

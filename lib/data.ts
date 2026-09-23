@@ -39,20 +39,28 @@ export async function getVessels(): Promise<Vessel[]> {
   }))
 }
 
-function toReservation(r: Record<string, unknown>): Reservation & {
+export type StoredReservation = Reservation & {
   source: string
   overrideReason: string | null
-} {
+  /** Stable across imports for archive rows; null for app rows. */
+  sourceKey: string | null
+}
+
+function toReservation(r: Record<string, unknown>): StoredReservation {
   return {
     id: String(r.id),
     berthId: r.berth_id as string,
-    start: (r.start_date as Date).toISOString().slice(0, 10),
-    end: (r.end_date as Date).toISOString().slice(0, 10),
+    // DATE comes back as text (selected with ::text). The driver would otherwise
+    // parse it as LOCAL midnight, and toISOString() would then shift every stay
+    // a day early on any host east of UTC. Vercel is UTC and hid this.
+    start: String(r.start_date).slice(0, 10),
+    end: String(r.end_date).slice(0, 10),
     kind: r.kind as 'vessel' | 'event',
     vesselId: (r.vessel_id as string | null) ?? null,
     label: r.label as string,
     source: r.source as string,
     overrideReason: (r.override_reason as string | null) ?? null,
+    sourceKey: (r.source_key as string | null) ?? null,
   }
 }
 
@@ -60,12 +68,12 @@ export async function getReservations(from?: string, to?: string) {
   const rows =
     from && to
       ? ((await sql`
-          SELECT id, berth_id, start_date, end_date, kind, vessel_id, label, source, override_reason
+          SELECT id, berth_id, start_date::text, end_date::text, kind, vessel_id, label, source, override_reason, source_key
           FROM reservation
           WHERE start_date <= ${to}::date AND end_date >= ${from}::date
           ORDER BY start_date`) as Record<string, unknown>[])
       : ((await sql`
-          SELECT id, berth_id, start_date, end_date, kind, vessel_id, label, source, override_reason
+          SELECT id, berth_id, start_date::text, end_date::text, kind, vessel_id, label, source, override_reason, source_key
           FROM reservation
           ORDER BY start_date`) as Record<string, unknown>[])
   return rows.map(toReservation)
@@ -76,7 +84,10 @@ export type Findings = {
   conflicts: Conflict[]
   /** One vessel in two berths. */
   crossBerth: Conflict[]
-  fits: { reservation: Reservation; fit: FitFinding }[]
+  fits: { reservation: StoredReservation; fit: FitFinding }[]
+  reservations: StoredReservation[]
+  dispositions: Map<string, Disposition>
+  today: string
   stats: {
     reservations: number
     conflicts: number
@@ -99,11 +110,12 @@ export type Findings = {
  * Run the SAME validation engine the booking form uses across the whole
  * archive. There is no second implementation of these rules.
  */
-export async function getFindings(): Promise<Findings> {
-  const [berths, vessels, reservations] = await Promise.all([
+export async function getFindings(today = new Date().toISOString().slice(0, 10)): Promise<Findings> {
+  const [berths, vessels, reservations, dispositions] = await Promise.all([
     getBerths(),
     getVessels(),
     getReservations(),
+    getDispositions(),
   ])
 
   const berthById = new Map(berths.map((b) => [b.id, b]))
@@ -127,6 +139,9 @@ export async function getFindings(): Promise<Findings> {
     conflicts,
     crossBerth,
     fits,
+    reservations,
+    dispositions,
+    today,
     stats: {
       reservations: reservations.length,
       conflicts: conflicts.length,
@@ -215,17 +230,129 @@ export async function getYears(): Promise<number[]> {
 }
 
 export async function findVesselByHull(name: string): Promise<Vessel | null> {
-  const key = hullKey(name)
-  const vessels = await getVessels()
-  return vessels.find((v) => hullKey(v.displayName) === key) ?? null
+  const rows = (await sql`
+    SELECT id, display_name, length_ft, length_source FROM vessel WHERE hull_key = ${hullKey(name)}
+  `) as Record<string, unknown>[]
+  const r = rows[0]
+  if (!r) return null
+  return {
+    id: r.id as string,
+    displayName: r.display_name as string,
+    lengthFt: r.length_ft === null ? null : Number(r.length_ft),
+    lengthSource: r.length_source as Vessel['lengthSource'],
+  }
+}
+
+/**
+ * The SQL for adding a vessel, as a statement, so createReservation can run
+ * it inside the same transaction as the stay. ON CONFLICT on hull_key makes
+ * two concurrent adds of the same name converge on one row instead of two.
+ */
+export function upsertVesselStatement(displayName: string, lengthFt: number | null) {
+  const id = `app_${crypto.randomUUID()}`
+  const lengthSource = lengthFt != null ? 'manual_override' : 'unknown'
+  return sql`
+    INSERT INTO vessel (id, display_name, length_ft, length_source, hull_key)
+    VALUES (${id}, ${displayName}, ${lengthFt}, ${lengthSource}, ${hullKey(displayName)})
+    ON CONFLICT (hull_key) DO UPDATE SET display_name = vessel.display_name
+    RETURNING id, display_name, length_ft, length_source`
 }
 
 export async function insertVessel(displayName: string, lengthFt: number | null): Promise<Vessel> {
-  const id = `app_${crypto.randomUUID()}`
-  const lengthSource = lengthFt != null ? 'manual_override' : 'unknown'
-  await sql`
-    INSERT INTO vessel (id, display_name, length_ft, length_source)
-    VALUES (${id}, ${displayName}, ${lengthFt}, ${lengthSource})
-  `
-  return { id, displayName, lengthFt, lengthSource }
+  const rows = (await upsertVesselStatement(displayName, lengthFt)) as Record<string, unknown>[]
+  const r = rows[0]
+  return {
+    id: r.id as string,
+    displayName: r.display_name as string,
+    lengthFt: r.length_ft === null ? null : Number(r.length_ft),
+    lengthSource: r.length_source as Vessel['lengthSource'],
+  }
+}
+
+// ---------------------------------------------------------------------------
+// The desk: what is true today.
+// ---------------------------------------------------------------------------
+
+export type DayBoard = {
+  today: string
+  inPort: StoredReservation[]
+  arriving: StoredReservation[]
+  departing: StoredReservation[]
+  next7: StoredReservation[]
+  freeTonight: BerthRow[]
+  berthCount: number
+  /** Bounds of what the archive covers, for the "Archive covers …" line. */
+  archive: { first: string; last: string } | null
+}
+
+/**
+ * The 8am questions: who is alongside, who arrives, who leaves, what is free.
+ * Four indexed queries. Cheap and date-dependent, so computed per request.
+ */
+export async function getDayBoard(today: string): Promise<DayBoard> {
+  const cols = 'id, berth_id, start_date::text, end_date::text, kind, vessel_id, label, source, override_reason, source_key'
+  const [inPort, arriving, departing, next7, berths, bounds] = await Promise.all([
+    sql.query(`SELECT ${cols} FROM reservation WHERE start_date <= $1::date AND end_date >= $1::date ORDER BY berth_id`, [today]),
+    sql.query(`SELECT ${cols} FROM reservation WHERE start_date = $1::date ORDER BY berth_id`, [today]),
+    sql.query(`SELECT ${cols} FROM reservation WHERE end_date = $1::date ORDER BY berth_id`, [today]),
+    sql.query(`SELECT ${cols} FROM reservation WHERE start_date > $1::date AND start_date <= $1::date + 7 ORDER BY start_date`, [today]),
+    getBerths(),
+    sql`SELECT min(start_date)::text AS first, max(end_date)::text AS last FROM reservation WHERE source = 'spreadsheet'`,
+  ])
+  const port = (inPort as Record<string, unknown>[]).map(toReservation)
+  const occupied = new Set(port.map((r) => r.berthId))
+  const b = (bounds as Record<string, unknown>[])[0]
+  return {
+    today,
+    inPort: port,
+    arriving: (arriving as Record<string, unknown>[]).map(toReservation),
+    departing: (departing as Record<string, unknown>[]).map(toReservation),
+    next7: (next7 as Record<string, unknown>[]).map(toReservation),
+    freeTonight: berths.filter((x) => !occupied.has(x.id)),
+    berthCount: berths.length,
+    archive: b?.first ? { first: String(b.first).slice(0, 10), last: String(b.last).slice(0, 10) } : null,
+  }
+}
+
+export type Disposition = { fingerprint: string; status: 'accepted' | 'data_error' | 'resolved'; note: string | null; decidedAt: string }
+
+export async function getDispositions(): Promise<Map<string, Disposition>> {
+  const rows = (await sql`SELECT fingerprint, status, note, decided_at::text AS decided_at FROM finding_disposition`) as Record<string, unknown>[]
+  return new Map(rows.map((r) => [r.fingerprint as string, {
+    fingerprint: r.fingerprint as string,
+    status: r.status as Disposition['status'],
+    note: (r.note as string | null) ?? null,
+    decidedAt: String(r.decided_at),
+  }]))
+}
+
+export type ChangeEntry = { id: string; at: string; tbl: string; rowId: string; op: string; old: Record<string, unknown> | null; new: Record<string, unknown> | null }
+
+export async function getRecentChanges(limit = 20): Promise<ChangeEntry[]> {
+  const rows = (await sql`
+    SELECT id, at::text AS at, tbl, row_id, op, old, new FROM change_log
+    WHERE NOT (op = 'INSERT' AND (new->>'source') = 'spreadsheet')  -- imports are not edits
+      AND NOT (op = 'UPDATE' AND tbl = 'vessel' AND (old->>'length_ft') IS NOT DISTINCT FROM (new->>'length_ft'))
+    ORDER BY id DESC LIMIT ${limit}
+  `) as Record<string, unknown>[]
+  return rows.map((r) => ({
+    id: String(r.id), at: String(r.at), tbl: r.tbl as string, rowId: r.row_id as string, op: r.op as string,
+    old: (r.old as Record<string, unknown> | null) ?? null, new: (r.new as Record<string, unknown> | null) ?? null,
+  }))
+}
+
+export type ImportRun = {
+  id: number
+  importedAt: string
+  stats: Record<string, unknown>
+}
+
+/** The most recent import, which is where the five numbers about the source live now. */
+export async function getLatestImport(): Promise<ImportRun | null> {
+  const rows = (await sql`
+    SELECT id, imported_at::text AS imported_at, stats FROM import_run ORDER BY id DESC LIMIT 1
+  `) as Record<string, unknown>[]
+  const r = rows[0]
+  if (!r) return null
+  return { id: Number(r.id), importedAt: String(r.imported_at), stats: (r.stats as Record<string, unknown>) ?? {} }
 }

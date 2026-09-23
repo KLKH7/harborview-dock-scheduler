@@ -16,9 +16,13 @@ booking, historical and new.
 
 | Screen | Purpose |
 |---|---|
-| **Schedule** | The berth by day grid, and where bookings are made. Drag along a row to select days; the drag stops where the berth is taken. Overlapping stays stack in separate lanes, so a double booking makes the row visibly taller before any colour is read. Hover or click a bar and that hull is traced everywhere it appears. |
-| **Problems** | Every stay in 23 years, checked by the rules that refuse a new one: two in one berth, one vessel in two berths, too long for the berth. Oversize is grouped by vessel and berth so 113 stays become 25 decisions, each fixable inline. Ends with what the data cannot tell us. |
-| **Vessels** | The roster. Name and length; a length set here is what the fit check uses. |
+| **Schedule** | Opens on today. One line above the grid says what is true at the dock right now: in port, arriving, departing, berths free tonight. The berth by day grid is where bookings are made: drag along a row to select days, and the drag stops where the berth is taken. Overlapping stays stack in separate lanes, so a double booking makes the row visibly taller before any colour is read. Hover or click a bar and that hull is traced everywhere it appears. |
+| **Review** | What the checks found, as a list beside one selected finding. Open findings (a stay ending on or after today) come first, soonest first, in red. Everything older is the archive: kept, listed, collapsed, and never red, because a stay that ended in 2003 is a record, not an alarm. Each finding can be accepted or marked a data error, and the decision is kept across re-imports. |
+| **Vessels** | The roster. Name and length; a length set here is what the fit check uses, and it survives a re-import of the sheet. |
+
+Navigation is a 48px rail (schedule, review, vessels) that `[` expands and `1` `2` `3` jump
+between. On a phone it is a bottom bar. Import notes, the account of what the sheet could and
+could not tell us, live behind a footer link rather than in the daily tool.
 
 The reserve panel is also a finder: give dates and a length and every berth is sorted into
 free and long enough, too short, or occupied, before a berth is chosen.
@@ -46,7 +50,7 @@ the stay. The extractor handles all three.
 ### 2. The 1997–2001 sheets store day numbers as uncached formulas
 
 Those sheets contain `=SUM(B3+1)` rather than a number, with no cached result. Both
-`data_only=true` and `data_only=false` fail — one sees a formula object, the other sees
+`data_only=true` and `data_only=false` fail, one sees a formula object, the other sees
 nothing. The day numbers are reconstructed arithmetically from the anchor `1`.
 
 **This reconstruction is verified, not trusted.** Every month grid carries its own
@@ -58,7 +62,7 @@ month blocks: 272, weekday-verified: 267
 ```
 
 The remaining 5 are reported rather than hidden: 3 are blocks whose weekday letters are
-uniformly offset by 1–2 days (a template pasted from another year and never corrected — the
+uniformly offset by 1–2 days (a template pasted from another year and never corrected, the
 day numbers win, and the sheet is flagged on the Data Quality page), and 2 have no readable
 weekday row. A *non-uniform* disagreement would mean the column→day mapping itself is broken,
 and that throws rather than producing plausible-looking wrong dates.
@@ -98,7 +102,7 @@ sheet is the only witness.
 
 A booking API would normally use half-open `[start, end)`, where a vessel departing on the
 17th frees the berth for one arriving the 17th. **That is wrong for this data.** The source
-is a day-grid in which a filled cell means "occupied that day" — a run ending on the 17th
+is a day-grid in which a filled cell means "occupied that day", a run ending on the 17th
 means the vessel was physically there on the 17th.
 
 This is not cosmetic. Under half-open semantics every same-day handover silently becomes
@@ -111,18 +115,18 @@ a new booking sharing even one day is refused.
 type FitStatus = 'fits' | 'violation' | 'unverifiable' | 'not_applicable'
 ```
 
-`unverifiable` is the important one. **1,454 bookings — 5,051 booked days — reference vessels
+`unverifiable` is the important one. **1,454 bookings, 5,051 booked days, reference vessels
 with no length recorded anywhere in the workbook**, including the busiest (`R/V Golden
 Compass`, 1,445 days). Their fit cannot be computed.
 
 Reporting those as "fits" would be a lie, and it is precisely the failure the system exists
 to prevent. Reporting them as violations would bury the 115 real ones. So they are a separate
-state with their own colour, their own count, and their own worklist — because the remedy is
+state with their own colour, their own count, and their own worklist, because the remedy is
 different: a violation needs a human decision, an unverifiable needs *data*.
 
 The same applies to berths. Two grouped areas (`North Finger Piers`, `Small craft slips`)
 carry no length in the source, so a vessel placed there is also `unverifiable`. Their capacity
-is stored as `null` — never `0` (which would flag everything) and never `Infinity` (which
+is stored as `null`, never `0` (which would flag everything) and never `Infinity` (which
 would approve everything).
 
 ### "Is this a vessel?" is an allow-list, not a keyword search
@@ -132,14 +136,14 @@ Not every cell in the grid names a ship. The schedule is also used for annotatio
 west face`, `Float rebuild - no usage permitted`) and events (`Student tour`,
 `Donor reception`).
 
-My first version classified these with a keyword deny-list — `maintenance|repair|dredging|…`.
+My first version classified these with a keyword deny-list, `maintenance|repair|dredging|…`.
 That can only catch the phrases you think of in advance, and it silently typed **85 bookings
 as vessels that were nothing of the kind**, each then counted as a vessel of unknown length
 and inflating the "cannot be fit-checked" total.
 
 It is now an allow-list on the vessel prefix (`R/V`, `M/V`, `F/V`, `S/V`, `M/Y`, `S/Y`,
 `OS/V`, `OSV`, `Tug`, `Barge`), which is exact rather than approximate because every genuine
-vessel in this workbook carries one. Note `OS/V` as well as `OSV` — both spellings appear,
+vessel in this workbook carries one. Note `OS/V` as well as `OSV`, both spellings appear,
 and missing the former dropped two vessels from the roster.
 
 The prefix list lives in one module (`lib/vessel-name.ts`) rather than being repeated in each
@@ -154,10 +158,32 @@ would hide the very problem the brief describes. They become a reviewable backlo
 
 Validation blocks on *create*, not on *ingest*.
 
+### The database holds the line, not just the engine
+
+For most of this project "refuses a double-booking" was true only when two requests happened
+not to interleave. The engine read, validated, and inserted, with nothing at the database
+level to stop a second request that had also just validated. Two tabs, or a double-click,
+would both land.
+
+Now there is a Postgres exclusion constraint on `(berth_id, daterange(start, end, '[]'))`.
+The `'[]'` makes it inclusive on both ends, which is exactly the engine's semantics, so the
+two can never disagree about what overlaps. The engine still runs first, because it produces
+the good message; the constraint is the guarantee. A request that slips past the engine is
+refused by the database with "That berth was just taken for those dates."
+
+The archive contains 8 stays that genuinely overlap another in the same berth. They are
+history and stay. They carry a `legacy_overlap` flag that exempts them, so the constraint
+applies to every other stay and to every stay made from now on.
+
+I tested this the only way that counts: three inserts for the same berth and dates fired
+concurrently, straight at the database. One landed, two were refused with `23P01`. Before the
+constraint, all three landed.
+
 ### Overlap and oversize refuse. There is no override
 
 A new booking that overlaps another, or puts a vessel in a berth shorter than it, is refused
-outright.
+outright. A refused booking no longer leaves anything behind either: the vessel and the stay
+are written in one transaction, after validation, so a refusal cannot orphan a roster row.
 
 Overlap is refused *during the drag* rather than after it: the bar stops growing at the last
 free day, so the wrong thing is never expressible and no error message is needed. Oversize
@@ -198,9 +224,41 @@ comes from the data rather than from remembering which purple. No entrance anima
 it fires every time the pointer crosses a bar; a 120ms opacity change and nothing under
 `prefers-reduced-motion`. Click pins it for keyboard and touch; Escape clears.
 
+### Findings are derived; decisions are recorded
+
+A finding is computed by the engine on every read. It is never stored, so it can never go
+stale. What is stored is the human's answer to it: `finding_disposition`, keyed by a
+fingerprint. Accept means the situation was fine in practice (rafted alongside, agreed with
+the skipper). Data error means the sheet or the roster is wrong. Either way the row leaves the
+list and the decision is kept.
+
+The fingerprint is the subtle part. Archive rows get SERIAL ids that any reseed reassigns, so
+a decision keyed on an id would silently detach. Fingerprints use a `source_key` instead: a
+hash of the sheet, berth, dates and label, identical on every import. Oversize is keyed by
+the vessel and berth pair, because 113 stays of one vessel in one berth is one decision, not
+113. I verified a decision survives a re-import.
+
+### The import is a boundary, not a reset
+
+`npm run seed` used to drop every table. Fine for a demo; wrong for a desk, where it would
+destroy every stay the coordinator had made. It is now two scripts. `migrate` is idempotent
+and never drops. `import` upserts: archive rows match on `source_key`, vessels on the hull,
+app-made rows are never touched, and a length the coordinator corrected by hand is kept over
+whatever the roster says. Every change to a stay or a vessel is written to a `change_log` by
+a trigger, so no code path can forget it, and the last twenty appear on the review page.
+
+### A one-day-early bug, fixed before it shipped anywhere it would show
+
+The Neon driver parses a `DATE` column as local midnight. The data layer then called
+`toISOString()`, which converts to UTC. On any host east of UTC every stay read one day early,
+and the engine would compare shifted stored dates against unshifted drafts. Vercel runs UTC,
+so production hid it; `npm run dev` in London would not have. Dates are now selected as text
+and never pass through a `Date`. Checked in UTC, London and Sydney: the same stay reads the
+same day in all three.
+
 ### One validation engine, not two
 
-`lib/validation/engine.ts` is pure — no database, no `fetch`, no `Date.now()`. It is imported
+`lib/validation/engine.ts` is pure, no database, no `fetch`, no `Date.now()`. It is imported
 by both the import path and the grid, so the rules applied to the historical archive
 and to a new reservation provably cannot drift apart. It has 38 unit tests covering the
 inclusive-boundary cases, containment, unknown lengths, events, both conflict classes, and
@@ -240,14 +298,15 @@ extractor's logic, and by brute-forcing every pair of stays and comparing to the
 scripts/extract.mts   .xlsx  → data/snapshot.json   (offline; never runs on Vercel)
 scripts/roster.mts    roster → data/vessels.json    (fuzzy hull-name join)
 scripts/audit.mts     independent re-count, asserts extraction invariants
-scripts/seed.mts      snapshot → Postgres
+scripts/migrate.mts   schema, idempotent, never drops; adds the exclusion constraint and triggers
+scripts/import.mts    snapshot → Postgres, upsert on source_key; app rows untouched
 lib/validation/       the pure engine + its tests
 app/                  four screens, Server Components + Server Actions
 ```
 
 Extraction is deliberately **offline**. The snapshot is committed, so it is deterministic,
 diffable, reviewable, and a broken database can never block the demo. The database earns its
-place because the brief says *manage* — new bookings must persist.
+place because the brief says *manage*, new bookings must persist.
 
 **Stack:** Next.js (App Router) · TypeScript · Neon Postgres · Tailwind · Vitest.
 
@@ -260,16 +319,18 @@ npm install
 npm test                        # 31 engine tests
 npm run extract                 # rebuild snapshot from data/source.xlsx (see note)
 npm run audit                   # verify the extraction independently
-npm run seed                    # load Postgres (needs DATABASE_URL)
+npm run migrate                 # schema (needs DATABASE_URL); safe to re-run
+npm run import                  # upsert the snapshot; safe to re-run, keeps app rows
+npm run seed                    # both
 npm run dev
 ```
 
-`npm test` works on a fresh clone with no setup — the engine is pure, so its tests need
+`npm test` works on a fresh clone with no setup, the engine is pure, so its tests need
 neither the workbook nor a database.
 
 The source workbook is **not committed** (it is the employer's sample data, and a 394 KB
 binary does not belong in git). `data/snapshot.json`, `data/vessels.json` and
-`data/findings.json` — the extractor's committed output — are, so the app and the audit run
+`data/findings.json`, the extractor's committed output, are, so the app and the audit run
 without it. To re-run `npm run extract` yourself, drop the sample workbook at
 `data/source.xlsx` first.
 
@@ -279,12 +340,18 @@ without it. To re-run `npm run extract` yourself, drop the sample workbook at
 
 Built to the suggested 3–5 hours, so the following are **conscious omissions**, not oversights:
 
-- **Auth / users** — single-tenant internal tool; the source data has no notion of identity.
-- **Editing a stay in place.** A stay can be removed from its hover card and re-made; moving
-  its dates by dragging the bar is not built.
-- **Uploading a new .xlsx at runtime** — the extraction is the hard part and it is already
+- **Auth / users**, single-tenant internal tool; the source data has no notion of identity.
+- **Editing a stay in place.** An app-made stay can be removed from its hover card and
+  re-made; moving its dates by dragging the bar is not built. Archive stays cannot be removed
+  at all: the archive is a record, and the way to disagree with it is a decision on the
+  review page, not a deletion.
+- **A cross-berth exclusion constraint.** The same-berth guard is enforced by the database.
+  "One vessel in two berths" is enforced by the engine only; a half-open range constraint
+  would express the same-day-shift allowance, but a one-day stay collapses to an empty range
+  and slips through it, so the engine stays the guard there for now.
+- **Uploading a new .xlsx at runtime**, the extraction is the hard part and it is already
   done; re-doing it in a serverless request adds risk without adding capability.
-- **Retired berths over time** — the `8YR Dock Summary` tab references berths that appear in
+- **Retired berths over time**, the `8YR Dock Summary` tab references berths that appear in
   no grid (`Marsh Landing`), so the facility clearly changed shape over 23 years. The schema
   admits this; no UI is built for it.
 - **Mobile layout, drag-to-reschedule, recurring bookings, notifications.**

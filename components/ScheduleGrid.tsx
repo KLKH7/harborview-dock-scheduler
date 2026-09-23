@@ -28,6 +28,8 @@ type Props = {
   initialMonth: number
   years: number[]
   today: string
+  /** Hull to trace on load, from a review row's "Open on schedule". */
+  initialTrace?: string | null
 }
 
 /**
@@ -102,6 +104,7 @@ export function ScheduleGrid({
   initialMonth,
   years,
   today,
+  initialTrace = null,
 }: Props) {
   const [year, setYear] = useState(initialYear)
   const [month, setMonth] = useState(initialMonth)
@@ -118,7 +121,7 @@ export function ScheduleGrid({
   const [hover, setHover] = useState<{ r: GridReservation; rect: DOMRect } | null>(null)
   // Clicking a bar pins its hull so the trace survives the pointer leaving, and
   // so keyboard and touch can reach it at all. Hover alone would be mouse-only.
-  const [pinnedHull, setPinnedHull] = useState<string | null>(null)
+  const [pinnedHull, setPinnedHull] = useState<string | null>(initialTrace)
   const hideHover = useRef<ReturnType<typeof setTimeout> | null>(null)
   const router = useRouter()
 
@@ -566,7 +569,9 @@ export function ScheduleGrid({
       )}
       {visible.length === 0 && occupiedThisMonth.length === 0 && (
         <p className="px-5 py-3 text-[13px] text-mute sm:px-8">
-          Nothing booked this month. Reserve, or drag across empty days on a berth.
+          {monthStart >= Date.UTC(Number(today.slice(0, 4)), Number(today.slice(5, 7)) - 1, 1)
+            ? 'Nothing booked from here on. Reserve, or drag across empty days on a berth.'
+            : `Nothing was booked in ${monthLabel(year, month)}.`}
         </p>
       )}
 
