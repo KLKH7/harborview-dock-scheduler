@@ -465,11 +465,11 @@ export function ScheduleGrid({
                     key={d}
                     role="columnheader"
                     className={`tnum flex flex-col items-center justify-center text-[12px] ${
-                      isToday ? 'bg-wash text-ink' : wd >= 5 ? 'text-mute/70' : 'text-mute'
+                      isToday ? 'bg-today text-sea' : wd >= 5 ? 'text-mute/70' : 'text-mute'
                     }`}
                   >
                     <div className="text-[11px] uppercase tracking-[0.04em]">{WEEKDAY[wd]}</div>
-                    <div className={`text-[14px] font-medium ${isToday ? 'text-ink' : 'text-ink'}`}>{d}</div>
+                    <div className={`text-[14px] font-medium ${isToday ? 'text-sea' : 'text-ink'}`}>{d}</div>
                   </div>
                 )
               })}
@@ -521,7 +521,7 @@ export function ScheduleGrid({
                         <div
                           key={d}
                           className={`border-r border-line/70 ${
-                            isToday ? 'bg-wash' : wd >= 5 ? 'bg-wash/40' : ''
+                            isToday ? 'bg-today' : wd >= 5 ? 'bg-wash/40' : ''
                           }`}
                         />
                       )
@@ -678,8 +678,8 @@ function Bar({
   const fill = alarm
     ? 'border-l-[3px] border-conflict bg-conflict/10 text-conflict'
     : r.kind === 'event'
-      ? 'border-l-[3px] border-mute bg-occupied text-ink'
-      : 'border-l-[3px] border-ink bg-occupied text-ink'
+      ? 'border-l-[3px] border-event bg-event-fill text-event'
+      : 'border-l-[3px] border-sea bg-sea-fill text-sea'
 
   // The old spreadsheet gave each regular vessel its own fill colour, which
   // answered "where else is this hull this month" at a glance. That does not
@@ -711,7 +711,6 @@ function Bar({
     >
       <span className="line-clamp-2 text-[12px] font-medium leading-snug [overflow-wrap:anywhere]">
         {clippedStart && <span className="opacity-50">‹ </span>}
-        {r.kind === 'event' && <span className="font-normal text-mute">event · </span>}
         {r.label}
         {clippedEnd && <span className="opacity-50"> ›</span>}
       </span>

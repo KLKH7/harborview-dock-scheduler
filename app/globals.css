@@ -3,10 +3,11 @@
 /*
   Harborview dock schedule.
 
-  One cool grey, one ink. Paper, wash, line, mute and ink are all tinted
-  the same grey, occupancy is a tint of the ink rather than a second hue,
-  so a vessel and an event are told apart by their label, every control is
-  ink, and the only colour on the page is conflict red.
+  One temperature. Paper, wash, line, mute and ink are all tinted the same
+  cool grey as the sea, so the page and its accents belong to one family.
+  Sea and moss appear only on occupancy bars, so a booked berth reads as
+  occupied from across the room. Every control is ink. Conflict red is
+  the only alarm.
 */
 @theme {
   --color-paper: #f5f7f8;
@@ -16,11 +17,15 @@
   --color-wash: #eceff2;
   --color-panel: #ffffff;
 
+  --color-sea: #1e4a5e;
+  --color-sea-fill: #d3e3ea;
+  --color-event: #3c5a55;
+  --color-event-fill: #d9e7e3;
+  --color-today: #e7f0f4;
   --color-conflict: #c4261a;
 
-  /* Ink over paper at roughly 8% and 14%. */
-  --color-occupied: #e5e9ec;
-  --color-occupied-strong: #d4dbe0;
+  --color-occupied: var(--color-sea-fill);
+  --color-occupied-strong: #c1d6df;
 
   --radius-cell: 4px;
   --radius-panel: 8px;
